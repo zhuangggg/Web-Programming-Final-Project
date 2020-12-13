@@ -1,0 +1,98 @@
+.gantt {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.gantt_leftpart {
+    width: 350px;    
+    line-height: 25px;
+}
+
+.project_title {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+li {
+    list-style: none;
+}
+
+.x {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    opacity: 50%;
+    margin-right: 5px;
+}
+
+.x:hover {
+    border: none;
+    opacity: 100%;
+}
+
+.x:focus {
+    outline: none;
+}
+
+.event_title {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom-style: solid;
+    border-width: 2px;
+    margin-top: 30px;
+}
+
+.event_content {
+    margin-top: 10px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    font-size: 18px;
+
+}
+
+.progress {
+    display: inline;
+    position: absolute;
+    right: 0px;
+}
+
+.event_content input {
+    font-size: 18px;
+    width: 210px;
+    margin-top: 15px;
+    border: none;
+}
+
+.event_content input:focus {
+    transition: 0.5s;
+    opacity: 50%;
+    outline: none;
+}
+
+#add_event {
+    font-size: 18px;
+    font-weight: bold;
+    width: 310px;
+    margin-top: 20px;
+    border: none;
+}
+
+#add_event:focus {
+    transition: 0.5s;
+    font-weight: bold;
+    opacity: 50%;
+    width: 310px;
+    margin-top: 20px;
+    outline: none;
+}
