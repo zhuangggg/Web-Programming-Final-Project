@@ -6,7 +6,6 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const Project = require('./models/project')
 const data = require('../src/data.json');
-//const updateRoute = require('./routes/updateRoute')
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -17,25 +16,24 @@ app.get('/', async (req, res)=>{
 
 app.post('/', async (req, res) => {
     const projectName = req.body.name
-    console.log('project name: ', projectName)
     const data = await Project.findOne({name: projectName})
-    console.log(data)
+    console.log(`${projectName} has sent`)
     res.send(data)
 });
 
 app.post('/update',async (req, res)=>{
     const projectName = req.body.name
     const newProjectEvents = req.body.data.events
-    console.log('project name: ', projectName)
-    console.log('new projec: ', newProjectEvents)
-
+    console.log("/update");
     await Project.findOne({ name: projectName }, function (err, doc){
-        console.log(newProjectEvents)
+        if(err) console.log(err)
         doc.events = newProjectEvents
-        console.log('sent data:', doc)
+        console.log("!!!")
         doc.save();
+        console.log(`${projectName} updated`)
     });
-    console.log('update success')
+    res.send("update successfully")
+    
 })
 
 app.put('/', (req, res) => {

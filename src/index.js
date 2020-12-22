@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './gantt.css';
-import Leftpart from './Leftpart';
+import Leftpart from './leftpart/Leftpart';
 
 
 ReactDOM.render(

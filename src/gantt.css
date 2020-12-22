@@ -67,14 +67,14 @@ li {
     right: 0px;
 }
 
-.event_content input {
+.add_item {
     font-size: 18px;
     width: 210px;
     margin-top: 15px;
     border: none;
 }
 
-.event_content input:focus {
+.add_item:focus {
     transition: 0.5s;
     opacity: 50%;
     outline: none;
@@ -95,4 +95,12 @@ li {
     width: 310px;
     margin-top: 20px;
     outline: none;
+}
+
+.item_info {
+    transition: 0.5s;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    border: solid gray 1.5px;
 }
