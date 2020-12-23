@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './gantt.css';
-import Leftpart from './leftpart/Leftpart';
-
+import App from './App';
 
 ReactDOM.render(
-  <div className="gantt">
-    <Leftpart />
+  <div>
+    <App />
   </div>,
   document.getElementById('root')
 );
