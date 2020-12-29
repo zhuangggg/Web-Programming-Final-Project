@@ -13,6 +13,7 @@ const projectName = 'EECS Cornerstone'
 
 function App() {
     const [data, setData] = useState("") 
+    const [count,setCount] = useState(0)
 
   const getData = async() => {
     console.log('getProject')
@@ -29,13 +30,14 @@ function App() {
     let msg = await instance.post('/update', {name: projectName, data: newProject})
     console.log(msg)
     setData(newProject)
+    setCount(count+1)
   }
     return(
         <>
         {data!=="" ? 
         <div className="gantt">
             <Leftpart data={data} updateData={(data)=>updateData(data)}/>
-            <Timeline data={data}/>
+            <Timeline data={data} count={count}/>
         </div>
         :<div></div>}
         </>

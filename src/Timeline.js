@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactGantt from 'gantt-for-react';
+import ReactGantt from './Timeline_Component/gantt-for-react';
 import './gantt.css'
 
 function Timeline(props) {
@@ -13,12 +13,7 @@ function Timeline(props) {
   // };
   // const [data, setData] = useState("") 
   const [tasks, setTasks] = useState("") 
-
-
-  useEffect(() => {
-    console.log("aaaaaaaaaa")
-    getTasks(props.data)
-  },[props.data])
+  // var task = '';
 
   const getTasks = (data) => {
     let tasks_array = data.events.map((event,i)=>{
@@ -55,9 +50,16 @@ function Timeline(props) {
       tasks = [...tasks,...element]
     });
     setTasks(tasks)
-    // return tasks;
+    // task = tasks
+    // console.log(tasks);
+    return tasks;
   };
 
+    useEffect(() => {
+    console.log("bbbbbbbbbbbbb")
+    getTasks(props.data)
+    console.log(props.data.events);
+  },[props.count])
   // const tasks = getTasks();
 
   const customPopupHtml = task => {
@@ -75,7 +77,7 @@ function Timeline(props) {
           <div className='timeline-container' style={{overflow: 'scroll'}}>
             <ReactGantt tasks={tasks}
                         viewMode='Week'
-                        // customPopupHtml={this.customPopupHtml}
+                        // customPopupHtml={customPopupHtml}
                         // scrollOffsets={this.state.scrollOffsets}
             />
           </div>:<div></div>
