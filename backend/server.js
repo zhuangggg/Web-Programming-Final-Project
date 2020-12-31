@@ -6,6 +6,7 @@ const Project = require('./models/project')
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const Subscription = require('./resolvers/Subscription')
+const data = require('./data.json')
 
 if (!process.env.MONGO_URL) {
   console.error('Missing MONGO_URL!!!')
@@ -30,6 +31,7 @@ mongodb.once('open', async() => {
 
 
   let db = await Project.find()
+  //Project.insertMany(data.projects)
 
   const server = new GraphQLServer({
     typeDefs: './schema.graphql',

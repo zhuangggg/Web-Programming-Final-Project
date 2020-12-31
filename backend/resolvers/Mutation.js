@@ -7,9 +7,9 @@ const Mutation = {
   
   async createProject(parent, args, { pubsub }, info) {
     const newProject = {
-        name: args.name,
-        progress: '0%',
-        time: {start: defaultStart, end: defaultEnd},
+        name: args.data.project_name,
+        progress: args.data.progress,
+        time: {start: args.data.time.start, end: args.data.time.end},
         events: []
     }
 
@@ -25,10 +25,11 @@ const Mutation = {
   },
 
   async createEvent(parent, args, { pubsub }, info) {
+    console.log(args)
     const newEvent = {
         name: args.data.event_name,
-        progress: '0%',
-        time: {start: defaultStart, end: defaultEnd},
+        progress: args.data.progress,
+        time: {start: args.data.time.start, end: args.data.time.end},
         items: []
     }
     pubsub.publish(`update_project ${args.data.project_name}`, {
@@ -46,8 +47,8 @@ const Mutation = {
   async createItem(parent, args, { pubsub }, info) {
     const newItem = {
         name: args.data.item_name,
-        progress: '0%',
-        time: {start: defaultStart, end: defaultEnd},
+        progress: args.data.progress,
+        time: {start: args.data.time.start, end: args.data.time.end},
     }
     pubsub.publish(`update_project ${args.data.project_name}`, {
       update_project: {
