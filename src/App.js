@@ -21,6 +21,21 @@ function App() {
   const [project, setProject] = useState("")
   const [count, setCount] = useState(0)
 
+  const refetchContent = {
+    refetchQueries: [{
+      query: PROJECT_QUERY, 
+      variables: {
+        name: projectName
+      }
+    }]
+  }
+
+  const [addEvent] = useMutation(CREATE_EVENT_MUTATION, refetchContent)
+  const [deleteEvent] = useMutation(DELETE_EVENT_MUTATION, refetchContent)
+  const [addItem] = useMutation(CREATE_ITEM_MUTATION, refetchContent)
+  const [deleteItem] = useMutation(DELETE_ITEM_MUTATION, refetchContent)
+
+  
   if(!subscribe){
     subscribeToMore({
       document: UPDATE_PROJECT_SUBSCRIPTION,
@@ -34,12 +49,19 @@ function App() {
     setSubscribe(true)
   }
 
+
   return(
         <>
           {loading? <div>loading</div>:
           <div className="gantt">
-              <Leftpart data={data.project} />
-              <Timeline data={data.project} />
+              <Leftpart data={data.project} 
+                        addEvent={addEvent}
+                        deleteEvent={deleteEvent}
+                        addItem={addItem}
+                        deleteItem={deleteItem}
+                        />
+              <Timeline data={data.project}
+                        count={count} />
           </div>}
         </>
     )

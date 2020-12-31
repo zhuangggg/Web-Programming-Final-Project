@@ -11,15 +11,12 @@ import { PROJECT_QUERY,
     DELETE_ITEM_MUTATION } from '../graphql'
 
 function Event (props) {
-  const [deleteEvent] = useMutation(DELETE_EVENT_MUTATION, {refetchQueries: [{query: PROJECT_QUERY, variables: {name: props.project_name}}]})
-  const [addItem] = useMutation(CREATE_ITEM_MUTATION, {refetchQueries: [{query: PROJECT_QUERY, variables: {name: props.project_name}}]})
-
     return(
       <>
         <li className="event" id={"event_"+props.eventIndex}>
           <div className="event_title">
             {props.clean? <button className="x" onClick={()=>{
-              deleteEvent({
+              props.deleteEvent({
                 variables:{
                   project_name: props.project_name,
                   event_name: props.event.name
@@ -32,6 +29,7 @@ function Event (props) {
           <ul className="event_content">
             {props.event.items.map((item,itemIndex)=>
               <Item
+                deleteItem={props.deleteItem}
                 project_name={props.project_name}
                 event_name={props.event.name}
                 item={item}
@@ -46,7 +44,8 @@ function Event (props) {
             let key = window.event ? e.keyCode : e.which
             let input = document.getElementById(props.eventIndex)
             if(input.value!="" && key==13) {
-              addItem({
+              console.log(props.addItem)
+              props.addItem({
                 variables:{
                   project_name: props.project_name,
                   event_name: props.event.name,

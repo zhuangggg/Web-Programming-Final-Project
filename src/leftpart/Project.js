@@ -13,12 +13,6 @@ import { PROJECT_QUERY,
 function Project (props) {
   const [clean, setClean] = useState(false)
 
-  const [addEvent] = useMutation(CREATE_EVENT_MUTATION, {refetchQueries: [{query: PROJECT_QUERY, variables: {name: props.project.name}}]})
-
-
-  const updateProject = (eventIndex, newEvent)=>{
-    
-  }
   const cleanMode = ()=>{
     setClean(!clean)
   }
@@ -34,9 +28,11 @@ function Project (props) {
         <ul className="project_content">
         {props.project.events.map((event, eventIndex)=>  
           <Event
+            deleteEvent={props.deleteEvent}
+            addItem={props.addItem}
+            deleteItem={props.deleteItem}
             project_name = {props.project.name}
             event = {event}
-            updateProject = {updateProject}
             eventIndex = {eventIndex}
             clean = {clean}/>)}
         </ul>
@@ -47,7 +43,7 @@ function Project (props) {
               let key = window.event ? e.keyCode : e.which
               let input = document.getElementById("add_event")
               if(input.value!="" && key==13) {
-                addEvent({variables:{
+                props.addEvent({variables:{
                   project_name: props.project.name,
                   event_name: input.value
                 }}) 

@@ -10,13 +10,12 @@ import { PROJECT_QUERY,
   DELETE_ITEM_MUTATION } from '../graphql'
 
 function Item (props) {
-  const [deleteItem] = useMutation(DELETE_ITEM_MUTATION, {refetchQueries: [{query: PROJECT_QUERY, variables: {name: props.project_name}}]})
 
     return(  
       <div>
         <div className="item">
           {props.clean? <button className="x" onClick={()=>{
-            deleteItem({
+            props.deleteItem({
               variables:{
                 project_name: props.project_name,
                 event_name: props.event_name,

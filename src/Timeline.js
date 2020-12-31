@@ -14,6 +14,7 @@ function Timeline(props) {
   // const [data, setData] = useState("") 
   const [tasks, setTasks] = useState("") 
   // var task = '';
+  console.log(props.data.events)
 
   const getTasks = (data) => {
     let tasks_array = data.events.map((event,i)=>{
