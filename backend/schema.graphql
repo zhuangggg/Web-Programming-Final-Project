@@ -1,3 +1,20 @@
+type Query {
+    project(name: String!): Project!
+}
+
+type Mutation {
+    createProject(name: String!): String
+    createEvent(data: eventInput!): String
+    createItem(data: itemInput!): String
+    deleteProject(name: String!): String
+    deleteEvent(data: eventInput!): String
+    deleteItem(data: itemInput!): String
+}
+
+type Subscription {
+    update_project(project_name: String!): projectSubscriptionPayload
+}
+
 type Project {
     name: String!
     progress: String!
@@ -23,17 +40,8 @@ type Time {
     end: String!
 }
 
-type Query {
-    project(name: String!): Project!
-}
-
-type Mutation {
-    createProject(name: String!): String
-    createEvent(data: eventInput!): String
-    createItem(data: itemInput!): String
-    deleteProject(name: String!): String
-    deleteEvent(data: eventInput!): String
-    deleteItem(data: itemInput!): String
+type projectSubscriptionPayload{
+    mutation: MutationType!
 }
 
 input eventInput {
@@ -45,4 +53,9 @@ input itemInput {
     project_name: String!
     event_name: String!
     item_name: String!
+}
+
+enum MutationType{
+  CREATED
+  DELETED
 }

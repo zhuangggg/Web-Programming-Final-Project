@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const Project = require('./models/project')
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
+const Subscription = require('./resolvers/Subscription')
 
 if (!process.env.MONGO_URL) {
   console.error('Missing MONGO_URL!!!')
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true
 })
 
+const pubsub = new PubSub()
 
 const mongodb = mongoose.connection
 
@@ -34,8 +36,10 @@ mongodb.once('open', async() => {
     resolvers: {
       Query,
       Mutation,
+      Subscription
     },
     context: {
+      pubsub
     }
   })
   server.start({ port: process.env.PORT | 4000 }, () => {

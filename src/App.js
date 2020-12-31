@@ -9,20 +9,38 @@ import { PROJECT_QUERY,
     CREATE_ITEM_MUTATION,
     DELETE_PROJECT_MUTATION,
     DELETE_EVENT_MUTATION,
-    DELETE_ITEM_MUTATION } from './graphql'
+    DELETE_ITEM_MUTATION,
+    UPDATE_PROJECT_SUBSCRIPTION
+   } from './graphql'
 const projectName = 'EECS Cornerstone'
 
 
 function App() {
   const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
-  const [count,setCount] = useState(0)
-    return(
+  const [subscribe, setSubscribe] = useState(false)
+  const [project, setProject] = useState("")
+  const [count, setCount] = useState(0)
+
+  if(!subscribe){
+    subscribeToMore({
+      document: UPDATE_PROJECT_SUBSCRIPTION,
+      variables: { project_name: projectName},
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log('update');
+        setCount(count+1)
+        return
+      }
+    })
+    setSubscribe(true)
+  }
+
+  return(
         <>
-        {loading? <div>loading</div>:
-        <div className="gantt">
-            <Leftpart data={data.project} />
-            <Timeline data={data.project} />
-        </div>}
+          {loading? <div>loading</div>:
+          <div className="gantt">
+              <Leftpart data={data.project} />
+              <Timeline data={data.project} />
+          </div>}
         </>
     )
 }

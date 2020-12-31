@@ -1,40 +1,31 @@
 import React, {useState, useEffect} from 'react';
 import '../gantt.css'
-
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { PROJECT_QUERY,
+  CREATE_PROJECT_MUTATION, 
+  CREATE_EVENT_MUTATION, 
+  CREATE_ITEM_MUTATION,
+  DELETE_PROJECT_MUTATION,
+  DELETE_EVENT_MUTATION,
+  DELETE_ITEM_MUTATION } from '../graphql'
 
 function Item (props) {
-  const [itemData, setItemData] = useState("") 
-  const [showInfo, setShowInfo] = useState(false)
-  const [count, setCount] = useState(0)  
+  const [deleteItem] = useMutation(DELETE_ITEM_MUTATION, {refetchQueries: [{query: PROJECT_QUERY, variables: {name: props.project_name}}]})
 
-  
-  const getItemData = ()=>{
-      setItemData(props.item)
-  }
-
-  useEffect(() => {
-      if(itemData=="") getItemData()
-  })
-
-  const sendToProps = ()=>{
-    props.updateEvent(props.eventIndexitemIndex, itemData)
-    setCount(count+1)
-}
-
-
-  const clickInfo = ()=>{
-    setShowInfo(!showInfo)
-  }
-
-  const editItem = (eventIndex, itemIndex)=>{
-    
-  }
     return(  
       <div>
         <div className="item">
-          {props.clean? <button className="x" onClick={()=>{console.log(props.itemIndex); props.cleanItem(props.itemIndex)}}>x</button>:<div></div>}
-          <div className="item_name">{itemData.name}</div>
-          <div className="progress">{itemData.progress}</div>
+          {props.clean? <button className="x" onClick={()=>{
+            deleteItem({
+              variables:{
+                project_name: props.project_name,
+                event_name: props.event_name,
+                item_name: props.item.name
+              }
+            })
+          }}>x</button>:<div></div>}
+          <div className="item_name">{props.item.name}</div>
+          <div className="progress">{props.item.progress}</div>
         </div>
       </div>
     )

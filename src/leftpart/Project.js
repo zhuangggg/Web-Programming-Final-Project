@@ -1,21 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import '../gantt.css'
 import Event from './Event'
-const currentDate = '2020/12/13'
-
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { PROJECT_QUERY,
+    CREATE_PROJECT_MUTATION, 
+    CREATE_EVENT_MUTATION, 
+    CREATE_ITEM_MUTATION,
+    DELETE_PROJECT_MUTATION,
+    DELETE_EVENT_MUTATION,
+    DELETE_ITEM_MUTATION } from '../graphql'
 
 function Project (props) {
   const [clean, setClean] = useState(false)
 
+  const [addEvent] = useMutation(CREATE_EVENT_MUTATION, {refetchQueries: [{query: PROJECT_QUERY, variables: {name: props.project.name}}]})
 
-
-  const addEvent = (inputValue)=>{
-
-  }
-
-  const cleanEvent = (eventIndex)=>{
-
-  }
 
   const updateProject = (eventIndex, newEvent)=>{
     
@@ -35,10 +34,10 @@ function Project (props) {
         <ul className="project_content">
         {props.project.events.map((event, eventIndex)=>  
           <Event
+            project_name = {props.project.name}
             event = {event}
             updateProject = {updateProject}
             eventIndex = {eventIndex}
-            cleanEvent = {cleanEvent}
             clean = {clean}/>)}
         </ul>
         <div className="add_event">
@@ -48,7 +47,10 @@ function Project (props) {
               let key = window.event ? e.keyCode : e.which
               let input = document.getElementById("add_event")
               if(input.value!="" && key==13) {
-                addEvent(input.value) 
+                addEvent({variables:{
+                  project_name: props.project.name,
+                  event_name: input.value
+                }}) 
                 input.value = ""
               }}}/>
         </div>
