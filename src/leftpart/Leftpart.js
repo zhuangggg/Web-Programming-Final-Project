@@ -3,7 +3,7 @@ import Project from '../leftpart/Project'
 
 
 function Leftpart(props) {
-  console.log(props.data.events)
+  // console.log(props.data.events)
     return (
     <>
         <Project

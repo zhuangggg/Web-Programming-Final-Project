@@ -36,18 +36,19 @@ function App() {
   const [deleteItem] = useMutation(DELETE_ITEM_MUTATION, refetchContent)
 
   
-  if(!subscribe){
-    subscribeToMore({
-      document: UPDATE_PROJECT_SUBSCRIPTION,
-      variables: { project_name: projectName},
-      updateQuery: (prev, { subscriptionData }) => {
-        console.log('update');
-        setCount(count+1)
-        return
-      }
-    })
-    setSubscribe(true)
-  }
+  // if(!subscribe){
+  //   subscribeToMore({
+  //     document: UPDATE_PROJECT_SUBSCRIPTION,
+  //     variables: { project_name: projectName},
+  //     updateQuery: (prev, { subscriptionData }) => {
+  //       console.log('update');
+  //       setCount(count+1)
+  //       console.log(count+1)
+  //       return
+  //     }
+  //   })
+  //   setSubscribe(true)
+  // }
 
 
   return(
@@ -60,8 +61,7 @@ function App() {
                         addItem={addItem}
                         deleteItem={deleteItem}
                         />
-              <Timeline data={data.project}
-                        count={count} />
+              <Timeline data={data.project}/>
           </div>}
         </>
     )
