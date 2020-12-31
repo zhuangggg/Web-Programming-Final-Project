@@ -1,0 +1,48 @@
+type Project {
+    name: String!
+    progress: String!
+    time: Time!
+    events: [Event]
+}
+
+type Event {
+    name: String!
+    progress: String!
+    time: Time!
+    items: [Item]
+}
+
+type Item {
+    name: String!
+    progress: String!
+    time: Time!
+}
+
+type Time {
+    start: String!
+    end: String!
+}
+
+type Query {
+    project(name: String!): Project!
+}
+
+type Mutation {
+    createProject(name: String!): String
+    createEvent(data: eventInput!): String
+    createItem(data: itemInput!): String
+    deleteProject(name: String!): String
+    deleteEvent(data: eventInput!): String
+    deleteItem(data: itemInput!): String
+}
+
+input eventInput {
+    project_name: String!
+    event_name: String!
+}
+
+input itemInput {
+    project_name: String!
+    event_name: String!
+    item_name: String!
+}

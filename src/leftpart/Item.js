@@ -36,15 +36,6 @@ function Item (props) {
           <div className="item_name">{itemData.name}</div>
           <div className="progress">{itemData.progress}</div>
         </div>
-        <button onClick={()=>clickInfo()}>more</button>
-        {showInfo?
-          <div className="item_info">
-            <button onClick={()=>editItem(props.itemIndex)}>edit</button>
-            <div>{itemData.name}</div>
-            <div>{itemData.time.start}-{itemData.time.end}</div>
-            <div>progress: {itemData.progress}</div>
-            <div>collaborator:</div>
-          </div>:<div></div>}
       </div>
     )
 }

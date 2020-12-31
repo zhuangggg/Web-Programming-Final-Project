@@ -1,45 +1,28 @@
 import React, {useState, useEffect}from 'react';
 import Leftpart from './leftpart/Leftpart';
 import Timeline from './Timeline'
-import './gantt.css';
-import axios from 'axios'
-
-const API_ROOT = 'http://localhost:4000/'
-const instance = axios.create({
-  baseURL: API_ROOT
-})
+import './gantt.css'
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { PROJECT_QUERY,
+    CREATE_PROJECT_MUTATION, 
+    CREATE_EVENT_MUTATION, 
+    CREATE_ITEM_MUTATION,
+    DELETE_PROJECT_MUTATION,
+    DELETE_EVENT_MUTATION,
+    DELETE_ITEM_MUTATION } from './graphql'
 const projectName = 'EECS Cornerstone'
 
 
 function App() {
-    const [data, setData] = useState("") 
-    const [count,setCount] = useState(0)
-
-  const getData = async() => {
-    console.log('getProject')
-    let msg =  await instance.post('/', {name: projectName})
-    setData(msg.data)
-  }
-  useEffect(() => {
-    if (data==""){
-      getData()
-    }
-  })
-
-  const updateData = async(newProject)=>{
-    let msg = await instance.post('/update', {name: projectName, data: newProject})
-    console.log(msg)
-    setData(newProject)
-    setCount(count+1)
-  }
+  const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
+  const [count,setCount] = useState(0)
     return(
         <>
-        {data!=="" ? 
+        {loading? <div>loading</div>:
         <div className="gantt">
-            <Leftpart data={data} updateData={(data)=>updateData(data)}/>
-            <Timeline data={data} count={count}/>
-        </div>
-        :<div></div>}
+            <Leftpart data={data.project} />
+            <Timeline data={data.project} />
+        </div>}
         </>
     )
 }
