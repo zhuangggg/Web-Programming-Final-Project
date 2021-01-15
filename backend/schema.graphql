@@ -1,5 +1,6 @@
 type Query {
     project(name: String!): Project!
+    user(name: String!): UserPayload!
 }
 
 type Mutation {
@@ -18,9 +19,21 @@ type Subscription {
 
 type Project {
     name: String!
+    users_id: [String]
     progress: String!
     time: Time!
     events: [Event]
+}
+
+type User {
+    id: String!
+    name: String!
+    projects_id: [String]
+}
+
+type UserPayload {
+    userinfo: User!
+    projects: [Project]
 }
 
 type Event {
@@ -32,6 +45,7 @@ type Event {
 
 type Item {
     name: String!
+    users_id: [String]
     progress: String!
     time: Time!
 }
@@ -51,18 +65,34 @@ type projectSubscriptionPayload{
 }
 
 input projectInput {
-    project_name: String!
+    name: String!
+    progress: String!
+    time: timeInput!
+    events: [Event_]
+}
+
+input Event_ {
+    name: String!
+    progress: String!
+    time: timeInput!
+    items: [Item_]
+}
+
+input Item_ {
+    name: String!
+    users_id: [String]
     progress: String!
     time: timeInput!
 }
+
 
 input _projectInput {
     project_name: String!
 }
 
 input projectEditInput {
-    names: _projectInput!
-    editContent: projectInput!
+    name: String!
+    recentContent: projectInput!
 }
 
 input eventInput {

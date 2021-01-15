@@ -1,5 +1,6 @@
 const Project = require('../models/project')
 
+const uuidv4 = require('uuid/v4')
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
 
@@ -7,13 +8,14 @@ const Mutation = {
   
   async createProject(parent, args, { pubsub }, info) {
     const newProject = {
-        name: args.data.project_name,
+        id: uuidv4(),
+        name: args.data.name,
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
         events: []
     }
 
-    pubsub.publish(`update_project ${args.name}`, {
+    pubsub.publish(`update_project ${args.project_name}`, {
       update_project: {
           mutation: 'CREATED'
       }
@@ -21,7 +23,7 @@ const Mutation = {
 
     Project.insertMany(newProject)
     
-    return `add project ${args.name} successfully!`
+    return `add project ${args.project_name} successfully!`
   },
 
   async createEvent(parent, args, { pubsub }, info) {
@@ -32,7 +34,7 @@ const Mutation = {
         time: {start: args.data.time.start, end: args.data.time.end},
         items: []
     }
-    pubsub.publish(`update_project ${args.data.project_name}`, {
+    pubsub.publish(`update_project ${args.data.event_name}`, {
       update_project: {
           mutation: 'CREATED'
       }
@@ -50,7 +52,7 @@ const Mutation = {
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
     }
-    pubsub.publish(`update_project ${args.data.project_name}`, {
+    pubsub.publish(`update_project ${args.data.item_name}`, {
       update_project: {
           mutation: 'CREATED'
       }
@@ -104,20 +106,21 @@ const Mutation = {
   },
 
   async editProject(parent, args, { pubsub }, info) {
-    pubsub.publish(`update_project ${args.data.names.project_name}`, {
+    pubsub.publish(`update_project ${args.data.name}`, {
       update_project: {
           mutation: 'EDITED'
       }
     })
-    console.log(args);
-    await Project.findOne({name: args.data.names.project_name}, function(err, doc){
-      doc.name = args.data.editContent.project_name
-      doc.progress =  args.data.editContent.progress
-      doc.time.start = args.data.editContent.time.start
-      doc.time.end = args.data.editContent.time.end
+    const data = args.data.recentContent
+    await Project.findOne({name: args.data.name}, function(err, doc){
+      console.log(doc)
+      doc.name = data.name
+      doc.progress = data.progress
+      doc.time = data.time
+      doc.events = data.events
       doc.save()
   })
-    return `edit project ${args.data.names.project_name} successfully!`
+    return `edit project ${args.data.name} successfully!`
 
   }
 }

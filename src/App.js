@@ -4,6 +4,7 @@ import Timeline from './Timeline'
 import './gantt.css'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { PROJECT_QUERY,
+    USER_QUERY,
     CREATE_PROJECT_MUTATION, 
     CREATE_EVENT_MUTATION, 
     CREATE_ITEM_MUTATION,
@@ -12,6 +13,7 @@ import { PROJECT_QUERY,
     DELETE_ITEM_MUTATION,
     UPDATE_PROJECT_SUBSCRIPTION
    } from './graphql'
+
 
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
@@ -24,6 +26,11 @@ function App() {
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
   const [count, setCount] = useState(0)
+  
+  const { loading:_loading, data:_data } = useQuery(USER_QUERY, {variables: {name: "May"}})
+
+  console.log(data);
+  console.log(_data);
 
   const refetchContent = {
     refetchQueries: [{
@@ -79,7 +86,6 @@ function App() {
   }
 
   const addItem = ({variables})=>{
-    console.log(variables)
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,

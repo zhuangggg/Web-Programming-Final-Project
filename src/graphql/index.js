@@ -1,6 +1,4 @@
-import { from } from 'apollo-link'
-
-export { PROJECT_QUERY } from './queries'
+export { PROJECT_QUERY, USER_QUERY } from './queries'
 export { CREATE_PROJECT_MUTATION, 
     CREATE_EVENT_MUTATION, 
     CREATE_ITEM_MUTATION,

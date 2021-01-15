@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Project from '../leftpart/Project'
 
 function Leftpart(props) {
+
     return (
     <>
         <Project

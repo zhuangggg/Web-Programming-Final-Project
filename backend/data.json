@@ -13,7 +13,6 @@
             "events": [
                 {
                     "name": "Maze",
-                    "users_id": ["1111", "2222", "3333"],
                     "progress": "100%",
                     "time": 
                     {
@@ -144,8 +143,4 @@
             "projects_id": ["fsdjiofsf","jaksdfhsdku"]
         }
     ]
-    
-    
-
-
 }

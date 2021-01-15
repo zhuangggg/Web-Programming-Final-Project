@@ -46,5 +46,6 @@ const wrappedApp = (
   </ApolloProvider>
 )
 
+
 ReactDOM.render(wrappedApp, document.getElementById('root'))
 

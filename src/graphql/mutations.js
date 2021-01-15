@@ -2,14 +2,14 @@ import { gql } from 'apollo-boost'
 
 export const CREATE_PROJECT_MUTATION = gql`
     mutation(
-        $project_name: String!
+        $project_name: ProjectInput!
         $progress: String!
         $start: String!
         $end: String!
     ){
         createProject(
             data: {
-                project_name: $project_name
+                name: $project_name
                 progress: $progress
                 time:{
                     start: $start

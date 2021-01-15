@@ -36,7 +36,6 @@ function Event (props) {
             let key = window.event ? e.keyCode : e.which
             let input = document.getElementById(props.eventIndex)
             if(input.value!="" && key==13) {
-              console.log(props.addItem)
               props.addItem({
                 variables:{
                   project_name: props.project_name,
