@@ -2,6 +2,7 @@
     "projects": [
         {
             "name": "EECS Cornerstone",
+            "id": "fsdjiofsf",
             "progress": "42%",
             "time": 
             {
@@ -12,6 +13,7 @@
             "events": [
                 {
                     "name": "Maze",
+                    "users_id": ["1111", "2222", "3333"],
                     "progress": "100%",
                     "time": 
                     {
@@ -21,6 +23,7 @@
                     ,
                     "items": [
                         {
+                            "users_id": ["1111", "2222", "3333"],
                             "name": "Flow Chart",
                             "progress": "100%",
                             "time": 
@@ -127,7 +130,22 @@
 
             ]
         }
+    ],
+    
+    "users": [
+        {
+            "id": "1111",
+            "name": "May",
+            "projects_id": ["fsdjiofsf","jaksdfhsdku"]
+        },
+        {
+            "id": "2222",
+            "name": "Bob",
+            "projects_id": ["fsdjiofsf","jaksdfhsdku"]
+        }
     ]
+    
+    
 
 
 }
