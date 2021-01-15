@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Project from '../leftpart/Project'
 
-
 function Leftpart(props) {
-  // console.log(props.data.events)
     return (
     <>
         <Project

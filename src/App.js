@@ -135,7 +135,6 @@ function App() {
   // }
 
   useEffect(() => {
-    console.log('useeffect')
     if(!loading && data.project!==project && !count){
       console.log('setData')
       setProject(data.project)
@@ -152,7 +151,8 @@ function App() {
                         addItem={addItem}
                         deleteItem={deleteItem}
                         />
-              <Timeline data={project}/>
+              <Timeline data={project}
+                        count={count}/>
           </div>}
         </>
     )

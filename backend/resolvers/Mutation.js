@@ -101,6 +101,24 @@ const Mutation = {
         doc.save()
     })
     return `delete item ${args.data.item_name} successfully!`
+  },
+
+  async editProject(parent, args, { pubsub }, info) {
+    pubsub.publish(`update_project ${args.data.names.project_name}`, {
+      update_project: {
+          mutation: 'EDITED'
+      }
+    })
+    console.log(args);
+    await Project.findOne({name: args.data.names.project_name}, function(err, doc){
+      doc.name = args.data.editContent.project_name
+      doc.progress =  args.data.editContent.progress
+      doc.time.start = args.data.editContent.time.start
+      doc.time.end = args.data.editContent.time.end
+      doc.save()
+  })
+    return `edit project ${args.data.names.project_name} successfully!`
+
   }
 }
 

@@ -9,6 +9,7 @@ type Mutation {
     deleteProject(data: _projectInput!): String
     deleteEvent(data: _eventInput!): String
     deleteItem(data: _itemInput!): String
+    editProject(data: projectEditInput!): String
 }
 
 type Subscription {
@@ -59,6 +60,11 @@ input _projectInput {
     project_name: String!
 }
 
+input projectEditInput {
+    names: _projectInput!
+    editContent: projectInput!
+}
+
 input eventInput {
     project_name: String!
     event_name: String!
@@ -88,4 +94,5 @@ input _itemInput {
 enum MutationType{
   CREATED
   DELETED
+  EDITED
 }

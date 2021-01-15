@@ -1,14 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../gantt.css'
 import Item from './Item'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { PROJECT_QUERY,
-    CREATE_PROJECT_MUTATION, 
-    CREATE_EVENT_MUTATION, 
-    CREATE_ITEM_MUTATION,
-    DELETE_PROJECT_MUTATION,
-    DELETE_EVENT_MUTATION,
-    DELETE_ITEM_MUTATION } from '../graphql'
 
 function Event (props) {
     return(

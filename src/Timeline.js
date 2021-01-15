@@ -60,7 +60,7 @@ function Timeline(props) {
     console.log("bbbbbbbbbbbbb")
     getTasks(props.data)
     console.log(props.data.events);
-  },[props.data])
+  },[props.count])
   // const tasks = getTasks();
 
   const customPopupHtml = task => {
