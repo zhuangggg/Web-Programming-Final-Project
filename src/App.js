@@ -133,6 +133,8 @@ function App() {
       name: variables.project.name,
       recentContent: JSON.stringify(variables.project)
     }
+    setProject(variables.project)
+    setCount(count+1)
     editProject_db({variables: payload})
   }
   
