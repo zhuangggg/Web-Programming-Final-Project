@@ -111,7 +111,7 @@ const Mutation = {
           mutation: 'EDITED'
       }
     })
-    const data = args.data.recentContent
+    const data = JSON.parse(args.data.recentContent)
     await Project.findOne({name: args.data.name}, function(err, doc){
       console.log(doc)
       doc.name = data.name

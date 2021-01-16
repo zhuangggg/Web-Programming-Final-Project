@@ -1,0 +1,130 @@
+
+    {
+        "name": "EECS Cornerstone",
+        "id": "fsdjiofsf",
+        "progress": "!!!!",
+        "time": 
+        {
+            "start": "2020/3/10",
+            "end": "2020/7/1"
+        }
+        ,
+        "events": [
+            {
+                "name": "Maze",
+                "progress": "100%",
+                "time": 
+                {
+                    "start": "2020/3/10",
+                    "end": "2020/5/8"
+                }
+                ,
+                "items": [
+                    {
+                        "users_id": ["1111", "2222", "3333"],
+                        "name": "Flow Chart",
+                        "progress": "100%",
+                        "time": 
+                        {
+                            "start": "2020/3/10",
+                            "end": "2020/3/24"
+                        }
+                        
+                    },
+                    {
+                        "name": "Arduino",
+                        "progress": "100%",
+                        "time": 
+                        {
+                            "start": "2020/3/26",
+                            "end": "2020/4/28"
+                        }
+                        
+                    },
+                    {
+                        "name": "Code",
+                        "progress": "100%",
+                        "time": 
+                        {
+                            "start": "2020/4/2",
+                            "end": "2020/4/26"
+                        }
+                        
+                    },
+                    {
+                        "name": "Bluetooth",
+                        "progress": "100%",
+                        "time": 
+                        {
+                            "start": "2020/4/15",
+                            "end": "2020/5/8"
+                        }
+                        
+                    },
+                    {
+                        "name": "Checkpoint",
+                        "progress": "100%",
+                        "time": 
+                        {
+                            "start": "2020/5/9",
+                            "end": "2020/5/9"
+                        }
+                        
+                    }
+                ]
+            },
+            {
+                "name": "Independent Project",
+                "progress": "56%",
+                "time": 
+                {
+                    "start": "2020/5/15",
+                    "end": "2020/7/1"
+                }
+                ,
+                "items": [
+                    {
+                        "name": "Declare Topic",
+                        "progress": "100%",
+                        "time": 
+                        {
+                            "start": "2020/5/16",
+                            "end": "2020/6/1"
+                        }
+                        
+                    },
+                    {
+                        "name": "Hardware",
+                        "progress": "80%",
+                        "time": 
+                        {
+                            "start": "2020/5/23",
+                            "end": "2020/6/17"
+                        }
+                        
+                    },
+                    {
+                        "name": "Software",
+                        "progress": "45%",
+                        "time": 
+                        {
+                            "start": "2020/6/3",
+                            "end": "2020/6/27"
+                        }
+                        
+                    },
+                    {
+                        "name": "Proposal",
+                        "progress": "0%",
+                        "time": 
+                        {
+                            "start": "2020/6/18",
+                            "end": "2020/6/30"
+                        }
+                        
+                    }
+                ]
+            }
+
+        ]
+    }

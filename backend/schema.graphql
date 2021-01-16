@@ -92,7 +92,7 @@ input _projectInput {
 
 input projectEditInput {
     name: String!
-    recentContent: projectInput!
+    recentContent: String!
 }
 
 input eventInput {

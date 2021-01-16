@@ -33,7 +33,7 @@ mongodb.once('open', async() => {
 
   //Project.deleteMany({},()=>{})
   //User.deleteMany({},()=>{})
-  Project.insertMany(data.projects)
+  //Project.insertMany(data.projects)
   //User.insertMany(data.users)
 
   const server = new GraphQLServer({

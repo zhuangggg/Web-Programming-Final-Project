@@ -11,9 +11,10 @@ import { PROJECT_QUERY,
     DELETE_PROJECT_MUTATION,
     DELETE_EVENT_MUTATION,
     DELETE_ITEM_MUTATION,
-    UPDATE_PROJECT_SUBSCRIPTION
+    UPDATE_PROJECT_SUBSCRIPTION,
+    EDIT_PROJECT_MUTATION
    } from './graphql'
-
+import test from './test.json'
 
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
@@ -45,6 +46,7 @@ function App() {
   const [deleteEvent_db] = useMutation(DELETE_EVENT_MUTATION, refetchContent)
   const [addItem_db] = useMutation(CREATE_ITEM_MUTATION, refetchContent)
   const [deleteItem_db] = useMutation(DELETE_ITEM_MUTATION, refetchContent)
+  const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION, refetch)
 
   const addEvent = ({variables})=>{
     console.log(variables)
@@ -125,6 +127,14 @@ function App() {
     deleteItem_db({variables: gqlbody})
   }
 
+  const editProject = ({variables})=>{
+    console.log(variables)
+    const payload = {
+      name: variables.project.name,
+      recentContent: JSON.stringify(variables.project)
+    }
+    editProject_db({variables: payload})
+  }
   
   // if(!subscribe){
   //   subscribeToMore({
@@ -156,9 +166,11 @@ function App() {
                         deleteEvent={deleteEvent}
                         addItem={addItem}
                         deleteItem={deleteItem}
+                        editProject={editProject}
                         />
               <Timeline data={project}
-                        count={count}/>
+                        count={count}
+                        editProject={editProject}/>
           </div>}
         </>
     )
