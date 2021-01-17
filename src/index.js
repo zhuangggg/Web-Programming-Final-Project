@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-
+import Login from './Login'
 import { ApolloClient, InMemoryCache } from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import { split } from 'apollo-link'

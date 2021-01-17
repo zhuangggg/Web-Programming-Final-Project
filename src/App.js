@@ -18,7 +18,7 @@ import test from './test.json'
 
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
-const defaultProgress = '30%'
+const defaultProgress = '0%'
 const projectName = 'EECS Cornerstone'
 
 

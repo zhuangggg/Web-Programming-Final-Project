@@ -35,13 +35,20 @@ export const PROJECT_QUERY = gql`
 export const USER_QUERY = gql`
     query(
         $name: String!
+        $id: String!
+        $type: String!
     ){
-        user(name: $name){
+        user(data:{
+            name: $name
+            id: $id
+            type: $type
+        }){
             userinfo{
                 name
                 projects_id
                 id
             }
+            check
             projects{
                 name
                 progress

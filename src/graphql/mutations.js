@@ -105,41 +105,6 @@ export const EDIT_PROJECT_MUTATION = gql`
         })
     }
 `
-/*
-mutation{
-  editProject(data:{
-    name: "EECS Cornerstone",
-  	recentContent: 
-        {
-            name: "EE",
-            progress: "42%",
-            time: 
-            {
-                start: "2020/3/10",
-                end: "2020/7/1"
-            }
-            ,
-            events: [
-                {
-                    name: "Maze",
-                    progress: "100%",
-                    time: 
-                    {
-                        start: "2020/3/10",
-                        end: "2020/5/8"
-                    }
-                    ,
-                    items: []
-                        
-                }]
-        }
-    
-
-  })
-}
-
-*/
-
 
 
 

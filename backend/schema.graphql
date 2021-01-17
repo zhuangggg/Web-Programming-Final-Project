@@ -1,6 +1,6 @@
 type Query {
     project(name: String!): Project!
-    user(name: String!): UserPayload!
+    user(data: userInput!): UserPayload!
 }
 
 type Mutation {
@@ -32,7 +32,8 @@ type User {
 }
 
 type UserPayload {
-    userinfo: User!
+    userinfo: User
+    check: String!
     projects: [Project]
 }
 
@@ -62,6 +63,12 @@ input timeInput {
 
 type projectSubscriptionPayload{
     mutation: MutationType!
+}
+
+input userInput {
+    name: String!
+    type: String!
+    id: String!
 }
 
 input projectInput {
