@@ -80,6 +80,7 @@ li {
     margin-left: 30px;
     margin-bottom: 13px;
     border: none;
+    color: black;
 }
 
 .add_item:focus {
@@ -94,6 +95,7 @@ li {
     width: 310px;
     margin-left: 30px;
     border: none;
+    color: black;
 }
 
 #add_event:focus {
@@ -138,4 +140,8 @@ li {
 .details-container input:focus{
     border: white 1px solid;
     border-radius: 10%;
+}
+
+::placeholder{
+    color: gray;
 }
