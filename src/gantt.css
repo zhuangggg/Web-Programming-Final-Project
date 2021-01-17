@@ -144,4 +144,5 @@ li {
 
 ::placeholder{
     color: gray;
+    text-align: left;
 }
