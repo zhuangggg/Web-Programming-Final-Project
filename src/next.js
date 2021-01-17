@@ -9,7 +9,7 @@ import { BrowserRouter,NavLink, Switch, Route, Redirect } from "react-router-dom
 const duration = 2
 
 function Next(props) {
-    console.log(props);
+    const [check, setCheck] = useState(false)
     const { subscribeToMore, loading, data, refetch } = useQuery(USER_QUERY, {variables: {
         name: props.name, 
         id: props.id,
@@ -35,6 +35,7 @@ function Next(props) {
                         content: data.user.check,
                         duration: duration
                     })
+                    setCheck(true)
                 }
                 props.setMode(0)
     
@@ -45,10 +46,12 @@ function Next(props) {
         }
         
     }, [data])
-    return (<Redirect to={{
-        pathname:`/home/${props.id}`,
-        state: {userid: props.id, username:props.name}
-      }}/>)
+    return (<div>
+        {check?<Redirect to={{
+        pathname:`/home/${props.id}+${props.name}`,
+        state: {userid: props.id, username:props.name, data: data}
+      }}/>:<></>}
+    </div>)
   }
   
   export default Next;

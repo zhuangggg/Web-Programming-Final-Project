@@ -52,6 +52,7 @@ export const USER_QUERY = gql`
             projects{
                 name
                 progress
+                id
                 time{
                     start
                     end

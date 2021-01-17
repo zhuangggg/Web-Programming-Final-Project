@@ -15,14 +15,18 @@ import { PROJECT_QUERY,
     EDIT_PROJECT_MUTATION
    } from './graphql'
 import test from './test.json'
+import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "react-router-dom";
 
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
 const defaultProgress = '0%'
-const projectName = 'EECS Cornerstone'
 
 
-function Gantt() {
+function Gantt(props) {
+  const location = useLocation()
+  console.log(props);
+  const projectName = props.location.state.projectname
+
   const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")

@@ -18,6 +18,7 @@ type Subscription {
 }
 
 type Project {
+    id: String!
     name: String!
     users_id: [String]
     progress: String!

@@ -1,3 +1,5 @@
+*
+
 .gantt {
     display: flex;
     flex-direction: row;
@@ -111,4 +113,31 @@ li {
     width: fit-content;
     height: fit-content;
     border: solid gray 1.5px;
+}
+
+.details-container{
+    width: 150px;
+    padding-left: 5px;
+    font-size: medium;
+}
+
+.eventBar .bar-progress {
+    fill: #7CB5F7 !important;
+}
+
+.itemBar .bar-progress {
+    fill: #92D9F0 !important;
+}
+
+.details-container input{
+    margin: 0;
+    font-size: 14px;
+    width: 40px;
+    color: #3D4F75;
+    border: none;
+}
+
+.details-container input:focus{
+    border: white 1px solid;
+    border-radius: 10%;
 }
