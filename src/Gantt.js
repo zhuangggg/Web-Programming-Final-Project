@@ -31,11 +31,7 @@ function Gantt(props) {
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
   const [count, setCount] = useState(0)
-  
-  const { loading:_loading, data:_data } = useQuery(USER_QUERY, {variables: {name: "May"}})
-
   console.log(data);
-  console.log(_data);
 
   const refetchContent = {
     refetchQueries: [{
