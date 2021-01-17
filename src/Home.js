@@ -9,10 +9,13 @@ function Home(props){
     return (
         <>
             <div>Hello, {name}</div>
-            <p><NavLink to={{
-                pathname:`/gantt/${data.user.projects[0].id}`,
-                state: {projectname: data.user.projects[0].name}
-      }}>{data.user.projects[0].name}</NavLink></p>
+            {data.user.projects.length!==0? data.user.projects.map(((project, index)=>
+                <NavLink to={{
+                    pathname:`/gantt/${project.id}`,
+                    state: {projectname: project.name}
+                }}>{project.name}</NavLink>
+            )):<p>no projects</p>
+            }
         </>
     )
 }
