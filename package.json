@@ -17,6 +17,7 @@
     "react": "^17.0.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "size-sensor": "^1.0.1",
     "subscriptions-transport-ws": "^0.9.18",
