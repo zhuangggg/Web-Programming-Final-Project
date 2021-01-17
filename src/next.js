@@ -3,6 +3,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import { USER_QUERY } from './graphql'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { message } from 'antd'
+import { BrowserRouter,NavLink, Switch, Route, Redirect } from "react-router-dom";
+
 
 const duration = 2
 
@@ -41,7 +43,10 @@ function Next(props) {
         }
         
     }, [data])
-    return (<div></div>)
+    return (<Redirect to={{
+        pathname:`/home/${props.id}`,
+        state: {userid: props.id, username:props.name}
+      }}/>)
   }
   
   export default Next;
