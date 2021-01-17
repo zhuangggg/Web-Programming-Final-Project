@@ -127,13 +127,13 @@ function App() {
     deleteItem_db({variables: gqlbody})
   }
 
-  const editProject = ({variables})=>{
+  const editProject = (variables)=>{
     console.log(variables)
     const payload = {
-      name: variables.project.name,
-      recentContent: JSON.stringify(variables.project)
+      name: variables.name,
+      recentContent: JSON.stringify(variables)
     }
-    setProject(variables.project)
+    setProject(variables)
     setCount(count+1)
     editProject_db({variables: payload})
   }

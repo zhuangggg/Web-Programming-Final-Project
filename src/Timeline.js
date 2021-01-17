@@ -14,7 +14,7 @@ function Timeline(props) {
   // const [data, setData] = useState("") 
   const [tasks, setTasks] = useState("") 
   // var task = '';
-  console.log(props.data.events)
+  // console.log(props.data.events)
 
   const getTasks = (data) => {
     let tasks_array = data.events.map((event,i)=>{
@@ -29,7 +29,7 @@ function Timeline(props) {
             id: "Event " + i,
             progress: event.progress.split("%")[0]
           }
-      let items = event.items.map((item,i)=>{
+      let items = event.items.map((item,j)=>{
         let start_date = item.time.start.split("/")
         let start = new Date(start_date[0],start_date[1]-1,start_date[2])
         let end_date = item.time.end.split("/")
@@ -38,7 +38,7 @@ function Timeline(props) {
               start: start,
               end: end,
               name: item.name,
-              id: "Item " + i,
+              id: "Item " +i+"-"+ j,
               progress: item.progress.split("%")[0]
             }
       })
@@ -72,12 +72,43 @@ function Timeline(props) {
     `;
   };
 
+  const handleDateChange = (task,start,end)=>{
+    var payload = props.data;
+    var taskId = task.id.split(" ");
+    switch (taskId[0]){
+      case 'Event':
+        payload.events[taskId[1]].time.start = `${start.getFullYear()}/${start.getMonth()+1}/${start.getDate()}`;
+        payload.events[taskId[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
+        break;
+      case 'Item':
+        payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.start = `${start.getFullYear()}/${start.getMonth()+1}/${start.getDate()}`;
+        payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
+        break;
+    }
+    props.editProject(payload)
+  }
+
+  const handleProgressChange = (task,progress)=>{
+    var payload = props.data;
+    var taskId = task.id.split(" ");
+    switch (taskId[0]){
+      case 'Event':
+        payload.events[taskId[1]].progress = `${progress}%`;
+        break;
+      case 'Item':
+        payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].progress = `${progress}%`;
+    }
+    props.editProject(payload)
+  }
+
     return (
       <>
       {tasks!==""?
           <div className='timeline-container' style={{overflow: 'scroll'}}>
             <ReactGantt tasks={tasks}
                         viewMode='Week'
+                        onDateChange={handleDateChange}
+                        onProgressChange={handleProgressChange}
                         // customPopupHtml={customPopupHtml}
                         // scrollOffsets={this.state.scrollOffsets}
             />
