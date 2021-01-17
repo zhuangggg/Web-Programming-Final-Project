@@ -13,7 +13,9 @@ function Next(props) {
         id: props.id,
         type: props.type }})
     useEffect(() => {
+        console.log('useeffect');
         if(data!==undefined){
+            console.log('message');
             message
             .loading('loading..')
             .then(()=>{
