@@ -27,7 +27,8 @@ function Timeline(props) {
             end: end,
             name: event.name,
             id: "Event " + i,
-            progress: event.progress.split("%")[0]
+            progress: event.progress.split("%")[0],
+            custom_class: 'eventBar'
           }
       let items = event.items.map((item,j)=>{
         let start_date = item.time.start.split("/")
@@ -39,7 +40,8 @@ function Timeline(props) {
               end: end,
               name: item.name,
               id: "Item " +i+"-"+ j,
-              progress: item.progress.split("%")[0]
+              progress: item.progress.split("%")[0],
+              custom_class: 'itemBar'
             }
       })
       items.unshift(task);
@@ -64,10 +66,13 @@ function Timeline(props) {
   // const tasks = getTasks();
 
   const customPopupHtml = task => {
+    const start = `${task._start.getMonth()}/${task._start.getDate()}`
+    const end = `${task._end.getMonth()}/${task._end.getDate()}`
     return `
       <div class="details-container">
-        <h5>${task.name}</h5>
-        <p>${task.progress}% completed!</p>
+        <h4 style='margin:0'>${task.name}</h4>
+        <span>Time: </span><input value="${start}" /><span> - </span><input value="${end}"/>
+        <span>Progress: </span><input value="${task.progress}"/><span>%</span>
       </div>
     `;
   };
@@ -109,7 +114,7 @@ function Timeline(props) {
                         viewMode='Week'
                         onDateChange={handleDateChange}
                         onProgressChange={handleProgressChange}
-                        // customPopupHtml={customPopupHtml}
+                        customPopupHtml={customPopupHtml}
                         // scrollOffsets={this.state.scrollOffsets}
             />
           </div>:<div></div>
