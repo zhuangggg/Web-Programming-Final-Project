@@ -1,7 +1,6 @@
 import React, {useState, useEffect}from 'react';
 import Leftpart from './leftpart/Leftpart';
 import Timeline from './Timeline'
-import './gantt.css'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { PROJECT_QUERY,
     USER_QUERY,
@@ -17,7 +16,6 @@ import { PROJECT_QUERY,
 import test from './test.json'
 import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "react-router-dom";
 import { message } from 'antd'
-import './antd.css'
 import loadingimg from './images/loading.gif'
 
 
