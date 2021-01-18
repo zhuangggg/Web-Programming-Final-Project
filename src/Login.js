@@ -47,10 +47,10 @@ function Login() {
 
     return (
       <div className="App">
-        <div class="form">
+        <div className="form">
          <span>GANTT CHART</span>
 
-          <div class="username">
+          <div className="username">
             <input type="text" 
             id="id"
             placeholder="ID"
@@ -62,7 +62,7 @@ function Login() {
               } 
             }/>
           </div>
-          <div class="password">
+          <div className="password">
             <input type="text" 
             id="username"
             placeholder="USERNAME"
@@ -74,11 +74,11 @@ function Login() {
               } 
             }/>
           </div>
-          <div class="sendButton">
-            <div class="login">
+          <div className="sendButton">
+            <div className="login">
               <span onClick={()=>send("login")}>LOG IN</span>
             </div>
-            <div class="signin">
+            <div className="signin">
               <span onClick={()=>send("signin")}>SIGN IN</span>
             </div>
           </div>
