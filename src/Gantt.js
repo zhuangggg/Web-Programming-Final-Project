@@ -20,7 +20,7 @@ import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "reac
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
 const defaultProgress = '0%'
-
+var c = 0;
 
 function Gantt(props) {
   const location = useLocation()
@@ -134,7 +134,10 @@ function Gantt(props) {
       recentContent: JSON.stringify(variables)
     }
     setProject(variables)
-    setCount(count+1)
+    // setCount(count+1)
+    // console.log(count);
+    c += 1;
+    console.log(c);
     editProject_db({variables: payload})
   }
   
@@ -171,7 +174,7 @@ function Gantt(props) {
                         editProject={editProject}
                         />
               <Timeline data={project}
-                        count={count}
+                        count={c}
                         editProject={editProject}/>
           </div>}
         </>
