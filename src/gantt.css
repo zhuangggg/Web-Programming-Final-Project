@@ -79,8 +79,7 @@ li {
 .add_item {
     font-size: 18px;
     width: 210px;
-    margin-left: 30px;
-    margin-bottom: 13px;
+    margin: 8.5px 30px;
     border: none;
     color: black;
 }

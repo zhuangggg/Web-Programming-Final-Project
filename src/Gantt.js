@@ -72,7 +72,7 @@ function Gantt(props) {
       items: []
     })
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     addEvent_db({variables: gqlbody})
   }  
   
@@ -87,7 +87,7 @@ function Gantt(props) {
     temp.events.splice(index, 1)
     console.log(index)
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     deleteEvent_db({variables: gqlbody})
   }
 
@@ -111,7 +111,7 @@ function Gantt(props) {
       }
     })
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     addItem_db({variables: gqlbody})
   }
 
@@ -127,7 +127,7 @@ function Gantt(props) {
     const item_index = temp.events[event_index].items.findIndex(item=>item.name===variables.item_name)
     temp.events[event_index].items.splice(item_index, 1)
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     deleteItem_db({variables: gqlbody})
   }
 
