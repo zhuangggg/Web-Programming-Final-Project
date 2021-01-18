@@ -20,7 +20,7 @@ import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "reac
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
 const defaultProgress = '0%'
-
+var c = 0;
 
 function Gantt(props) {
   const location = useLocation()
@@ -68,7 +68,7 @@ function Gantt(props) {
       items: []
     })
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     addEvent_db({variables: gqlbody})
   }  
   
@@ -83,7 +83,7 @@ function Gantt(props) {
     temp.events.splice(index, 1)
     console.log(index)
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     deleteEvent_db({variables: gqlbody})
   }
 
@@ -107,7 +107,7 @@ function Gantt(props) {
       }
     })
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     addItem_db({variables: gqlbody})
   }
 
@@ -123,7 +123,7 @@ function Gantt(props) {
     const item_index = temp.events[event_index].items.findIndex(item=>item.name===variables.item_name)
     temp.events[event_index].items.splice(item_index, 1)
     setProject(temp)
-    setCount(count+1)
+    c+=1;
     deleteItem_db({variables: gqlbody})
   }
 
@@ -134,7 +134,10 @@ function Gantt(props) {
       recentContent: JSON.stringify(variables)
     }
     setProject(variables)
-    setCount(count+1)
+    // setCount(count+1)
+    // console.log(count);
+    c += 1;
+    console.log(c);
     editProject_db({variables: payload})
   }
   
@@ -171,7 +174,7 @@ function Gantt(props) {
                         editProject={editProject}
                         />
               <Timeline data={project}
-                        count={count}
+                        count={c}
                         editProject={editProject}/>
           </div>}
         </>

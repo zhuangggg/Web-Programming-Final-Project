@@ -66,8 +66,8 @@ function Timeline(props) {
   // const tasks = getTasks();
 
   const customPopupHtml = task => {
-    const start = `${task._start.getMonth()}/${task._start.getDate()}`
-    const end = `${task._end.getMonth()}/${task._end.getDate()}`
+    const start = `${task._start.getMonth()+1}/${task._start.getDate()}`
+    const end = `${task._end.getMonth()+1}/${task._end.getDate()}`
     return `
       <div class="details-container">
         <h4 style='margin:0'>${task.name}</h4>
