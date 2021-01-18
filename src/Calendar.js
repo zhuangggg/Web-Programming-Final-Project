@@ -4,12 +4,10 @@ import {
   USER_QUERY,
   PROJECT_QUERY
 } from './graphql'
-//import './App.css'
-//import React, { Component } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-//import "./App.css";
 import './react-big-calendar.css'
+import './calendar.css'
 //import "react-big-calendar/lib/css/react-big-calendar.css";
 //import 'react-big-calendar/lib/sass/styles.scss'
 import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "react-router-dom";
@@ -77,14 +75,37 @@ function GanttCalendar(props) {
   */
 
     return (
-      <div>
-        <Calendar
-          localizer={localizer}
-          defaultDate={new Date()}
-          defaultView="month"
-          events={items}
-          style={{ height: "100vh" }}
-        />
+      <div className="Calendar">
+        <div className="eventlist">
+          <p className="listhead">Your events</p>
+          <div>
+            {projects.map(p => {
+              return (
+                <div className="projectcontainer">
+                  <p className="projectname">{p.name}</p>
+                  <div className="events">
+                    {p.events.map(e => {
+                      return (
+                        <div>
+                          <p>{e.name}</p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className="calendar">
+          <Calendar
+            localizer={localizer}
+            defaultDate={new Date()}
+            defaultView="month"
+            events={items}
+            style={{ height: "100vh" }}
+          />
+        </div>
       </div>
     );
 }
