@@ -16,7 +16,7 @@ import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "reac
 
 const localizer = momentLocalizer(moment);
 
-function App(props) {
+function GanttCalendar(props) {
   const name = props.location.state.username
   const id = props.location.state.userid
   const location = useLocation()
@@ -89,4 +89,4 @@ function App(props) {
     );
 }
 
-export default Calendar;
+export default GanttCalendar;
