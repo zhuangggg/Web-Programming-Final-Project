@@ -148,3 +148,9 @@ li {
     color: gray;
     text-align: left;
 }
+
+.loadingimg {
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    position: absolute;
+}

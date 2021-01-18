@@ -16,6 +16,10 @@ import { PROJECT_QUERY,
    } from './graphql'
 import test from './test.json'
 import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "react-router-dom";
+import { message } from 'antd'
+import './antd.css'
+import loadingimg from './images/loading.gif'
+
 
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
@@ -164,7 +168,7 @@ function Gantt(props) {
   }, [data]);
   return(
         <>
-          {!project? <div>loading</div>:
+          {!project? <div className="loadingimg" ><img src={loadingimg}/></div>:
           <div className="gantt">
               <Leftpart data={project} 
                         addEvent={addEvent}
