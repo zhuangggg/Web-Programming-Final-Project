@@ -76,12 +76,13 @@
     border: none;
     margin-bottom: 10px;
     color: black;
+    margin-left: 15px;
+    outline: none;
 }
 
-.add_project:focus {
+.add_project:focus::placeholder {
     transition: 0.5s;
-    opacity: 50%;
-    outline: none;
+    color: #bbbbbb;
 }
 
 .loadingimg {

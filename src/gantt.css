@@ -95,12 +95,12 @@ ul.project_content {
     margin: 8.5px 30px;
     border: none;
     color: black;
+    outline: none;
 }
 
-.add_item:focus {
+.add_item:focus::placeholder{
     transition: 0.5s;
-    opacity: 50%;
-    outline: none;
+    color: #bbbbbb;
 }
 
 #add_event {
@@ -110,12 +110,13 @@ ul.project_content {
     margin-left: 30px;
     border: none;
     color: black;
+    outline: none;
 }
 
-#add_event:focus {
+#add_event:focus::placeholder {
     transition: 0.5s;
-    opacity: 50%;
-    outline: none;
+    color: #bbbbbb;
+
 }
 
 .item_info {
@@ -177,10 +178,6 @@ ul.project_content {
     font-size: 10px;
     height: fit-content;
     justify-self: end;
-}
-
-input.add_project {
-    margin-left: 15px;
 }
 
 p {
