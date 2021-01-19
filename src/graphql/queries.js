@@ -6,11 +6,6 @@ export const PROJECT_QUERY = gql`
     ){
         project(name: $name){
             name
-            progress
-            time{
-                start
-                end
-            }
             events{
                 name
                 progress
@@ -51,12 +46,7 @@ export const USER_QUERY = gql`
             check
             projects{
                 name
-                progress
                 id
-                time{
-                    start
-                    end
-                }
                 events{
                     name
                     progress

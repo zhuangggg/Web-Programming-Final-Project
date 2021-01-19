@@ -46,10 +46,18 @@ function Next(props) {
         }
         
     }, [data])
+
+    const refetch_userinfo = ()=>{
+        console.log("refetch");
+        refetch()
+    }
+
     return (<div>
         {check?<Redirect to={{
         pathname:`/home/${props.id}+${props.name}`,
-        state: {userid: props.id, username:props.name, data: data}
+        state: {
+            userid: props.id, 
+            username:props.name}
       }}/>:<></>}
     </div>)
   }

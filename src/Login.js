@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { USER_QUERY } from './graphql'
 import Next from './next' 
 import { message } from 'antd'
+import 'antd/dist/antd.css'
 
 const duration = 2
 

@@ -7,7 +7,7 @@ type Mutation {
     createProject(data: projectInput): String
     createEvent(data: eventInput!): String
     createItem(data: itemInput!): String
-    deleteProject(data: _projectInput!): String
+    deleteProject(name: String!): String
     deleteEvent(data: _eventInput!): String
     deleteItem(data: _itemInput!): String
     editProject(data: projectEditInput!): String
@@ -95,11 +95,6 @@ input Item_ {
     users_id: [String]
     progress: String!
     time: timeInput!
-}
-
-
-input _projectInput {
-    project_name: String!
 }
 
 input projectEditInput {

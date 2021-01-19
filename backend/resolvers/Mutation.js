@@ -71,6 +71,7 @@ const Mutation = {
           mutation: 'DELETED'
       }
     })
+    console.log(args.name);
     Project.deleteMany({name: args.name}, ()=>{})
     return `delete project ${args.name} successfully!`
   },

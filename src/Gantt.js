@@ -35,20 +35,20 @@ function Gantt(props) {
   const [count, setCount] = useState(0)
   console.log(data);
 
-  const refetchContent = {
+  /*const refetchContent = {
     refetchQueries: [{
       query: PROJECT_QUERY, 
       variables: {
         name: projectName
       }
     }]
-  }
+  }*/
 
-  const [addEvent_db] = useMutation(CREATE_EVENT_MUTATION, refetchContent)
-  const [deleteEvent_db] = useMutation(DELETE_EVENT_MUTATION, refetchContent)
-  const [addItem_db] = useMutation(CREATE_ITEM_MUTATION, refetchContent)
-  const [deleteItem_db] = useMutation(DELETE_ITEM_MUTATION, refetchContent)
-  const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION, refetch)
+  const [addEvent_db] = useMutation(CREATE_EVENT_MUTATION)
+  const [deleteEvent_db] = useMutation(DELETE_EVENT_MUTATION)
+  const [addItem_db] = useMutation(CREATE_ITEM_MUTATION)
+  const [deleteItem_db] = useMutation(DELETE_ITEM_MUTATION)
+  const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
 
   const addEvent = ({variables})=>{
     console.log(variables)

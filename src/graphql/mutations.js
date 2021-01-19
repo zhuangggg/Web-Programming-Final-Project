@@ -2,19 +2,13 @@ import { gql } from 'apollo-boost'
 
 export const CREATE_PROJECT_MUTATION = gql`
     mutation(
-        $project_name: ProjectInput!
-        $progress: String!
-        $start: String!
-        $end: String!
+        $name: String!
+        $id: String!
     ){
         createProject(
             data: {
-                name: $project_name
-                progress: $progress
-                time:{
-                    start: $start
-                    end: $end
-                }
+                name: $name
+                id: $id
             }
         )
     }
@@ -104,6 +98,18 @@ export const EDIT_PROJECT_MUTATION = gql`
             recentContent: $recentContent
         })
     }
+`
+export const ADD_PROJECT_ID_MUTATION = gql`
+    mutation editProject(
+        $name: String!
+        $project_id: String!
+    ){
+        addProjectIdForUser(data: {
+            name: $name
+            project_id: $project_id
+        })
+    }
+
 `
 
 

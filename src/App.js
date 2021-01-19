@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter,NavLink, Switch, Route, Redirect } from "react-router-dom";
 import Login from './Login'
 import Gantt from './Gantt'
-import Home from './Home'
+import GetInfo from './GetInfo'
 import GanttCalendar from './Calendar'
 
 function App(){
@@ -11,7 +11,7 @@ function App(){
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Login} />
-                <Route path="/home/:id?" component={Home} />
+                <Route path="/home/:id?" component={GetInfo} />
                 <Route path="/gantt" component={Gantt} />
                 <Route path="/calendar/" component={GanttCalendar} />
             </Switch>
