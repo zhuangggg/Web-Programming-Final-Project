@@ -114,10 +114,7 @@ ul.project_content {
 
 #add_event:focus {
     transition: 0.5s;
-    font-weight: bold;
     opacity: 50%;
-    width: 310px;
-    margin-top: 20px;
     outline: none;
 }
 
