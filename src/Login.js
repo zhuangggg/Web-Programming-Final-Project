@@ -2,8 +2,9 @@ import './login.css';
 import React, { useRef, useState, useEffect } from 'react'
 import { USER_QUERY } from './graphql'
 import Next from './next' 
-import { message } from 'antd'
+import { message, Input, Button } from 'antd'
 import 'antd/dist/antd.css'
+
 
 const duration = 2
 
@@ -75,12 +76,8 @@ function Login() {
             }/>
           </div>
           <div className="sendButton">
-            <div className="login">
-              <span onClick={()=>send("login")}>LOG IN</span>
-            </div>
-            <div className="signin">
-              <span onClick={()=>send("signin")}>SIGN IN</span>
-            </div>
+              <button className="login" onClick={()=>send("login")}>LOG IN</button>
+              <button className="signin" onClick={()=>send("signin")}>SIGN IN</button>
           </div>
         </div>
         <div>

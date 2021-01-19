@@ -4,7 +4,8 @@ import {CREATE_PROJECT_MUTATION, ADD_PROJECT_ID_MUTATION, DELETE_PROJECT_MUTATIO
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import {v4 as uuidv4} from 'uuid'
 import { BrowserRouter,NavLink, Switch, Route, Redirect, useLocation } from "react-router-dom";
-import {Button} from 'antd'
+import userimg from './images/user.png'
+import {DeleteOutlined} from '@ant-design/icons'
 
 function Home(props){
 
@@ -53,41 +54,47 @@ function Home(props){
       }
 
     return (
-        <>
-            <div>Hello, {name}</div>
-            <div>
-                <NavLink to={{
-                    pathname:`/calendar/`,
-                    state: {
-                        username: name,
-                        userid: id
-                    }
-                }}>Calendar</NavLink>
-            </div>
-            <Button onClick={cleanMode}>clear</Button>
-            {projects.length!==0? projects.map(((project, index)=>
-              <div style={{flexDirection: "column"}}>
-                <div>
-                {clean?<button className="x" onClick={()=>deleteProject(project.name)}>x</button>:<div></div>}
-                <NavLink to={{
-                    pathname:`/gantt/${project.id}`,
-                    state: {projectname: project.name}
-                }}>{project.name}</NavLink>
+        <div className="home">
+            <div className="left">
+                <img className="userimg" src={userimg}/>
+                <div className="title">Hello, {name}</div>
+                <div class="button_cont" align="center">
+                    <NavLink to={{
+                        pathname:`/calendar/`,
+                        state: {
+                            username: name,
+                            userid: id
+                        }
+                    }}>
+                <div className="example_f"><span>Calendar</span></div></NavLink>
                 </div>
-              </div>
-            )):<p>no projects</p>
-            }
-            <input  className="add_project"
-            id={props.eventIndex} 
-            placeholder="+ Add Project ..." 
-            onKeyUp={(e)=>{  
-            let key = window.event ? e.keyCode : e.which
-            let input = document.getElementsByClassName("add_project")[0]
-            if(input.value!="" && key==13) {
-                console.log(input.value);
-                addProject(input.value)
-                input.value = ""}}}/>
-        </>
+            </div>
+            <div className="right">
+                {projects.length!==0? projects.map(((project, index)=>
+                <div style={{flexDirection: "column"}}>
+                    <div className="project">
+                        <NavLink to={{
+                            pathname:`/gantt/${project.id}`,
+                            state: {projectname: project.name}
+                        }}><button className="project_btn"><span>{project.name}</span></button></NavLink>
+                        {clean?<div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>:<div></div>}
+                    </div>
+                </div>
+                )):<p>no projects</p>
+                }
+                <input  className="add_project"
+                id={props.eventIndex} 
+                placeholder="+ Add Project ..." 
+                onKeyUp={(e)=>{  
+                let key = window.event ? e.keyCode : e.which
+                let input = document.getElementsByClassName("add_project")[0]
+                if(input.value!="" && key==13) {
+                    console.log(input.value);
+                    addProject(input.value)
+                    input.value = ""}}}/>
+                <button onClick={cleanMode} className="clearproject">Clear Projects</button>
+            </div>
+        </div>
     )
 }
 
