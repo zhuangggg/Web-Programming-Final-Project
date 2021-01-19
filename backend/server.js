@@ -1,13 +1,19 @@
 require('dotenv-defaults').config()
 
-const { GraphQLServer, PubSub } = require('graphql-yoga')
+// const { GraphQLServer, PubSub } = require('graphql-yoga')
 const mongoose = require('mongoose')
-const Project = require('./models/project')
-const User = require('./models/user')
+// const Project = require('./models/project')
+// const User = require('./models/user')
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const Subscription = require('./resolvers/Subscription')
 const data = require('./data.json')
+const express = require('express');
+const {graphqlHTTP} = require('express-graphql');
+const cors = require('cors');
+const path = require('path');
+const { makeExecutableSchema } = require('graphql-tools');
+const typeDefs = require('./schema')
 
 if (!process.env.MONGO_URL) {
   console.error('Missing MONGO_URL!!!')
@@ -19,7 +25,7 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true
 })
 
-const pubsub = new PubSub()
+// const pubsub = new PubSub()
 
 const mongodb = mongoose.connection
 
@@ -36,21 +42,60 @@ mongodb.once('open', async() => {
   //Project.insertMany(data.projects)
   //User.insertMany(data.users)
 
-  const server = new GraphQLServer({
-    typeDefs: './schema.graphql',
-    resolvers: {
-      Query,
-      Mutation,
-      Subscription
-    },
-    context: {
-      Project,
-      User,
-      pubsub
-    }
-  })
+  const resolvers = {
+    Query,
+    Mutation,
+    Subscription
+  }
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
 
-  server.start({ port: process.env.PORT | 4000 }, () => {
-    console.log(`The server is up on port ${process.env.PORT | 4000}`)
+  const app = express();
+  app.use(express.static(path.join(__dirname, '../build')));
+
+// Allow cross-origin
+app.use(cors());
+
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: true
   })
+);
+
+  // app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+  app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+  });
+
+// app.use(express.static('../build'));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+// });
+
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+  // const server = new GraphQLServer({
+  //   typeDefs: './schema.graphql',
+  //   resolvers: {
+  //     Query,
+  //     Mutation,
+  //     Subscription
+  //   },
+  //   context: {
+  //     Project,
+  //     User,
+  //     pubsub
+  //   }
+  // })
+
+  // server.start({ port: process.env.PORT | 4000 }, () => {
+  //   console.log(`The server is up on port ${process.env.PORT | 4000}`)
+  // })
 })
