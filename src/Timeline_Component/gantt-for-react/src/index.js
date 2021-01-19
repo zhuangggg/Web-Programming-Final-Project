@@ -11,15 +11,15 @@ export default class ReactGantt extends Component {
   };
 
   // redraw the gantt when update. now change the viewMode
-  componentDidUpdate(prevProps, prevState) {
-    if (this.ganttInst) {
-      this.ganttInst.refresh(this.props.tasks);
-      // 不相等才刷新
-      if (this.props.viewMode !== prevProps.viewMode) {
-        this.ganttInst.change_view_mode(this.props.viewMode);
-      }
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.ganttInst) {
+  //     this.ganttInst.refresh(this.props.tasks);
+  //     // 不相等才刷新
+  //     if (this.props.viewMode !== prevProps.viewMode) {
+  //       this.ganttInst.change_view_mode(this.props.viewMode);
+  //     }
+  //   }
+  // }
 
   componentWillUnmount() {
     clear(this.ganttRef);

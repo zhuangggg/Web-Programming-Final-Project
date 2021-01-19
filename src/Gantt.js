@@ -145,8 +145,13 @@ function Gantt(props) {
     setProject(variables)
     // setCount(count+1)
     // console.log(count);
+<<<<<<< HEAD
     c += 1;
     console.log(payload);
+=======
+    // c += 1;
+    console.log(c);
+>>>>>>> b7bf502cc5719ab56340f1fadf192659fced8ffe
     editProject_db({variables: payload})
   }
 
