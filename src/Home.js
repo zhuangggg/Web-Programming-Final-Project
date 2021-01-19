@@ -35,7 +35,7 @@ function Home(props){
         const newProject = {
             name: project_name,
             id: newid,
-            users_id: id
+            usernames: [name]
         }
         const temp = projects
         temp.push(newProject)
@@ -75,7 +75,7 @@ function Home(props){
                     <div className="project">
                         <NavLink to={{
                             pathname:`/gantt/${project.id}`,
-                            state: {projectname: project.name}
+                            state: {projectname: project.name, username: name}
                         }}><button className="project_btn"><span>{project.name}</span></button></NavLink>
                         {clean?<div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>:<div></div>}
                     </div>

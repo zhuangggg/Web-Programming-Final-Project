@@ -4,11 +4,13 @@ export const CREATE_PROJECT_MUTATION = gql`
     mutation(
         $name: String!
         $id: String!
+        $usernames: [String!]!
     ){
         createProject(
             data: {
                 name: $name
                 id: $id
+                usernames: $usernames
             }
         )
     }
@@ -48,6 +50,7 @@ export const CREATE_ITEM_MUTATION = gql`
             event_name: $event_name
             item_name: $item_name
             progress: $progress
+
             time:{
                 start: $start
                 end: $end

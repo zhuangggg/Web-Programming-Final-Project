@@ -22,7 +22,7 @@ type Subscription {
 type Project {
     id: String!
     name: String!
-    users_id: [String]
+    usernames: [String]
     events: [Event]
 }
 
@@ -47,7 +47,7 @@ type Event {
 
 type Item {
     name: String!
-    users_id: [String]
+    usernames: [String]
     progress: String!
     time: Time!
 }
@@ -80,7 +80,7 @@ input _userInput {
 input projectInput {
     name: String!
     id: String!
-    users_id: [String]
+    usernames: [String]
     events: [Event_]
 }
 
@@ -93,7 +93,7 @@ input Event_ {
 
 input Item_ {
     name: String!
-    users_id: [String]
+    usernames: [String]
     progress: String!
     time: timeInput!
 }

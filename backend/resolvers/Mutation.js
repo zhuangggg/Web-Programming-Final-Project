@@ -11,7 +11,8 @@ const Mutation = {
     const newProject = {
         id: args.data.id,
         name: args.data.name,
-        events: []
+        events: [],
+        usernames: args.data.usernames
     }
     console.log('createProject');
 
@@ -51,12 +52,14 @@ const Mutation = {
         name: args.data.item_name,
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
-    }
+        username: args.data.username
+      }
     // pubsub.publish(`update_project ${args.data.item_name}`, {
     //   update_project: {
     //       mutation: 'CREATED'
     //   }
     // })
+    console.log('createItem');
     await Project.findOne({name: args.data.project_name}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events[index].items = [...doc.events[index].items, newItem]
@@ -112,9 +115,13 @@ const Mutation = {
     //       mutation: 'EDITED'
     //   }
     // })
+    console.log("------------------------");
     const data = JSON.parse(args.data.recentContent)
+    console.log(args.data);
+    console.log(data);
+    console.log(data.recentContent);
+
     await Project.findOne({name: args.data.name}, function(err, doc){
-      console.log(doc)
       doc.name = data.name
       doc.progress = data.progress
       doc.time = data.time
@@ -132,7 +139,19 @@ const Mutation = {
       doc.projects_id = temp
       doc.save()
   })
-  }
+  },
+
+  /*async addUserNameForItem(parent, args, { pubsub }, info) {
+    const event_index = project.events.findIndex((event)=>event.name===args.data.event_name)
+    const item_index = project.events[event_index].items.findIndex((item)=>item.name===args.data.item_name)
+    await Project.findOne({name: args.data.project_name}, function(err,doc){
+      const temp = doc.events[event_index].items[item_index].usernames
+      temp.push(args.data.username)
+      doc.events[event_index].items[item_index].usernames = temp
+      doc.save()
+    })
+
+  }*/
 }
 
 module.exports = Mutation

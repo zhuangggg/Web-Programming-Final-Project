@@ -23,14 +23,15 @@ const next = new Date()
 next.setDate(new Date().getDate()+7)
 const defaultStart = `${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}`
 const defaultEnd = `${next.getFullYear()}/${next.getMonth()+1}/${next.getDate()}`
-const defaultProgress = '0%'
+const defaultProgress = '20%'
 var c = 0;
 
 function Gantt(props) {
   const location = useLocation()
   console.log(props);
   const projectName = props.location.state.projectname
-
+  const name = props.location.state.username
+  console.log(name);
   const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
@@ -92,15 +93,18 @@ function Gantt(props) {
   }
 
   const addItem = ({variables})=>{
+    console.log(name);
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,
       project_name: variables.project_name,
       progress: defaultProgress,
       start: defaultStart,
-      end: defaultEnd
+      end: defaultEnd,
+      username: name
     }
     let temp = project
+    console.log(gqlbody)
     const index = temp.events.findIndex(event=>event.name===variables.event_name)
     temp.events[index].items.push({
       name: variables.item_name,
@@ -108,7 +112,8 @@ function Gantt(props) {
       time: {
         start: defaultStart,
         end: defaultEnd
-      }
+      },
+      usernames: [name]
     })
     setProject(temp)
     c+=1;
@@ -131,7 +136,7 @@ function Gantt(props) {
     deleteItem_db({variables: gqlbody})
   }
 
-  const editProject = (variables)=>{
+  const editProject = ({variables})=>{
     console.log(variables)
     const payload = {
       name: variables.name,
@@ -141,8 +146,26 @@ function Gantt(props) {
     // setCount(count+1)
     // console.log(count);
     c += 1;
-    console.log(c);
+    console.log(payload);
     editProject_db({variables: payload})
+  }
+
+  const getEditEvent = ({variables})=>{
+    const index = project.events.findIndex((event)=>event.name===variables.event_name)
+    const temp = project
+    temp.events[index] = variables.newEvent
+    editProject({variables: temp})
+    console.log(index)
+    setProject(temp)
+  }
+
+  const getEditItem = ({variables})=>{
+    const event_index = project.events.findIndex((event)=>event.name===variables.event_name)
+    const item_index = project.events[event_index].items.findIndex((item)=>item.name===variables.item_name)
+    const temp = project
+    temp.events[event_index].items[item_index] = variables.newItem
+    editProject({variables: temp})
+    setProject(temp)
   }
   
   // if(!subscribe){
@@ -176,6 +199,8 @@ function Gantt(props) {
                         addItem={addItem}
                         deleteItem={deleteItem}
                         editProject={editProject}
+                        getEditEvent={getEditEvent}
+                        getEditItem={getEditItem}
                         />
               <Timeline data={project}
                         count={c}

@@ -13,7 +13,9 @@ function Leftpart(props) {
           deleteEvent={props.deleteEvent}
           addItem={props.addItem}
           deleteItem={props.deleteItem}
-          project = {props.data}/>
+          project = {props.data}
+          getEditEvent={props.getEditEvent}
+          getEditItem={props.getEditItem}/>
     </>
   );
 }

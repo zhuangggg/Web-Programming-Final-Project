@@ -6,6 +6,7 @@ export const PROJECT_QUERY = gql`
     ){
         project(name: $name){
             name
+            usernames
             events{
                 name
                 progress
@@ -20,6 +21,7 @@ export const PROJECT_QUERY = gql`
                         start
                         end
                     }
+                    usernames
                 }
             }
         }
@@ -47,6 +49,7 @@ export const USER_QUERY = gql`
             projects{
                 name
                 id
+                usernames
                 events{
                     name
                     progress

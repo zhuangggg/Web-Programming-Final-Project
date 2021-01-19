@@ -1,21 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import '../gantt.css'
 import Event from './Event'
+import {Button} from 'antd'
 
 function Project (props) {
-  const [clean, setClean] = useState(false)
+  const [edit, setEdit] = useState(false)
 
-  const cleanMode = ()=>{
-    setClean(!clean)
+  const editMode = ()=>{
+    setEdit(!edit)
   }
   return(
     <>
     {(props.project!=="")?      
-      <div className="gantt_leftpart">
+      <div className={"gantt_leftpart"}>
         <div className="project_title">
           <div className="project_name">{props.project.name}</div>
           {/* <div className="progress">{props.project.progress}</div> */}
-          <button className="btn_clean" onClick={cleanMode}>clean</button>
+          <Button className="btn_clean" onClick={editMode}>Edit</Button>
         </div>
         <ul className="project_content">
         {props.project.events.map((event, eventIndex)=>  
@@ -26,7 +27,9 @@ function Project (props) {
             project_name = {props.project.name}
             event = {event}
             eventIndex = {eventIndex}
-            clean = {clean}/>)}
+            edit = {edit}
+            getEditEvent={props.getEditEvent}
+            getEditItem={props.getEditItem}/>)}
         </ul>
         <div className="add_event">
           <input id="add_event" 

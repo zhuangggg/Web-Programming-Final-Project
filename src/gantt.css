@@ -11,6 +11,11 @@
     line-height: 25px;
     padding-right: 20px;
     border-right: 1px #dddddd solid;
+
+}
+
+.gantt_leftpart_edit:hover {
+    opacity: 100%;
 }
 
 .timeline-container{
@@ -89,6 +94,13 @@ ul.project_content {
     right: 0px;
 }
 
+.progress_edit {
+    display: inline;
+    position: absolute;
+    right: 0px;
+    opacity: 40%;
+}
+
 .add_item {
     font-size: 18px;
     width: 180px;
@@ -117,6 +129,15 @@ ul.project_content {
     transition: 0.5s;
     color: #bbbbbb;
 
+}
+
+.item_name_edit{
+    opacity: 40%;
+}
+
+.item_name_edit:hover{
+    opacity: 100%;
+    cursor: pointer;
 }
 
 .item_info {
@@ -175,11 +196,20 @@ ul.project_content {
 }
 
 .btn_clean{
-    font-size: 10px;
+    font-size: 15px;
     height: fit-content;
     justify-self: end;
 }
 
 p {
     margin: 0 !important;
+}
+
+.event_name_edit {
+    opacity: 40%;
+    cursor: pointer;
+}
+
+.event_name_edit:hover {
+    opacity: 100%;
 }

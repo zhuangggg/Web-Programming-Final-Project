@@ -54,7 +54,7 @@ function Next(props) {
 
     return (<div>
         {check?<Redirect to={{
-        pathname:`/home/${props.id}+${props.name}`,
+        pathname:`/home`,
         state: {
             userid: props.id, 
             username:props.name}
