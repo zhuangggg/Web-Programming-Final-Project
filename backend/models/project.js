@@ -4,12 +4,7 @@ const Schema = mongoose.Schema
 const ProjectSchema = new Schema({
     name: String,
     id: String,
-    progress: String,
     users_id: [String],
-    time: {
-        start: String,
-        end: String
-    },
     events: [{
         name: String,
         progress: String,

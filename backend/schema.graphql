@@ -11,6 +11,7 @@ type Mutation {
     deleteEvent(data: _eventInput!): String
     deleteItem(data: _itemInput!): String
     editProject(data: projectEditInput!): String
+    addProjectIdForUser(data: _userInput!): String
 }
 
 type Subscription {
@@ -21,8 +22,6 @@ type Project {
     id: String!
     name: String!
     users_id: [String]
-    progress: String!
-    time: Time!
     events: [Event]
 }
 
@@ -72,10 +71,15 @@ input userInput {
     id: String!
 }
 
+input _userInput {
+    name: String!
+    project_id: String!
+}
+
 input projectInput {
     name: String!
-    progress: String!
-    time: timeInput!
+    id: String!
+    users_id: [String]
     events: [Event_]
 }
 

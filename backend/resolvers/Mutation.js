@@ -1,6 +1,7 @@
 const Project = require('../models/project')
+const User = require('../models/user')
 
-const uuidv4 = require('uuid/v4')
+
 const defaultStart = '2020/3/10'
 const defaultEnd = '2020/3/20'
 
@@ -8,12 +9,11 @@ const Mutation = {
   
   async createProject(parent, args, { pubsub }, info) {
     const newProject = {
-        id: uuidv4(),
+        id: args.data.id,
         name: args.data.name,
-        progress: args.data.progress,
-        time: {start: args.data.time.start, end: args.data.time.end},
         events: []
     }
+    console.log('createProject');
 
     pubsub.publish(`update_project ${args.project_name}`, {
       update_project: {
@@ -122,6 +122,15 @@ const Mutation = {
   })
     return `edit project ${args.data.name} successfully!`
 
+  },
+
+  async addProjectIdForUser(parent, args, { pubsub }, info) {
+    await User.findOne({name: args.data.name}, function(err, doc){
+      const temp = doc.projects_id
+      temp.push(args.data.project_id)
+      doc.projects_id = temp
+      doc.save()
+  })
   }
 }
 
