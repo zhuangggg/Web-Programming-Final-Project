@@ -14,9 +14,9 @@ function Project (props) {
       <div className="gantt_leftpart">
         <div className="project_title">
           <div className="project_name">{props.project.name}</div>
-          <div className="progress">{props.project.progress}</div>
+          {/* <div className="progress">{props.project.progress}</div> */}
+          <button className="btn_clean" onClick={cleanMode}>clean</button>
         </div>
-        <button onClick={cleanMode}>clean</button>
         <ul className="project_content">
         {props.project.events.map((event, eventIndex)=>  
           <Event

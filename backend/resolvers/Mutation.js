@@ -15,11 +15,11 @@ const Mutation = {
     }
     console.log('createProject');
 
-    pubsub.publish(`update_project ${args.project_name}`, {
-      update_project: {
-          mutation: 'CREATED'
-      }
-    })
+    // pubsub.publish(`update_project ${args.project_name}`, {
+    //   update_project: {
+    //       mutation: 'CREATED'
+    //   }
+    // })
 
     Project.insertMany(newProject)
     
@@ -34,11 +34,11 @@ const Mutation = {
         time: {start: args.data.time.start, end: args.data.time.end},
         items: []
     }
-    pubsub.publish(`update_project ${args.data.event_name}`, {
-      update_project: {
-          mutation: 'CREATED'
-      }
-    })
+    // pubsub.publish(`update_project ${args.data.event_name}`, {
+    //   update_project: {
+    //       mutation: 'CREATED'
+    //   }
+    // })
     await Project.findOne({name: args.data.project_name}, function(err, doc){
         doc.events = [...doc.events, newEvent]
         doc.save()
@@ -52,11 +52,11 @@ const Mutation = {
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
     }
-    pubsub.publish(`update_project ${args.data.item_name}`, {
-      update_project: {
-          mutation: 'CREATED'
-      }
-    })
+    // pubsub.publish(`update_project ${args.data.item_name}`, {
+    //   update_project: {
+    //       mutation: 'CREATED'
+    //   }
+    // })
     await Project.findOne({name: args.data.project_name}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events[index].items = [...doc.events[index].items, newItem]
@@ -66,22 +66,22 @@ const Mutation = {
   },
 
   async deleteProject(parent, args, { pubsub }, info) {
-    pubsub.publish(`update_project ${args.name}`, {
-      update_project: {
-          mutation: 'DELETED'
-      }
-    })
+    // pubsub.publish(`update_project ${args.name}`, {
+    //   update_project: {
+    //       mutation: 'DELETED'
+    //   }
+    // })
     console.log(args.name);
     Project.deleteMany({name: args.name}, ()=>{})
     return `delete project ${args.name} successfully!`
   },
 
   async deleteEvent(parent, args, { pubsub }, info) {
-    pubsub.publish(`update_project ${args.data.project_name}`, {
-      update_project: {
-          mutation: 'DELETED'
-      }
-    })
+    // pubsub.publish(`update_project ${args.data.project_name}`, {
+    //   update_project: {
+    //       mutation: 'DELETED'
+    //   }
+    // })
     await Project.findOne({name: args.data.project_name}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events.splice(index,1)
@@ -91,11 +91,11 @@ const Mutation = {
   },
 
   async deleteItem(parent, args, { pubsub }, info) {
-    pubsub.publish(`update_project ${args.data.project_name}`, {
-      update_project: {
-          mutation: 'DELETED'
-      }
-    })
+    // pubsub.publish(`update_project ${args.data.project_name}`, {
+    //   update_project: {
+    //       mutation: 'DELETED'
+    //   }
+    // })
     
     await Project.findOne({name: args.data.project_name}, function(err, doc){
         const eventIndex = doc.events.findIndex((event)=>event.name===args.data.event_name)
@@ -107,11 +107,11 @@ const Mutation = {
   },
 
   async editProject(parent, args, { pubsub }, info) {
-    pubsub.publish(`update_project ${args.data.name}`, {
-      update_project: {
-          mutation: 'EDITED'
-      }
-    })
+    // pubsub.publish(`update_project ${args.data.name}`, {
+    //   update_project: {
+    //       mutation: 'EDITED'
+    //   }
+    // })
     const data = JSON.parse(args.data.recentContent)
     await Project.findOne({name: args.data.name}, function(err, doc){
       console.log(doc)

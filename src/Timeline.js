@@ -17,48 +17,60 @@ function Timeline(props) {
   // console.log(props.data.events)
 
   const getTasks = (data) => {
-    let tasks_array = data.events.map((event,i)=>{
-      let start_date = event.time.start.split("/")
-      let start = new Date(start_date[0],start_date[1]-1,start_date[2])
-      let end_date = event.time.end.split("/")
-      let end = new Date(end_date[0],end_date[1]-1,end_date[2])
-      let task =  {
-            start: start,
-            end: end,
-            name: event.name,
-            id: "Event " + i,
-            progress: event.progress.split("%")[0],
-            custom_class: 'eventBar'
-          }
-      let items = event.items.map((item,j)=>{
-        let start_date = item.time.start.split("/")
+    if (data.events.length !==0){
+      let tasks_array = data.events.map((event,i)=>{
+        let start_date = event.time.start.split("/")
         let start = new Date(start_date[0],start_date[1]-1,start_date[2])
-        let end_date = item.time.end.split("/")
+        let end_date = event.time.end.split("/")
         let end = new Date(end_date[0],end_date[1]-1,end_date[2])
-        return{
+        let task =  {
               start: start,
               end: end,
-              name: item.name,
-              id: "Item " +i+"-"+ j,
-              progress: item.progress.split("%")[0],
-              custom_class: 'itemBar'
+              name: event.name,
+              id: "Event " + i,
+              progress: event.progress.split("%")[0],
+              custom_class: 'eventBar'
             }
-      })
-      items.unshift(task);
-      return items
-    })  
-    // console.log(tasks_array);
-    var tasks = []
-    tasks_array.forEach(element => {
-      tasks = [...tasks,...element]
-    });
-    setTasks(tasks)
-    // task = tasks
-    // console.log(tasks);
-    return tasks;
+        let items = event.items.map((item,j)=>{
+          let start_date = item.time.start.split("/")
+          let start = new Date(start_date[0],start_date[1]-1,start_date[2])
+          let end_date = item.time.end.split("/")
+          let end = new Date(end_date[0],end_date[1]-1,end_date[2])
+          return{
+                start: start,
+                end: end,
+                name: item.name,
+                id: "Item " +i+"-"+ j,
+                progress: item.progress.split("%")[0],
+                custom_class: 'itemBar'
+              }
+        })
+        items.unshift(task);
+        return items
+      })  
+      // console.log(tasks_array);
+      var tasks = []
+      tasks_array.forEach(element => {
+        tasks = [...tasks,...element]
+      });
+      setTasks(tasks)
+      // task = tasks
+      // console.log(tasks);
+      return tasks;
+    }
+    else{
+      setTasks([{
+        start: new Date(),
+        end: new Date(),
+        name: '   ',
+        id: "Event 0",
+        progress: "0",
+        custom_class: 'transparent'
+      }])
+    }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     console.log("bbbbbbbbbbbbb")
     getTasks(props.data)
     console.log(props.data.events);
@@ -71,8 +83,8 @@ function Timeline(props) {
     return `
       <div class="details-container">
         <h4 style='margin:0'>${task.name}</h4>
-        <span>Time: </span><input value="${start}" /><span> - </span><input value="${end}"/>
-        <span>Progress: </span><input value="${task.progress}"/><span>%</span>
+        <p>Time: ${start} - ${end}</p>
+        <p>Progress: ${task.progress}%</p>
       </div>
     `;
   };

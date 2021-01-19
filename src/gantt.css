@@ -7,35 +7,44 @@
 }
 
 .gantt_leftpart {
-    width: 350px;    
+    width: 25vw;    
     line-height: 25px;
     padding-right: 20px;
     border-right: 1px #dddddd solid;
 }
 
 .timeline-container{
-    width: 900px;
+    width: 75vw;
     height: 100%;
 }
 
 .project_title {
     display: flex;
     flex-direction: row;
+    align-items: center;
     position: relative;
     font-size: 24px;
     font-weight: bold;
+    padding: 10px 10px;
+    height: 70px;
+}
+
+.project_name{
+    padding: 0 20px;
 }
 
 li {
     list-style: none;
 }
 
-.x {
+button.x {
     background-color: transparent;
     border: none;
-    font-size: 18px;
     opacity: 50%;
-    margin-right: 5px;
+    font-size: 20px;
+    opacity: 50%;
+    margin-top: -2px !important;
+    height: 20px;
 }
 
 .x:hover {
@@ -45,6 +54,10 @@ li {
 
 .x:focus {
     outline: none;
+}
+
+ul.project_content {
+    padding-left: 30px;
 }
 
 .event_title {
@@ -78,7 +91,7 @@ li {
 
 .add_item {
     font-size: 18px;
-    width: 210px;
+    width: 180px;
     margin: 8.5px 30px;
     border: none;
     color: black;
@@ -93,7 +106,7 @@ li {
 #add_event {
     font-size: 18px;
     font-weight: bold;
-    width: 310px;
+    width: 200px;
     margin-left: 30px;
     border: none;
     color: black;
@@ -161,4 +174,18 @@ li {
 
 .handle{
     width:8px !important
+}
+
+.btn_clean{
+    font-size: 10px;
+    height: fit-content;
+    justify-self: end;
+}
+
+input.add_project {
+    margin-left: 15px;
+}
+
+p {
+    margin: 0 !important;
 }

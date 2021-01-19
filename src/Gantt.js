@@ -18,9 +18,11 @@ import { BrowserRouter,NavLink, Switch, Route, Redirect,useLocation } from "reac
 import { message } from 'antd'
 import loadingimg from './images/loading.gif'
 
-
-const defaultStart = '2020/3/10'
-const defaultEnd = '2020/3/20'
+const today = new Date()
+const next = new Date()
+next.setDate(new Date().getDate()+7)
+const defaultStart = `${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}`
+const defaultEnd = `${next.getFullYear()}/${next.getMonth()+1}/${next.getDate()}`
 const defaultProgress = '0%'
 var c = 0;
 
