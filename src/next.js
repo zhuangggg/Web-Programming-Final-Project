@@ -1,7 +1,7 @@
 import './login.css';
 import React, { useRef, useState, useEffect } from 'react'
 import { USER_QUERY } from './graphql'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from 'react-apollo'
 import { message } from 'antd'
 import { BrowserRouter,NavLink, Switch, Route, Redirect } from "react-router-dom";
 
