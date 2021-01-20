@@ -3,18 +3,7 @@ import ReactGantt from './Timeline_Component/gantt-for-react';
 import './gantt.css'
 
 function Timeline(props) {
-  // componentDidMount() {
-  //   window.setInterval(function() {
-  //     this.setState({
-  //       viewMode: ['Quarter Day', 'Half Day', 'Day', 'Week', 'Month'][parseInt(Math.random() * 5 + 1) - 1],
-  //       tasks: this.getTasks().slice(0, parseInt(Math.random() * 4 + 1))
-  //     });
-  //   }.bind(this), 5000)
-  // };
-  // const [data, setData] = useState("") 
-  const [tasks, setTasks] = useState("") 
-  // var task = '';
-  // console.log(props.data.events)
+  const [tasks, setTasks] = useState("")
 
   const getTasks = (data) => {
     if (data.events.length !==0){
@@ -102,7 +91,7 @@ function Timeline(props) {
         payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
         break;
     }
-    props.editProject(payload)
+    props.editProject({variables:payload})
   }
 
   const handleProgressChange = (task,progress)=>{
@@ -115,7 +104,7 @@ function Timeline(props) {
       case 'Item':
         payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].progress = `${progress}%`;
     }
-    props.editProject(payload)
+    props.editProject({variables:payload})
   }
 
     return (

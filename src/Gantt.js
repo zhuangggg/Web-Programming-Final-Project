@@ -28,23 +28,13 @@ var c = 0;
 
 function Gantt(props) {
   const location = useLocation()
-<<<<<<< HEAD
   const projectName = props.location.state.projectname
   const name = props.location.state.username
-=======
-  // console.log(props);
-  const projectName = props.location.state.projectname
-  const name = props.location.state.username
-  // console.log(name);
->>>>>>> 4c5331f2df10eb301b6b6ef6fdca0c391bd2c91a
+
   const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
   const [count, setCount] = useState(0)
-<<<<<<< HEAD
-=======
-  // console.log(data);
->>>>>>> 4c5331f2df10eb301b6b6ef6fdca0c391bd2c91a
 
   /*const refetchContent = {
     refetchQueries: [{
@@ -139,28 +129,13 @@ function Gantt(props) {
     deleteItem_db({variables: gqlbody})
   }
 
-<<<<<<< HEAD
   const editProject = ({variables})=>{
-=======
-  const editProject = (variables)=>{
-    console.log('editProject');
-    console.log(variables)
->>>>>>> 4c5331f2df10eb301b6b6ef6fdca0c391bd2c91a
     const payload = {
       name: variables.name,
       recentContent: JSON.stringify(variables)
     }
     setProject(variables)
-<<<<<<< HEAD
-    c += 1;
-=======
-    // setCount(count+1)
-    // console.log(count);
-    // c += 1;
-    console.log(payload);
-    // c += 1;
-    console.log(c);
->>>>>>> 4c5331f2df10eb301b6b6ef6fdca0c391bd2c91a
+    c+=1
     editProject_db({variables: payload})
   }
 
