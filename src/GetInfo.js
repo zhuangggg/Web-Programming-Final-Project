@@ -21,6 +21,7 @@ function GetInfo(props) {
         type: "login" }})        
     console.log(data);
 
+
     return (<>
     {loading?<div className="loadingimg" ><img src={loadingimg}/></div>:
     <Home data={data.user}/>}

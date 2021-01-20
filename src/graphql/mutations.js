@@ -20,14 +20,14 @@ export const CREATE_PROJECT_MUTATION = gql`
 
 export const CREATE_EVENT_MUTATION = gql`
     mutation createEvent(
-        $project_name: String!
+        $id: String!
         $event_name: String!
         $progress: String!
         $start: String!
         $end: String!
     ){
         createEvent(data: {
-            project_name: $project_name
+            id: $id
             event_name: $event_name
             progress: $progress
             time:{
@@ -40,7 +40,7 @@ export const CREATE_EVENT_MUTATION = gql`
 
 export const CREATE_ITEM_MUTATION = gql`
     mutation createItem(
-        $project_name: String!
+        $id: String!
         $event_name: String!
         $item_name: String!
         $progress: String!
@@ -49,7 +49,7 @@ export const CREATE_ITEM_MUTATION = gql`
         $username: String!
     ){
         createItem(data: {
-            project_name: $project_name
+            id: $id
             event_name: $event_name
             item_name: $item_name
             progress: $progress
@@ -71,23 +71,23 @@ export const DELETE_PROJECT_MUTATION = gql`
 `
 export const DELETE_EVENT_MUTATION = gql`
     mutation deleteEvent(
-        $project_name: String!
+        $id: String!
         $event_name: String!
     ){
         deleteEvent(data: {
-            project_name: $project_name
+            id: $id
             event_name: $event_name
         })
     }
 `
 export const DELETE_ITEM_MUTATION = gql`
     mutation deleteItem(
-        $project_name: String!
+        $id: String!
         $event_name: String!
         $item_name: String!
     ){
         deleteItem(data: {
-            project_name: $project_name
+            id: $id
             event_name: $event_name
             item_name: $item_name
         })
@@ -96,11 +96,11 @@ export const DELETE_ITEM_MUTATION = gql`
 
 export const EDIT_PROJECT_MUTATION = gql`
     mutation editProject(
-        $name: String!
+        $id: String!
         $recentContent: String!
     ){
         editProject(data: {
-            name: $name
+            id: $id
             recentContent: $recentContent
         })
     }

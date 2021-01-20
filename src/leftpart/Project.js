@@ -25,7 +25,7 @@ function Project (props) {
             deleteEvent={props.deleteEvent}
             addItem={props.addItem}
             deleteItem={props.deleteItem}
-            project_name = {props.project.name}
+            id = {props.project.id}
             event = {event}
             eventIndex = {eventIndex}
             edit = {edit}
@@ -40,7 +40,7 @@ function Project (props) {
               let input = document.getElementById("add_event")
               if(input.value!="" && key==13) {
                 props.addEvent({variables:{
-                  project_name: props.project.name,
+                  id: props.project.id,
                   event_name: input.value
                 }}) 
                 input.value = ""

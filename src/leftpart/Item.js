@@ -66,7 +66,7 @@ function Item (props) {
           {props.edit? <button className="x" onClick={()=>{
             props.deleteItem({
               variables:{
-                project_name: props.project_name,
+                id: props.id,
                 event_name: props.event_name,
                 item_name: props.item.name
               }

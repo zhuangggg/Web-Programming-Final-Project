@@ -135,7 +135,7 @@ function Home(props){
                             </div>:
                             <NavLink to={{
                                 pathname:`/gantt/${project.id}`,
-                                state: {projectname: project.name, username: name, password: password}
+                                state: {projectname: project.name, projectid:project.id, username: name, password: password}
                             }}><button className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button></NavLink>}
                     </div>
                 </div>

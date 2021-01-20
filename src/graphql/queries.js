@@ -2,10 +2,11 @@ import { gql } from 'apollo-boost'
 
 export const PROJECT_QUERY = gql`
     query(
-        $name: String!
+        $id: String!
     ){
-        project(name: $name){
+        project(id: $id){
             name
+            id
             color
             usernames
             events{

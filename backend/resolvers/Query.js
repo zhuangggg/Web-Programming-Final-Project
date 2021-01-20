@@ -4,9 +4,9 @@ const User = require('../models/user')
 const Query = {
 
     async project(parent, args) {
-        const target = await Project.findOne({name: args.name})
+        const target = await Project.findOne({id: args.id})
         //console.log(target)
-        if(!target) throw new Error('cannot find the project' + args.name)
+        if(!target) throw new Error('cannot find the project' + args.id)
         return target
     },
 

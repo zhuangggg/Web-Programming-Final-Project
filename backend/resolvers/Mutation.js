@@ -41,7 +41,7 @@ const Mutation = {
     //       mutation: 'CREATED'
     //   }
     // })
-    await Project.findOne({name: args.data.project_name}, function(err, doc){
+    await Project.findOne({id: args.data.id}, function(err, doc){
         doc.events = [...doc.events, newEvent]
         doc.save()
     })
@@ -62,7 +62,7 @@ const Mutation = {
     //       mutation: 'CREATED'
     //   }
     // })
-    await Project.findOne({name: args.data.project_name}, function(err, doc){
+    await Project.findOne({id: args.data.id}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events[index].items = [...doc.events[index].items, newItem]
         doc.save()
@@ -87,7 +87,7 @@ const Mutation = {
     //       mutation: 'DELETED'
     //   }
     // })
-    await Project.findOne({name: args.data.project_name}, function(err, doc){
+    await Project.findOne({id: args.data.id}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events.splice(index,1)
         doc.save()
@@ -102,7 +102,7 @@ const Mutation = {
     //   }
     // })
     
-    await Project.findOne({name: args.data.project_name}, function(err, doc){
+    await Project.findOne({id: args.data.id}, function(err, doc){
         const eventIndex = doc.events.findIndex((event)=>event.name===args.data.event_name)
         const itemIndex = doc.events[eventIndex].items.findIndex((item)=>item.name===args.data.item_name)
         doc.events[eventIndex].items.splice(itemIndex,1)
@@ -123,7 +123,7 @@ const Mutation = {
     console.log(data);
     console.log(data.recentContent);
 
-    await Project.findOne({name: args.data.name}, function(err, doc){
+    await Project.findOne({id: args.data.id}, function(err, doc){
       doc.name = data.name
       doc.progress = data.progress
       doc.time = data.time
@@ -139,7 +139,7 @@ const Mutation = {
   async addUserNameForItem(parent, args, { pubsub }, info) {
     const event_index = project.events.findIndex((event)=>event.name===args.data.event_name)
     const item_index = project.events[event_index].items.findIndex((item)=>item.name===args.data.item_name)
-    await Project.findOne({name: args.data.project_name}, function(err,doc){
+    await Project.findOne({id: args.data.id}, function(err,doc){
       const temp = doc.events[event_index].items[item_index].usernames
       temp.push(args.data.username)
       doc.events[event_index].items[item_index].usernames = temp
