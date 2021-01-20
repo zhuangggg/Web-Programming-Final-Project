@@ -688,70 +688,76 @@ function GanttCalendar(props) {
 
     return (
         <div className="App">
-        <div>
-        <meta httpEquiv="content-type" content="text/html; charset=utf-8"/>
-        <title>TOAST UI Calendar App DEMO</title>
-    </div>
-    <div>
-    <div id="top">
-        <a href="https://github.com/nhn/tui.calendar">
-        <img src={imgbi}/>
-    </a>
-    </div>
-    <div id="lnb">
+            <div>
+                <meta httpEquiv="content-type" content="text/html; charset=utf-8"/>
+                <title>TOAST UI Calendar App DEMO</title>
+            </div>
+            <div>
+                <div id="top">
+                    <a href="https://github.com/nhn/tui.calendar">
+                        <img src={imgbi}/>
+                    </a>
+                </div>
+                <div id="lnb">
+                    <div id="lnb-calendars" className="lnb-calendars">
+                        <div id="calendarList" className="lnb-calendars-d1">
+                    </div>
+                </div>
+            </div>
+            <div id="right">
+                <div id="menu">
+                    <Dropdown>
+                        <Dropdown.Toggle id="dropdownMenu-calendarType" className="btn btn-default btn-sm dropdown-toggle">
+                            <i id="calendarTypeIcon" className="calendar-icon ic_view_month" style={{marginRight: "4px"}}></i>
+                            <span id="calendarTypeName">Dropdown</span>&nbsp;
+                            <i className="calendar-icon tui-full-calendar-dropdown-arrow"></i>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-calendarType">
+                            <Dropdown.Item role="presentation">
+                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-daily">
+                            <i className="calendar-icon ic_view_day"></i>Daily
+                            </a>
+                            </Dropdown.Item>
+                            <Dropdown.Item role="presentation">
+                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-weekly">
+                            <i className="calendar-icon ic_view_week"></i>Weekly
+                            </a>
+                            </Dropdown.Item>
+                            <Dropdown.Item role="presentation">
+                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-monthly">
+                            <i className="calendar-icon ic_view_month"></i>Month
+                            </a>
+                            </Dropdown.Item>
 
-        <div id="lnb-calendars" className="lnb-calendars">
-        <div id="calendarList" className="lnb-calendars-d1">
-        </div>
-        </div>
-        </div>
-        <div id="right">
-        <div id="menu">
-        <Dropdown>
-        <Dropdown.Toggle id="dropdownMenu-calendarType" className="btn btn-default btn-sm dropdown-toggle">
-        <i id="calendarTypeIcon" className="calendar-icon ic_view_month" style={{marginRight: "4px"}}></i>
-    <span id="calendarTypeName">Dropdown</span>&nbsp;
-        <i className="calendar-icon tui-full-calendar-dropdown-arrow"></i>
-        </Dropdown.Toggle>
-        <Dropdown.Menu className="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-calendarType">
-        <Dropdown.Item role="presentation">
-        <a className="dropdown-menu-title" role="menuitem" data-action="toggle-daily">
-        <i className="calendar-icon ic_view_day"></i>Daily
-        </a>
-        </Dropdown.Item>
-        <Dropdown.Item role="presentation">
-        <a className="dropdown-menu-title" role="menuitem" data-action="toggle-weekly">
-        <i className="calendar-icon ic_view_week"></i>Weekly
-        </a>
-        </Dropdown.Item>
-        <Dropdown.Item role="presentation">
-        <a className="dropdown-menu-title" role="menuitem" data-action="toggle-monthly">
-        <i className="calendar-icon ic_view_month"></i>Month
-        </a>
-        </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <span id="menu-navi">
+                        <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+                        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
+                            <i className="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
+                        </button>
+                        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
+                            <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
+                        </button>
+                    </span>
+                    <span id="renderRange" className="render-range"></span>
+                </div>
+                    <div>
+                        <div id="calendar" ref={calendarRef}> </div>
+                    </div>
+                </div>
 
-        </Dropdown.Menu>
-        </Dropdown>
-        <span id="menu-navi">
-        <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
-        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
-        <i className="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
-        </button>
-        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
-        <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
-        </button>
-        </span>
-        <span id="renderRange" className="render-range"></span>
-        </div>
-        <div>
-        <div id="calendar" ref={calendarRef}> </div>
-        </div>
-        </div>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossOrigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
+            </div>
+            <NavLink to={{pathname: `/home`,
+            state:
+            {
+                password: password,
+                    username: name
+            }}} ><button className="back_btn"><span>Back</span></button></NavLink>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossOrigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
-        </div>
         </div>
 );
 }
