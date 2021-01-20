@@ -12,7 +12,7 @@ function Next(props) {
     const [check, setCheck] = useState(false)
     const { subscribeToMore, loading, data, refetch } = useQuery(USER_QUERY, {variables: {
         name: props.name, 
-        id: props.id,
+        password: props.password,
         type: props.type }})
     useEffect(() => {
         console.log('useeffect');
@@ -51,7 +51,7 @@ function Next(props) {
         {check?<Redirect to={{
         pathname:`/home`,
         state: {
-            userid: props.id, 
+            password: props.password, 
             username:props.name}
       }}/>:<></>}
     </div>)

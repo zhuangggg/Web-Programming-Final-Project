@@ -145,11 +145,7 @@ function Home(props){
                     input.value = ""}}}/>
                 <button onClick={cleanMode} className="clearproject">Edit Projects</button>
             </div>
-<<<<<<< HEAD
-            {projects===[]?(<Modal
-=======
-            {projects!==[]?<Modal
->>>>>>> 9e1f58f3c7f730ddef7e3927bfca2369160c6ed9
+            {projects.length?<Modal
                 title="Edit Project"
                 visible={isModalVisible&&clean}
                 onOk={handleOk}
@@ -161,11 +157,7 @@ function Home(props){
                     <div className="option">{color_set.map(((color)=>
                     <div style={getStyle(color)}/>))}</div></Option>)}
                 </Select>
-<<<<<<< HEAD
-            </Modal>):<></>}
-=======
             </Modal>:<></>}
->>>>>>> 9e1f58f3c7f730ddef7e3927bfca2369160c6ed9
         </div>
     )
 }

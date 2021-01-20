@@ -33,17 +33,17 @@ export const PROJECT_QUERY = gql`
 export const USER_QUERY = gql`
     query(
         $name: String!
-        $id: String!
+        $password: String!
         $type: String!
     ){
         user(data:{
             name: $name
-            id: $id
+            password: $password
             type: $type
         }){
             userinfo{
                 name
-                id
+                password
             }
             check
             projects{

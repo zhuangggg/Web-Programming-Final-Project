@@ -19,9 +19,9 @@ const Query = {
                     check: "cannot find the name: " + args.data.name
                 }
             }
-            if(target.id!==args.data.id){
+            if(target.password!==args.data.password){
                 return {
-                    check: "the id is wrong"
+                    check: "the password is wrong"
                 }
             }
             const db = await Project.find()
@@ -49,14 +49,14 @@ const Query = {
             return payload
         }
         else{
-            const target = await User.findOne({id: args.data.id})
+            const target = await User.findOne({name: args.data.name})
             if(target) return {
                 check: "the id has been used"
             }
             else {
                 const newUser = {
-                    id: args.data.id,
                     name: args.data.name,
+                    password: args.data.password
                 }
                 await User.insertMany(newUser)
                 const payload = {

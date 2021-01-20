@@ -10,15 +10,15 @@ const duration = 2
 
 function Login() {
     const usernameRef = useRef(null)
-    const useridRef = useRef(null)
+    const userpasswordRef = useRef(null)
     const [count, setCount] = useState(0)
-    const [userid, setUserId] = useState('')
     const [username, setUsername] = useState('')
+    const [userpassword, setUserPassword] = useState('')
     const [mode ,setMode] = useState(0)
     const [type, setType] = useState("")
 
     const send = (s)=>{
-        if(!userid){
+        if(!userpassword){
             message.error({
                 content: "id cannot be empty",
                 duration: duration
@@ -40,7 +40,7 @@ function Login() {
 
     useEffect(() => {
       if(!count){
-        useridRef.current.focus()
+        usernameRef.current.focus()
         setCount(1)
       }
     }, [count])
@@ -52,22 +52,22 @@ function Login() {
 
           <div className="username">
             <input type="text" 
-            id="id"
-            placeholder="ID"
-            ref={useridRef}
-            onChange={(e)=>setUserId(e.target.value)}
+            id="username"
+            placeholder="Username"
+            ref={usernameRef}
+            onChange={(e)=>setUsername(e.target.value)}
             onKeyDown={(e)=>{
               if(e.key=== 'Enter') {
-                usernameRef.current.focus()}
+                userpasswordRef.current.focus()}
               } 
             }/>
           </div>
           <div className="password">
             <input type="text" 
-            id="username"
-            placeholder="USERNAME"
-            ref={usernameRef}
-            onChange={(e)=>setUsername(e.target.value)}
+            id="password"
+            placeholder="Password"
+            ref={userpasswordRef}
+            onChange={(e)=>setUserPassword(e.target.value)}
             onKeyDown={(e)=>{
               if(e.key=== 'Enter') {
                 send("login")}
@@ -81,8 +81,8 @@ function Login() {
         </div>
         <div>
             {mode? <Next 
-                    id={userid}
                     name={username}
+                    password={userpassword}
                     type={type}
                     setMode={setMode}/>:<></>}
           </div>

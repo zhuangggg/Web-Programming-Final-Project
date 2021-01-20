@@ -11,13 +11,13 @@ import loadingimg from './images/loading.gif'
 function GetInfo(props) {
     const location = useLocation();
     const name = location.state.username
-    const id = location.state.userid
+    const password = location.state.password
     //console.log(location.state.refetch_userinfo)
 
     const [check, setCheck] = useState(false)
     const { subscribeToMore, loading, data, refetch } = useQuery(USER_QUERY, {variables: {
         name: name, 
-        id: id,
+        password: password,
         type: "login" }})        
 
     return (<>

@@ -28,8 +28,8 @@ type Project {
 }
 
 type User {
-    id: String!
     name: String!
+    password: String!
 }
 
 type UserPayload {
@@ -69,7 +69,7 @@ type projectSubscriptionPayload{
 input userInput {
     name: String!
     type: String!
-    id: String!
+    password: String!
 }
 
 input projectInput {
