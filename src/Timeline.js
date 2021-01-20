@@ -18,7 +18,7 @@ function Timeline(props) {
               end: end,
               name: event.name,
               id: "Event " + i,
-              progress: event.progress.split("%")[0],
+              progress: parseInt(event.progress.split("%")[0]),
               custom_class: `event_${i%5}`
             }
         let items = event.items.map((item,j)=>{
@@ -31,7 +31,7 @@ function Timeline(props) {
                 end: end,
                 name: item.name,
                 id: "Item " +i+"-"+ j,
-                progress: item.progress.split("%")[0],
+                progress: parseInt(item.progress.split("%")[0]),
                 custom_class: `event_${i%5}`
               }
         })
@@ -92,7 +92,7 @@ function Timeline(props) {
         payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
         break;
     }
-    props.editProject({variables:payload})
+    props.editProject({variables:payload},false)
   }
 
   const handleProgressChange = (task,progress)=>{
@@ -105,13 +105,13 @@ function Timeline(props) {
       case 'Item':
         payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].progress = `${progress}%`;
     }
-    props.editProject({variables:payload})
+    props.editProject({variables:payload},false)
   }
 
     return (
       <>
       {tasks!==""?
-          <div className={`timeline-container color_${props.data.color}`} style={{overflow: 'scroll'}}>
+          <div className={`timeline-container color_${props.data.color}`}>
             <ReactGantt tasks={tasks}
                         viewMode='Week'
                         onDateChange={handleDateChange}

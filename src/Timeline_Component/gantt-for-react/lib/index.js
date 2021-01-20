@@ -54,7 +54,9 @@ var ReactGantt = function (_Component) {
 
     // redraw the gantt when update. now change the viewMode
     value: function componentDidUpdate(prevProps, prevState) {
-      if (this.props.tasks!==prevProps.tasks) {
+      if (this.props.tasks != prevProps.tasks) {
+        console.log(this.props.tasks);
+        console.log(prevProps.tasks);
         this.ganttInst.refresh(this.props.tasks);
         // 不相等才刷新
         if (this.props.viewMode !== prevProps.viewMode) {

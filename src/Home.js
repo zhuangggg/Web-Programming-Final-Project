@@ -123,13 +123,13 @@ function Home(props){
                     <div className="project">
                         {clean?
                             <div className="project">
-                                <button className="project_btn_edit" onClick={()=>showModal(index)}><span>{project.name}</span></button>
+                                <button className="project_btn_edit" onClick={()=>showModal(index)} style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>
                                 <div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>
                             </div>:
                             <NavLink to={{
                                 pathname:`/gantt/${project.id}`,
                                 state: {projectname: project.name, username: name}
-                            }}><button className="project_btn"><span>{project.name}</span></button></NavLink>}
+                            }}><button className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button></NavLink>}
                     </div>
                 </div>
                 )):<p>no projects</p>
@@ -143,9 +143,13 @@ function Home(props){
                 if(input.value!="" && key==13) {
                     addProject(input.value)
                     input.value = ""}}}/>
-                <button onClick={cleanMode} className="clearproject">Clear Projects</button>
+                <button onClick={cleanMode} className="clearproject">Edit Projects</button>
             </div>
+<<<<<<< HEAD
             {projects===[]?(<Modal
+=======
+            {projects!==[]?<Modal
+>>>>>>> 9e1f58f3c7f730ddef7e3927bfca2369160c6ed9
                 title="Edit Project"
                 visible={isModalVisible&&clean}
                 onOk={handleOk}
@@ -157,7 +161,11 @@ function Home(props){
                     <div className="option">{color_set.map(((color)=>
                     <div style={getStyle(color)}/>))}</div></Option>)}
                 </Select>
+<<<<<<< HEAD
             </Modal>):<></>}
+=======
+            </Modal>:<></>}
+>>>>>>> 9e1f58f3c7f730ddef7e3927bfca2369160c6ed9
         </div>
     )
 }
