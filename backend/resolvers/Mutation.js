@@ -129,6 +129,7 @@ const Mutation = {
       doc.time = data.time
       doc.events = data.events
       doc.color = data.color
+      doc.usernames = data.usernames
       doc.save()
   })
     return `edit project ${args.data.name} successfully!`

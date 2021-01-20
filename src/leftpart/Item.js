@@ -6,6 +6,8 @@ import {Input, Modal} from 'antd'
 
 function Item (props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [clear, setClear] = useState([false])
+  const [count, setCount] = useState(0)
   const [inputvalue, setInputValue] = useState({
     name: props.item.name,
     usernames: props.item.usernames,
@@ -25,6 +27,8 @@ function Item (props) {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    const newUserNames = inputvalue.usernames.filter((username, index)=>!clear[index])
+    console.log(newUserNames);
     const newItem = {
       name: inputvalue.name,
       progress: inputvalue.progress,
@@ -32,7 +36,7 @@ function Item (props) {
         start: inputvalue.time.start,
         end: inputvalue.time.end
       },
-      usernames: inputvalue.usernames
+      usernames: newUserNames
     }
     console.log(newItem);
     props.getEditItem({
@@ -48,6 +52,14 @@ function Item (props) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  const handleClear = (index) =>{
+    console.log(clear);
+    const temp = clear
+    temp[index] = !temp[index]
+    setClear(temp)
+    setCount(count+1)
+  }
     return(  
       <div>
         <div className="item">
@@ -83,8 +95,8 @@ function Item (props) {
             setInputValue({...inputvalue, time: {start: inputvalue.time.start, end: e.target.value}})}}/>
           <div className="collabor">
             <p>{"Collaborator: "}</p>
-            {inputvalue.usernames.map((username)=>
-            <div className="collabor_name"><p>{username+","}</p></div>)}
+            {inputvalue.usernames.map((username, index)=>
+            <div className={clear[index]?"collabor_name_deleted":"collabor_name"} onClick={()=>handleClear(index)}><p>{username+","}</p></div>)}
             <input placeholder="+ Add Collaborator" onKeyDown={(e)=>{
               if(e.key=='Enter'){
                 setInputValue({...inputvalue, usernames: [...inputvalue.usernames, e.target.value]})
