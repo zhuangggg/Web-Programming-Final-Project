@@ -9,19 +9,9 @@ function Timeline(props) {
   const getTasks = (data) => {
     if (data.events.length !==0){
       let tasks_array = data.events.map((event,i)=>{
-        let start_date = event.time.start.split("/")
-        let start = new Date(start_date[0],start_date[1]-1,start_date[2])
-        let end_date = event.time.end.split("/")
-        let end = new Date(end_date[0],end_date[1]-1,end_date[2])
-        let task =  {
-              start: start,
-              end: end,
-              name: event.name,
-              id: "Event " + i,
-              progress: parseInt(event.progress.split("%")[0]),
-              custom_class: `event_${i%5}`
-            }
-        let items = event.items.map((item,j)=>{
+          let sum = 0;
+          let items = event.items.map((item,j)=>{
+            sum += parseInt(item.progress.split("%")[0]);
           let start_date = item.time.start.split("/")
           let start = new Date(start_date[0],start_date[1]-1,start_date[2])
           let end_date = item.time.end.split("/")
@@ -36,6 +26,18 @@ function Timeline(props) {
                 usernames: item.usernames
               }
         })
+        let start_date = event.time.start.split("/")
+        let start = new Date(start_date[0],start_date[1]-1,start_date[2])
+        let end_date = event.time.end.split("/")
+        let end = new Date(end_date[0],end_date[1]-1,end_date[2])
+        let task =  {
+              start: start,
+              end: end,
+              name: event.name,
+              id: "Event " + i,
+              progress: Math.round(sum/event.items.length),
+              custom_class: `event_${i%5}`
+            }
         items.unshift(task);
         return items
       })  
@@ -104,14 +106,19 @@ function Timeline(props) {
   const handleProgressChange = (task,progress)=>{
     var payload = props.data;
     var taskId = task.id.split(" ");
+    let sum = 0;
     switch (taskId[0]){
       case 'Event':
         payload.events[taskId[1]].progress = `${progress}%`;
         break;
       case 'Item':
         payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].progress = `${progress}%`;
+        payload.events[taskId[1].split('-')[0]].items.map(item=>{
+        sum+=parseInt(item.progress.split('%')[0])
+      })
+        payload.events[taskId[1].split('-')[0]].progress = `${Math.round(sum/payload.events[taskId[1].split('-')[0]].items.length)}%`
     }
-    props.editProject({variables:payload},false)
+    props.editProject({variables:payload})
   }
 
     return (
