@@ -152,20 +152,22 @@ ul.project_content {
     width: 150px;
     padding-left: 5px;
     font-size: medium;
+    background: white;
+    color: black;
 }
 
-.details-container input{
+/* .details-container input{
     margin: 0;
     font-size: 14px;
     width: 40px;
-    color: #3D4F75;
+    color: black;
     border: none;
-}
+} */
 
-.details-container input:focus{
+/* .details-container input:focus{
     border: white 1px solid;
     border-radius: 10%;
-}
+} */
 
 ::placeholder{
     color: gray;
