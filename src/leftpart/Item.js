@@ -16,7 +16,6 @@ function Item (props) {
     users_id: props.item.users_id
   })
 
-  console.log(inputvalue);
 
   const showModal = () => {
     setIsModalVisible(true);

@@ -71,6 +71,20 @@
     right: 0;
   }
 
+  .project_btn_edit {
+    border-radius: 4px;
+    background: rgb(88, 139, 190);
+    border: none;
+    color: #ffffff;
+    font-size: 22px;
+    padding: 8px;
+    width: 450px;
+    transition: all 0.4s;
+    cursor: pointer;
+    margin: 15px;
+    opacity: 40%;
+  }
+
 
 .add_project {
     border: none;
@@ -148,4 +162,9 @@
       background-color: white;
       border: 2px black;
       color: gray;
+  }
+
+  .option {
+    display: flex;
+    flex-direction: column;
   }

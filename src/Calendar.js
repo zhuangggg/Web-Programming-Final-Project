@@ -33,20 +33,15 @@ function GanttCalendar(props) {
   })
 
   useEffect(() => {
-    console.log(data)
     if(data){
       setProjects(data.user.projects)
-      console.log(data.user.projects)
     }
   }, [data])
 
   useEffect(() => {
-    console.log(projects);
     var itemlist = []
     projects.forEach(p => {
-      console.log(p)
       p.events.forEach(e => {
-        console.log(e);
         e.items.forEach(i => {
           itemlist.push({
             start: moment(i.time.start.replace('/', '-').replace('/', '-')).toDate(),
@@ -58,7 +53,6 @@ function GanttCalendar(props) {
         })
       })
     })
-    console.log(itemlist)
     setItems(itemlist)
   }, [projects])
   /* 

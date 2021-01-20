@@ -17,7 +17,6 @@ function Event (props) {
     },
   })
 
-  console.log(inputvalue);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -34,7 +33,6 @@ function Event (props) {
       },
       items: props.event.items
     }
-    console.log(props.event.name);
     props.getEditEvent({
       variables: {
         event_name: props.event.name,

@@ -18,7 +18,6 @@ function Login() {
     const [type, setType] = useState("")
 
     const send = (s)=>{
-      console.log(s)
         if(!userid){
             message.error({
                 content: "id cannot be empty",

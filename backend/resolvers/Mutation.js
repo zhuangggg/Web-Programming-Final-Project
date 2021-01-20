@@ -12,7 +12,7 @@ const Mutation = {
         id: args.data.id,
         name: args.data.name,
         events: [],
-        usernames: args.data.usernames
+        usernames: [args.data.usernames]
     }
     console.log('createProject');
 
@@ -48,18 +48,19 @@ const Mutation = {
   },
 
   async createItem(parent, args, { pubsub }, info) {
+    console.log(args);
+    console.log("---------")
     const newItem = {
         name: args.data.item_name,
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
-        username: args.data.username
+        usernames: [args.data.username]
       }
     // pubsub.publish(`update_project ${args.data.item_name}`, {
     //   update_project: {
     //       mutation: 'CREATED'
     //   }
     // })
-    console.log('createItem');
     await Project.findOne({name: args.data.project_name}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events[index].items = [...doc.events[index].items, newItem]

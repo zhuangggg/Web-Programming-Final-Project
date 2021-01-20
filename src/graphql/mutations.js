@@ -44,13 +44,14 @@ export const CREATE_ITEM_MUTATION = gql`
         $progress: String!
         $start: String!
         $end: String!
+        $username: String!
     ){
         createItem(data: {
             project_name: $project_name
             event_name: $event_name
             item_name: $item_name
             progress: $progress
-
+            username: $username
             time:{
                 start: $start
                 end: $end

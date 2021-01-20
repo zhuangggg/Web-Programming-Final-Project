@@ -28,15 +28,12 @@ var c = 0;
 
 function Gantt(props) {
   const location = useLocation()
-  console.log(props);
   const projectName = props.location.state.projectname
   const name = props.location.state.username
-  console.log(name);
   const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
   const [count, setCount] = useState(0)
-  console.log(data);
 
   /*const refetchContent = {
     refetchQueries: [{
@@ -54,7 +51,6 @@ function Gantt(props) {
   const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
 
   const addEvent = ({variables})=>{
-    console.log(variables)
     const gqlbody = {
       event_name: variables.event_name,
       project_name: variables.project_name,
@@ -78,7 +74,6 @@ function Gantt(props) {
   }  
   
   const deleteEvent = ({variables})=>{
-    console.log(variables)
     const gqlbody = {
       event_name: variables.event_name,
       project_name: variables.project_name,
@@ -86,14 +81,12 @@ function Gantt(props) {
     let temp = project
     const index = temp.events.findIndex(event=>event.name===variables.event_name)
     temp.events.splice(index, 1)
-    console.log(index)
     setProject(temp)
     c+=1;
     deleteEvent_db({variables: gqlbody})
   }
 
   const addItem = ({variables})=>{
-    console.log(name);
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,
@@ -104,7 +97,6 @@ function Gantt(props) {
       username: name
     }
     let temp = project
-    console.log(gqlbody)
     const index = temp.events.findIndex(event=>event.name===variables.event_name)
     temp.events[index].items.push({
       name: variables.item_name,
@@ -117,11 +109,11 @@ function Gantt(props) {
     })
     setProject(temp)
     c+=1;
+    console.log(gqlbody)
     addItem_db({variables: gqlbody})
   }
 
   const deleteItem = ({variables})=>{
-    console.log(variables)
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,
@@ -137,18 +129,12 @@ function Gantt(props) {
   }
 
   const editProject = ({variables})=>{
-    console.log(variables)
     const payload = {
       name: variables.name,
       recentContent: JSON.stringify(variables)
     }
     setProject(variables)
-    // setCount(count+1)
-    // console.log(count);
     c += 1;
-    console.log(payload);
-    // c += 1;
-    console.log(c);
     editProject_db({variables: payload})
   }
 
@@ -157,7 +143,6 @@ function Gantt(props) {
     const temp = project
     temp.events[index] = variables.newEvent
     editProject({variables: temp})
-    console.log(index)
     setProject(temp)
   }
 
@@ -186,7 +171,6 @@ function Gantt(props) {
 
   useEffect(() => {
     if(!loading && data.project!==project && !count){
-      console.log('setData')
       setProject(data.project)
       setCount(count+1)
     }

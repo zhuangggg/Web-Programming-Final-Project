@@ -13,6 +13,7 @@ type Mutation {
     deleteItem(data: _itemInput!): String
     editProject(data: projectEditInput!): String
     addProjectIdForUser(data: _userInput!): String
+    addUserNameForItem(data: addUserInput!): String
 }
 
 type Subscription {
@@ -80,7 +81,7 @@ input _userInput {
 input projectInput {
     name: String!
     id: String!
-    usernames: [String]
+    usernames: [String!]!
     events: [Event_]
 }
 
@@ -121,6 +122,7 @@ input itemInput {
     item_name: String!
     progress: String!
     time: timeInput!
+    username: String!
 }
 
 input _itemInput {
@@ -129,11 +131,19 @@ input _itemInput {
     item_name: String!
 }
 
+input addUserInput {
+    project_name: String!
+    event_name: String!
+    item_name: String!
+    username: String!
+}
+
 enum MutationType{
   CREATED
   DELETED
   EDITED
 }
+
 `
 
 module.exports = typeDefs;
