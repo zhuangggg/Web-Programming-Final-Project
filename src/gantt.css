@@ -225,10 +225,15 @@ p {
     cursor: pointer;
 }
 
-.collabor_name_deleted p {
+.collabor_name_deleted {
     transition: 1s;
-    text-decoration: line-through;
+    margin-left: 5px;
+    cursor: pointer;
     opacity: 50%;
+}
+
+.collabor_name_deleted p {
+    text-decoration: line-through;
 }
 
 .collabor input {
