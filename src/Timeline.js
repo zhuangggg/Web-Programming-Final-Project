@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactGantt from './Timeline_Component/gantt-for-react';
 import './gantt.css'
+import './timeline.css'
 
 function Timeline(props) {
   const [tasks, setTasks] = useState("")
@@ -18,7 +19,7 @@ function Timeline(props) {
               name: event.name,
               id: "Event " + i,
               progress: event.progress.split("%")[0],
-              custom_class: 'eventBar'
+              custom_class: `event_${i%5}`
             }
         let items = event.items.map((item,j)=>{
           let start_date = item.time.start.split("/")
@@ -31,7 +32,7 @@ function Timeline(props) {
                 name: item.name,
                 id: "Item " +i+"-"+ j,
                 progress: item.progress.split("%")[0],
-                custom_class: 'itemBar'
+                custom_class: `event_${i%5}`
               }
         })
         items.unshift(task);
@@ -60,7 +61,7 @@ function Timeline(props) {
   };
 
   useEffect(() => {
-    //console.log("bbbbbbbbbbbbb")
+    console.log("bbbbbbbbbbbbb")
     getTasks(props.data)
     //console.log(props.data.events);
   },[props.count])
@@ -110,7 +111,7 @@ function Timeline(props) {
     return (
       <>
       {tasks!==""?
-          <div className='timeline-container' style={{overflow: 'scroll'}}>
+          <div className={`timeline-container color_${props.data.color}`} style={{overflow: 'scroll'}}>
             <ReactGantt tasks={tasks}
                         viewMode='Week'
                         onDateChange={handleDateChange}
