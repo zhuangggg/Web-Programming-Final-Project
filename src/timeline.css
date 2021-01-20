@@ -19,6 +19,22 @@
 }
 
 .color_0{
+    --first: #264653;
+    --second: #2a9d8f;
+    --third: #e9c46a;
+    --fourth:#f4a261;
+    --fifth: #e76f51;
+}
+
+.color_1{
+    --first: #ffcdb2;
+    --second: #ffb4a2;
+    --third: #e5989b;
+    --fourth: #b5838d;
+    --fifth: #6d6875;
+}
+
+.color_2{
     --first: #1C78E6;
     --second: #00B4F0;
     --third: #0BD9CE;
@@ -26,7 +42,7 @@
     --fifth: #6CE692;
 }
 
-.color_1{
+.color_3{
     --first: #d7a05b;
     --second: #eabe7c;
     --third: #cdb590;
@@ -34,7 +50,7 @@
     --fifth: #816f53;
 }
 
-.color_2{
+.color_4{
     --first: #6c4760;
     --second: #617899;
     --third: #38acaf;
