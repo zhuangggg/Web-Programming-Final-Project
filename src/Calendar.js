@@ -754,8 +754,8 @@ crossOrigin="anonymous"></script>
             <NavLink to={{pathname: `/home`,
             state:
             {
-                password: password,
-                    username: name
+                password: id,
+                username: name
             }}} ><button className="back_btn"><span>Back</span></button></NavLink>
 
         </div>
