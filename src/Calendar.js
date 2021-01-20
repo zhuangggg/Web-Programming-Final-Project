@@ -387,7 +387,7 @@ function GanttCalendar(props) {
                             category: 'time',
                             isAllday: true,
                             start: moment(i.time.start.replace('/', '-').replace('/', '-    ')).toDate(),
-                            end: moment(i.time.end.replace('/', '-').replace('/', '-')).toDate(),
+                            end: moment(i.time.end.replace('/', '-').replace('/', '-')).endOf('day')._d,
                             color: '#ffffff',
                             bgColor: projectsColors[p.color][eventnum],
                             borderColor: projectsColors[p.color][eventnum]

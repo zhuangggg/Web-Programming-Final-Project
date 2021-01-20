@@ -1,5 +1,6 @@
 import './login.css';
 import React, { useRef, useState, useEffect } from 'react'
+import $ from 'jquery'
 import { USER_QUERY } from './graphql'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { message } from 'antd'
@@ -22,6 +23,10 @@ function GetInfo(props) {
     refetch()
     console.log(data);
     console.log("rrrrrrrrrr");
+
+    $(window).bind("pageshow", function() {
+      refetch();
+    });
 
     return (<>
     {loading?<div className="loadingimg" ><img src={loadingimg}/></div>:
