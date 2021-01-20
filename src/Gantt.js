@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import Leftpart from './leftpart/Leftpart';
 import Timeline from './Timeline'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from 'react-apollo'
 import { PROJECT_QUERY,
     USER_QUERY,
     CREATE_PROJECT_MUTATION, 
@@ -28,15 +28,15 @@ var c = 0;
 
 function Gantt(props) {
   const location = useLocation()
-  console.log(props);
+  // console.log(props);
   const projectName = props.location.state.projectname
   const name = props.location.state.username
-  console.log(name);
+  // console.log(name);
   const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
   const [count, setCount] = useState(0)
-  console.log(data);
+  // console.log(data);
 
   /*const refetchContent = {
     refetchQueries: [{
@@ -136,7 +136,8 @@ function Gantt(props) {
     deleteItem_db({variables: gqlbody})
   }
 
-  const editProject = ({variables})=>{
+  const editProject = (variables)=>{
+    console.log('editProject');
     console.log(variables)
     const payload = {
       name: variables.name,
@@ -145,7 +146,7 @@ function Gantt(props) {
     setProject(variables)
     // setCount(count+1)
     // console.log(count);
-    c += 1;
+    // c += 1;
     console.log(payload);
     // c += 1;
     console.log(c);
