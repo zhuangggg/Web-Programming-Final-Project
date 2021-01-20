@@ -18,8 +18,10 @@ function GetInfo(props) {
     const { subscribeToMore, loading, data, refetch } = useQuery(USER_QUERY, {variables: {
         name: name, 
         password: password,
-        type: "login" }})        
+        type: "login" }}) 
+    refetch()
     console.log(data);
+    console.log("rrrrrrrrrr");
 
     return (<>
     {loading?<div className="loadingimg" ><img src={loadingimg}/></div>:
