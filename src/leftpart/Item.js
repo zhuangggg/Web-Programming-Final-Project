@@ -73,7 +73,7 @@ function Item (props) {
             })
           }}><DeleteOutlined/></button>:<div></div>}
             <div className={props.edit?"item_name_edit":"item_name"}  onClick={showModal}>{props.item.name}</div>
-            <div className={props.edit?"progress_edit":"progress"}>{props.item.progress}</div>
+            <div className={props.edit?"progress_edit":"progress_num"}>{props.item.progress}</div>
         </div>
         <Modal
           title="Edit Item"
