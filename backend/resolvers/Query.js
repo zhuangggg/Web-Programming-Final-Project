@@ -26,13 +26,20 @@ const Query = {
             }
             const db = await Project.find()
             let projects = []
-            db.forEach((project)=>{
+            /*db.forEach((project)=>{
                 target.projects_id.forEach((project_id)=>{
                     if(project.id===project_id){
                         projects.push(project)
                     }
                 })
-            })
+            })*/
+            db.forEach(project => {
+                project.usernames.forEach(username=>{
+                    if(username===target.name){
+                        projects.push(project)
+                    }
+                })                
+            });
             const payload = {
                 userinfo: target,
                 check: "log in success!",
