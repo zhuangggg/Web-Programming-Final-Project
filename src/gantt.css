@@ -107,6 +107,7 @@ ul.project_content {
     border: none;
     color: black;
     outline: none;
+    height: 22px;
 }
 
 .add_item:focus::placeholder{
@@ -230,7 +231,7 @@ p {
 
 .collabor input {
     margin-left: 10px;
-    width: 120px;
+    width: 130px;
     padding-bottom: 0%;
     border-top: none;
     border-left: none;

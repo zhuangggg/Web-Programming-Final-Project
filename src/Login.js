@@ -63,7 +63,7 @@ function Login() {
             }/>
           </div>
           <div className="password">
-            <input type="text" 
+            <input type="password" 
             id="password"
             placeholder="Password"
             ref={userpasswordRef}

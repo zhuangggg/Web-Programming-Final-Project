@@ -32,7 +32,8 @@ function Timeline(props) {
                 name: item.name,
                 id: "Item " +i+"-"+ j,
                 progress: parseInt(item.progress.split("%")[0]),
-                custom_class: `event_${i%5}`
+                custom_class: `event_${i%5}`,
+                usernames: item.usernames
               }
         })
         items.unshift(task);
@@ -68,15 +69,20 @@ function Timeline(props) {
   // const tasks = getTasks();
 
   const customPopupHtml = task => {
+    // console.log(task);
     const start = `${task._start.getMonth()+1}/${task._start.getDate()}`
     const end = `${task._end.getMonth()+1}/${task._end.getDate()}`
-    return `
+    return task.usernames !== undefined?`
       <div class="details-container">
-        <h4 style='margin:0'>${task.name}</h4>
+        <h4 style='margin:0'>${task.name} - ${task.usernames.toString()}</h4>
         <p>Time: ${start} - ${end}</p>
         <p>Progress: ${task.progress}%</p>
       </div>
-    `;
+    `:`<div class="details-container">
+    <h4 style='margin:0'>${task.name}</h4>
+    <p>Time: ${start} - ${end}</p>
+    <p>Progress: ${task.progress}%</p>
+  </div>`;
   };
 
   const handleDateChange = (task,start,end)=>{
