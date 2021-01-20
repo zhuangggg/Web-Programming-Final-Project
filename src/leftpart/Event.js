@@ -58,7 +58,7 @@ function Event (props) {
               })
             }}><DeleteOutlined/></button>:<div></div>}
             <div className={props.edit?"event_name_edit":"event_name"}  onClick={showModal}>{props.event.name}</div>
-            <div className={props.edit?"progress_edit":"progress"}>{props.event.progress}</div>
+            <div className={props.edit?"progress_edit":"progress_num"}>{props.event.progress}</div>
           </div>
           <ul className="event_content">
             {props.event.items.map((item,itemIndex)=>
