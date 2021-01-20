@@ -27,10 +27,12 @@ function GanttCalendar(props) {
   const { data, refetch, subscribeToMore } = useQuery(USER_QUERY, {
       variables: {
           name: name,
-          id: id,
+          password: id,
           type: 'login'
       }
   })
+  console.log(name);
+  console.log(id);
 
   useEffect(() => {
     if(data){

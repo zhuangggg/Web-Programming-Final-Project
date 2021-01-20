@@ -29,7 +29,7 @@ function Home(props){
     const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
 
     const name = props.data.userinfo.name
-    const id = props.data.userinfo.id
+    const id = props.data.userinfo.password
     const deleteProject = (project_name)=>{
         let temp = projects
         const index = temp.findIndex(project=>project.name===project_name)
