@@ -109,14 +109,14 @@
     background-color: transparent;
     border: none;
     font-size: 30px;
-    opacity: 50%;
+    opacity: 0.5;
     margin-right: 5px;
     margin-top: 15px;
 }
 
 .x:hover {
     border: none;
-    opacity: 100%;
+    opacity: 1;
 }
 
 .example_f {
