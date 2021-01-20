@@ -10,12 +10,15 @@ import {Modal, Select} from 'antd'
 import Analysis from './Analysis'
 
 const colors = [
-    ["#1C78E6", "#00B4F0", "#0BD9CE", "#00D184","#6CE692"],
+    ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"],
+    ["#ffcdb2", "#ffb4a2", "#e5989b", "#b5838d", "#6d6875"],
+    ["#1C78E6", "#00B4F0", "#0BD9CE", "#00D184", "#6CE692"],
     ["#d7a05b", "#eabe7c", "#cdb590", "#aa916a", "#816f53"],
     ["#6c4760", "#617899", "#38acaf", "#6fda97", "#e6f972"],
 ]
 
 function Home(props){
+    console.log(props)
     const [projects, setProjects] = useState(props.data.projects)
 
     const [addProject_db] = useMutation(CREATE_PROJECT_MUTATION)
@@ -112,7 +115,9 @@ function Home(props){
                         pathname:`/calendar/`,
                         state: {
                             username: name,
-                            userid: id
+                            userid: id,
+                            projects: projects,
+                            projectsColors: colors
                         }
                     }}>
                     <div className="example_f"><span>Calendar</span></div></NavLink>

@@ -1,42 +1,41 @@
-.Calendar {
-    display: flex;
-    flex-direction: row;
-    position: relative;
+.App {
 }
 
-.eventlist {
-    width: 24vw;    
-    line-height: 25px;
-    padding-right: 20px;
-    margin-left: 1vw;
+#root {
+  width: inherit;
 }
 
-.calendar {
-    width: 75vw;
-    height: 100%;
-    padding-right: 20px;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-
-.listhead {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-.projectcontainer {
-    margin: 15px;
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-.projectname {
-    font-size: 20px;
-    height: 35px;
-    margin: auto;
-    border-bottom: 3px solid #e5e5e5;
-    font-weight: bold;
+.App-link {
+  color: #61dafb;
 }
 
-.events {
-    margin-left: 10px;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-

@@ -55,14 +55,14 @@ function Gantt(props) {
     const gqlbody = {
       event_name: variables.event_name,
       project_name: variables.project_name,
-      progress: defaultProgress,
+      progress: "0%",
       start: defaultStart,
       end: defaultEnd
     }
     let temp = project
     temp.events.push({
       name: variables.event_name,
-      progress: defaultProgress,
+      progress: "0%",
       time: {
         start: defaultStart,
         end: defaultEnd
@@ -108,6 +108,9 @@ function Gantt(props) {
       },
       usernames: [name]
     })
+    let sum = 0;
+    temp.events[index].items.map(item=>sum+=parseInt(item.progress.split('%')[0]))
+    temp.events[index].progress = `${Math.round(sum/temp.events[index].items.length)}%`
     setProject(temp)
     c+=1;
     console.log(gqlbody)
@@ -124,6 +127,9 @@ function Gantt(props) {
     const event_index = temp.events.findIndex(event=>event.name===variables.event_name)
     const item_index = temp.events[event_index].items.findIndex(item=>item.name===variables.item_name)
     temp.events[event_index].items.splice(item_index, 1)
+    let sum = 0;
+    temp.events[event_index].items.map(item=>sum+=parseInt(item.progress.split('%')[0]))
+    temp.events[event_index].progress = `${Math.round(sum/temp.events[event_index].items.length)}%`
     setProject(temp)
     c+=1;
     deleteItem_db({variables: gqlbody})
@@ -154,6 +160,9 @@ function Gantt(props) {
     const item_index = project.events[event_index].items.findIndex((item)=>item.name===variables.item_name)
     const temp = project
     temp.events[event_index].items[item_index] = variables.newItem
+    let sum = 0;
+    temp.events[event_index].items.map(item=>sum+=parseInt(item.progress.split('%')[0]))
+    temp.events[event_index].progress = `${Math.round(sum/temp.events[event_index].items.length)}%`
     const newUserNames = [...new Set([...temp.usernames, ...temp.events[event_index].items[item_index].usernames])]
     temp.usernames = newUserNames
     console.log(temp);

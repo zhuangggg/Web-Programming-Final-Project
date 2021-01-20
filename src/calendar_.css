@@ -1,0 +1,42 @@
+.Calendar {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.eventlist {
+    width: 24vw;    
+    line-height: 25px;
+    padding-right: 20px;
+    margin-left: 1vw;
+}
+
+.calendar {
+    width: 75vw;
+    height: 100%;
+    padding-right: 20px;
+}
+
+
+.listhead {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center
+}
+
+.projectcontainer {
+    margin: 15px;
+}
+
+.projectname {
+    font-size: 20px;
+    height: 35px;
+    margin: auto;
+    border-bottom: 3px solid #e5e5e5;
+    font-weight: bold;
+}
+
+.events {
+    margin-left: 10px;
+}
+
