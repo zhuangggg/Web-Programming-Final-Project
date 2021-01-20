@@ -31,7 +31,7 @@ const chance = new Chance()
 function GanttCalendar(props) {
     console.log(props.location.state);
     const name = props.location.state.username
-    const id = props.location.state.userid
+    const password = props.location.state.userid
     const projects = props.location.state.projects
     const projectsColors = props.location.state.projectsColors
     const calendarRef = useRef(null)
@@ -765,7 +765,7 @@ crossOrigin="anonymous"></script>
             <NavLink to={{pathname: `/home`,
             state:
             {
-                password: id,
+                password: password,
                 username: name
             }}} ><button className="back_btn"><span>Back</span></button></NavLink>
 
