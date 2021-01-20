@@ -4,13 +4,15 @@ export const CREATE_PROJECT_MUTATION = gql`
     mutation(
         $name: String!
         $id: String!
-        $usernames: [String!]!
+        $username: String!
+        $color: Int!
     ){
         createProject(
             data: {
                 name: $name
                 id: $id
-                usernames: $usernames
+                username: $username
+                color: $color
             }
         )
     }

@@ -44,7 +44,8 @@ function Home(props){
         const newProject = {
             name: project_name,
             id: newid,
-            usernames: [name]
+            color: 0,
+            username: name
         }
         const temp = projects
         temp.push(newProject)

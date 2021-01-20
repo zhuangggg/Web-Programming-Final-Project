@@ -6,6 +6,7 @@ export const PROJECT_QUERY = gql`
     ){
         project(name: $name){
             name
+            color
             usernames
             events{
                 name
@@ -48,6 +49,7 @@ export const USER_QUERY = gql`
             check
             projects{
                 name
+                color
                 id
                 usernames
                 events{
