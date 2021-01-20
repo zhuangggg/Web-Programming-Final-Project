@@ -130,6 +130,7 @@ function Gantt(props) {
   }
 
   const editProject = ({variables})=>{
+    console.log(variables);
     const payload = {
       name: variables.name,
       recentContent: JSON.stringify(variables)
@@ -148,10 +149,12 @@ function Gantt(props) {
   }
 
   const getEditItem = ({variables})=>{
+    console.log(variables);
     const event_index = project.events.findIndex((event)=>event.name===variables.event_name)
     const item_index = project.events[event_index].items.findIndex((item)=>item.name===variables.item_name)
     const temp = project
     temp.events[event_index].items[item_index] = variables.newItem
+    console.log(temp);
     editProject({variables: temp})
     setProject(temp)
   }

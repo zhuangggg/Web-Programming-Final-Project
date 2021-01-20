@@ -13,7 +13,7 @@ const Mutation = {
         name: args.data.name,
         color: args.data.color,
         events: [],
-        usernames: [args.data.usernames]
+        usernames: [args.data.username]
     }
     console.log('createProject');
 

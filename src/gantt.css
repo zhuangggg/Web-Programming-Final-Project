@@ -212,3 +212,45 @@ p {
 .event_name_edit:hover {
     opacity: 100%;
 }
+
+.collabor {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin: 5px;
+}
+
+.collabor_name {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.collabor_name_deleted p {
+    transition: 1s;
+    text-decoration: line-through;
+    opacity: 50%;
+}
+
+.collabor input {
+    margin-left: 10px;
+    width: 120px;
+    padding-bottom: 0%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px rgba(128, 128, 128, 0.726) solid;
+}
+
+.collabor input:focus {
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px rgba(128, 128, 128, 0.726) solid;
+}
+
+.trash {
+    margin: 5px; 
+    opacity: 60%;
+    cursor: pointer;
+}
