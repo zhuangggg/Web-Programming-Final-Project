@@ -15,7 +15,7 @@ const colors = [
 ]
 
 function Home(props){
-
+    console.log(props)
     const [projects, setProjects] = useState(props.data.projects)
 
     const [addProject_db] = useMutation(CREATE_PROJECT_MUTATION)
@@ -111,7 +111,9 @@ function Home(props){
                         pathname:`/calendar/`,
                         state: {
                             username: name,
-                            userid: id
+                            userid: id,
+                            projects: projects,
+                            projectsColors: colors
                         }
                     }}>
                 <div className="example_f"><span>Calendar</span></div></NavLink>
