@@ -129,14 +129,14 @@ function Gantt(props) {
     deleteItem_db({variables: gqlbody})
   }
 
-  const editProject = ({variables})=>{
+  const editProject = ({variables},render=true)=>{
     console.log(variables);
     const payload = {
       name: variables.name,
       recentContent: JSON.stringify(variables)
     }
     setProject(variables)
-    c+=1
+    if (render === true) c+=1
     editProject_db({variables: payload})
   }
 
