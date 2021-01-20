@@ -5,7 +5,7 @@ import {Button} from 'antd'
 
 function Project (props) {
   const [edit, setEdit] = useState(false)
-
+  console.log(props.project);
   const editMode = ()=>{
     setEdit(!edit)
   }

@@ -12,7 +12,6 @@ type Mutation {
     deleteEvent(data: _eventInput!): String
     deleteItem(data: _itemInput!): String
     editProject(data: projectEditInput!): String
-    addProjectIdForUser(data: _userInput!): String
     addUserNameForItem(data: addUserInput!): String
 }
 
@@ -31,7 +30,6 @@ type Project {
 type User {
     id: String!
     name: String!
-    projects_id: [String]
 }
 
 type UserPayload {
@@ -72,11 +70,6 @@ input userInput {
     name: String!
     type: String!
     id: String!
-}
-
-input _userInput {
-    name: String!
-    project_id: String!
 }
 
 input projectInput {

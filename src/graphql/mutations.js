@@ -105,18 +105,6 @@ export const EDIT_PROJECT_MUTATION = gql`
         })
     }
 `
-export const ADD_PROJECT_ID_MUTATION = gql`
-    mutation editProject(
-        $name: String!
-        $project_id: String!
-    ){
-        addProjectIdForUser(data: {
-            name: $name
-            project_id: $project_id
-        })
-    }
-
-`
 
 
 

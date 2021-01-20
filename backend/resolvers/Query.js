@@ -57,7 +57,6 @@ const Query = {
                 const newUser = {
                     id: args.data.id,
                     name: args.data.name,
-                    projects_id: []
                 }
                 await User.insertMany(newUser)
                 const payload = {

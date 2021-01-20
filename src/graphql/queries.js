@@ -43,7 +43,6 @@ export const USER_QUERY = gql`
         }){
             userinfo{
                 name
-                projects_id
                 id
             }
             check

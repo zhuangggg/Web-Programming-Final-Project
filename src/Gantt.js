@@ -154,6 +154,8 @@ function Gantt(props) {
     const item_index = project.events[event_index].items.findIndex((item)=>item.name===variables.item_name)
     const temp = project
     temp.events[event_index].items[item_index] = variables.newItem
+    const newUserNames = [...new Set([...temp.usernames, ...temp.events[event_index].items[item_index].usernames])]
+    temp.usernames = newUserNames
     console.log(temp);
     editProject({variables: temp})
     setProject(temp)

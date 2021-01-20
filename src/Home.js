@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
 import './home.css'
-import {CREATE_PROJECT_MUTATION, ADD_PROJECT_ID_MUTATION, DELETE_PROJECT_MUTATION, EDIT_PROJECT_MUTATION} from './graphql'
+import {CREATE_PROJECT_MUTATION, DELETE_PROJECT_MUTATION, EDIT_PROJECT_MUTATION} from './graphql'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import {v4 as uuidv4} from 'uuid'
 import { BrowserRouter,NavLink, Switch, Route, Redirect, useLocation } from "react-router-dom";
@@ -20,7 +20,6 @@ function Home(props){
 
     const [addProject_db] = useMutation(CREATE_PROJECT_MUTATION)
     const [deleteProject_db] = useMutation(DELETE_PROJECT_MUTATION)
-    const [addProject_id_for_user] = useMutation(ADD_PROJECT_ID_MUTATION)    
     const [count, setCount] = useState(0)
     const [clean, setClean] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -51,10 +50,6 @@ function Home(props){
         temp.push(newProject)
         setProjects(temp)
         setCount(count+1)
-        addProject_id_for_user({variables:{
-            name: name,
-            project_id: newid
-        }})
         addProject_db({variables: newProject})
     }
 
@@ -150,7 +145,7 @@ function Home(props){
                     input.value = ""}}}/>
                 <button onClick={cleanMode} className="clearproject">Clear Projects</button>
             </div>
-            <Modal
+            {projects===[]?(<Modal
                 title="Edit Project"
                 visible={isModalVisible&&clean}
                 onOk={handleOk}
@@ -162,7 +157,7 @@ function Home(props){
                     <div className="option">{color_set.map(((color)=>
                     <div style={getStyle(color)}/>))}</div></Option>)}
                 </Select>
-            </Modal>
+            </Modal>):<></>}
         </div>
     )
 }

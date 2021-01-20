@@ -136,15 +136,6 @@ const Mutation = {
 
   },
 
-  async addProjectIdForUser(parent, args, { pubsub }, info) {
-    await User.findOne({name: args.data.name}, function(err, doc){
-      const temp = doc.projects_id
-      temp.push(args.data.project_id)
-      doc.projects_id = temp
-      doc.save()
-  })
-  },
-
   async addUserNameForItem(parent, args, { pubsub }, info) {
     const event_index = project.events.findIndex((event)=>event.name===args.data.event_name)
     const item_index = project.events[event_index].items.findIndex((item)=>item.name===args.data.item_name)

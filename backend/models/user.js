@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
     id: String,
-    name: String,
-    projects_id: [String]
+    name: String
 })
 
 const User = mongoose.model('User', UserSchema)
