@@ -254,3 +254,46 @@ p {
     opacity: 0.6;
     cursor: pointer;
 }
+
+.edit {
+
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.edit:hover {
+    opacity: 1;
+}
+
+.back_btn {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgb(85, 85, 85);
+    border: none;
+    color: #ffffff;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+  .back_btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+  }
+  .back_btn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  .back_btn:hover span {
+    padding-right: 25px;
+  }
+  .back_btn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }

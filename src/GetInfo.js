@@ -10,15 +10,16 @@ import loadingimg from './images/loading.gif'
 
 function GetInfo(props) {
     const location = useLocation();
+    console.log(location.state);
     const name = location.state.username
     const password = location.state.password
     //console.log(location.state.refetch_userinfo)
-
     const [check, setCheck] = useState(false)
     const { subscribeToMore, loading, data, refetch } = useQuery(USER_QUERY, {variables: {
         name: name, 
         password: password,
         type: "login" }})        
+    console.log(data);
 
     return (<>
     {loading?<div className="loadingimg" ><img src={loadingimg}/></div>:

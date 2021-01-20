@@ -16,23 +16,16 @@ const Query = {
             const target = await User.findOne({name: args.data.name})
             if(!target){
                 return{
-                    check: "cannot find the name: " + args.data.name
+                    check: `Cannot find the name: ${args.data.name}`
                 }
             }
             if(target.password!==args.data.password){
                 return {
-                    check: "the password is wrong"
+                    check: "The password is wrong"
                 }
             }
             const db = await Project.find()
             let projects = []
-            /*db.forEach((project)=>{
-                target.projects_id.forEach((project_id)=>{
-                    if(project.id===project_id){
-                        projects.push(project)
-                    }
-                })
-            })*/
             db.forEach(project => {
                 project.usernames.forEach(username=>{
                     if(username===target.name){
@@ -42,7 +35,7 @@ const Query = {
             });
             const payload = {
                 userinfo: target,
-                check: "log in success!",
+                check: "Log in success!",
                 projects: projects
             }
             console.log(payload)
@@ -51,7 +44,7 @@ const Query = {
         else{
             const target = await User.findOne({name: args.data.name})
             if(target) return {
-                check: "the id has been used"
+                check: `The name ${args.data.name} has been used`
             }
             else {
                 const newUser = {
@@ -61,7 +54,7 @@ const Query = {
                 await User.insertMany(newUser)
                 const payload = {
                     userinfo: newUser,
-                    check: "sign in success!",
+                    check: "Sign in success!",
                     projects: []
                 }
                 console.log(payload)

@@ -7,6 +7,7 @@ import { BrowserRouter,NavLink, Switch, Route, Redirect, useLocation } from "rea
 import userimg from './images/user.png'
 import {DeleteOutlined} from '@ant-design/icons'
 import {Modal, Select} from 'antd'
+import Analysis from './Analysis'
 
 const colors = [
     ["#1C78E6", "#00B4F0", "#0BD9CE", "#00D184","#6CE692"],
@@ -15,7 +16,6 @@ const colors = [
 ]
 
 function Home(props){
-
     const [projects, setProjects] = useState(props.data.projects)
 
     const [addProject_db] = useMutation(CREATE_PROJECT_MUTATION)
@@ -29,6 +29,7 @@ function Home(props){
     const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
 
     const name = props.data.userinfo.name
+    const password = props.data.userinfo.password
     const id = props.data.userinfo.password
     const deleteProject = (project_name)=>{
         let temp = projects
@@ -114,7 +115,8 @@ function Home(props){
                             userid: id
                         }
                     }}>
-                <div className="example_f"><span>Calendar</span></div></NavLink>
+                    <div className="example_f"><span>Calendar</span></div></NavLink>
+                    <NavLink to={{pathname: `/`}}>log out</NavLink>
                 </div>
             </div>
             <div className="right">
@@ -128,7 +130,7 @@ function Home(props){
                             </div>:
                             <NavLink to={{
                                 pathname:`/gantt/${project.id}`,
-                                state: {projectname: project.name, username: name}
+                                state: {projectname: project.name, username: name, password: password}
                             }}><button className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button></NavLink>}
                     </div>
                 </div>
@@ -163,3 +165,5 @@ function Home(props){
 }
 
 export default Home
+
+// <Analysis project={project} color={colors[projects[index].color][2]}/>

@@ -22,7 +22,7 @@ function Next(props) {
             .loading('loading..')
             .then(()=>{
                 console.log(data)
-                if(data.user.check!=="log in success!" && data.user.check!=="sign in success!"){
+                if(data.user.check!=="Log in success!" && data.user.check!=="Sign in success!"){
                     message.error({
                         content: data.user.check,
                         duration: duration

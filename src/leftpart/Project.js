@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import '../gantt.css'
 import Event from './Event'
-import {Button} from 'antd'
+import {EditOutlined} from '@ant-design/icons'
+
 
 function Project (props) {
   const [edit, setEdit] = useState(false)
@@ -16,7 +17,7 @@ function Project (props) {
         <div className="project_title">
           <div className="project_name">{props.project.name}</div>
           {/* <div className="progress">{props.project.progress}</div> */}
-          <Button className="btn_clean" onClick={editMode}>Edit</Button>
+          <div className="edit" onClick={editMode}><EditOutlined/></div>
         </div>
         <ul className="project_content">
         {props.project.events.map((event, eventIndex)=>  

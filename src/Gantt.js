@@ -30,7 +30,7 @@ function Gantt(props) {
   const location = useLocation()
   const projectName = props.location.state.projectname
   const name = props.location.state.username
-
+  const password = props.location.state.password
   const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
@@ -197,6 +197,13 @@ function Gantt(props) {
               <Timeline data={project}
                         count={c}
                         editProject={editProject}/>
+              <NavLink to={{pathname: `/home`, 
+              state: 
+              {
+                password: password, 
+                username: name
+              }}} ><button className="back_btn"><span>Back</span></button></NavLink>
+
           </div>}
         </>
     )

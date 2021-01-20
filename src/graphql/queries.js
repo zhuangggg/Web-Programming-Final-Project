@@ -61,6 +61,7 @@ export const USER_QUERY = gql`
                     items{
                         name
                         progress
+                        usernames
                         time{
                             start
                             end
