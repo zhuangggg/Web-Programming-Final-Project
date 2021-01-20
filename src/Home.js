@@ -9,7 +9,9 @@ import {DeleteOutlined} from '@ant-design/icons'
 import {Modal, Select} from 'antd'
 
 const colors = [
-    ["#1C78E6", "#00B4F0", "#0BD9CE", "#00D184","#6CE692"],
+    ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"],
+    ["#ffcdb2", "#ffb4a2", "#e5989b", "#b5838d", "#6d6875"],
+    ["#1C78E6", "#00B4F0", "#0BD9CE", "#00D184", "#6CE692"],
     ["#d7a05b", "#eabe7c", "#cdb590", "#aa916a", "#816f53"],
     ["#6c4760", "#617899", "#38acaf", "#6fda97", "#e6f972"],
 ]
