@@ -5,6 +5,7 @@ export const CREATE_PROJECT_MUTATION = gql`
         $name: String!
         $id: String!
         $usernames: [String!]!
+        $color: Number!
     ){
         createProject(
             data: {

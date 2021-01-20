@@ -11,6 +11,7 @@ const Mutation = {
     const newProject = {
         id: args.data.id,
         name: args.data.name,
+        color: args.data.color,
         events: [],
         usernames: [args.data.usernames]
     }
@@ -127,6 +128,7 @@ const Mutation = {
       doc.progress = data.progress
       doc.time = data.time
       doc.events = data.events
+      doc.color = data.color
       doc.save()
   })
     return `edit project ${args.data.name} successfully!`
@@ -142,7 +144,7 @@ const Mutation = {
   })
   },
 
-  /*async addUserNameForItem(parent, args, { pubsub }, info) {
+  async addUserNameForItem(parent, args, { pubsub }, info) {
     const event_index = project.events.findIndex((event)=>event.name===args.data.event_name)
     const item_index = project.events[event_index].items.findIndex((item)=>item.name===args.data.item_name)
     await Project.findOne({name: args.data.project_name}, function(err,doc){
@@ -152,7 +154,7 @@ const Mutation = {
       doc.save()
     })
 
-  }*/
+  }
 }
 
 module.exports = Mutation

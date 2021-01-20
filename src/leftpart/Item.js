@@ -13,8 +13,10 @@ function Item (props) {
       start: props.item.time.start,
       end: props.item.time.end
     },
-    users_id: props.item.users_id
+    usernames: props.item.usernames
   })
+
+  console.log(inputvalue.usernames);
 
 
   const showModal = () => {
@@ -61,12 +63,12 @@ function Item (props) {
             <div className={props.edit?"progress_edit":"progress"}>{props.item.progress}</div>
         </div>
         <Modal
-          title="Edit Event"
+          title="Edit Item"
           visible={isModalVisible&&props.edit}
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <p>Event Name</p>
+          <p>Item Name</p>
           <Input value={inputvalue.name} onChange={(e)=>{
             setInputValue({...inputvalue, name: e.target.value})}} />
           <p>Progress</p>
@@ -78,6 +80,10 @@ function Item (props) {
           <p>End</p>
           <Input value={inputvalue.time.end} onChange={(e)=>{
             setInputValue({...inputvalue, time: {start: inputvalue.time.start, end: e.target.value}})}}/>
+          <div>
+            {inputvalue.usernames.map((username)=>
+            <p>{username}</p>)}
+          </div>
         </Modal>
       </div>
     )

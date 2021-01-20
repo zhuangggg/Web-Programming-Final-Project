@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const ProjectSchema = new Schema({
     name: String,
+    color: Number,
     id: String,
     usernames: [String],
     events: [{
