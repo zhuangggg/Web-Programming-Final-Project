@@ -116,7 +116,7 @@ function Home(props){
                         state: {
                             username: name,
                             userid: id,
-                            projects: projects,
+                            projects: props.data.projects,
                             projectsColors: colors
                         }
                     }}>

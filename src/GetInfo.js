@@ -1,5 +1,6 @@
 import './login.css';
 import React, { useRef, useState, useEffect } from 'react'
+import $ from 'jquery'
 import { USER_QUERY } from './graphql'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { message } from 'antd'
@@ -18,8 +19,14 @@ function GetInfo(props) {
     const { subscribeToMore, loading, data, refetch } = useQuery(USER_QUERY, {variables: {
         name: name, 
         password: password,
-        type: "login" }})        
+        type: "login" }}) 
+    refetch()
     console.log(data);
+    console.log("rrrrrrrrrr");
+
+    $(window).bind("pageshow", function() {
+      refetch();
+    });
 
 
     return (<>
