@@ -377,22 +377,24 @@ function GanttCalendar(props) {
                 p.events.forEach(e => {
                     id++;
                     e.items.forEach(i => {
-                        let schedule = {
-                            id: String(id),
-                            calendarId: String(id),
-                            title: i.name,
-                            body: 'Progress: ' + i.progress,
-                            isReadOnly: true,
-                            dueDateClass: '',
-                            category: 'time',
-                            isAllday: true,
-                            start: moment(i.time.start.replace('/', '-').replace('/', '-    ')).toDate(),
-                            end: moment(i.time.end.replace('/', '-').replace('/', '-')).endOf('day')._d,
-                            color: '#ffffff',
-                            bgColor: projectsColors[p.color][eventnum],
-                            borderColor: projectsColors[p.color][eventnum]
+                        if(i.usernames.includes(name)) {
+                            let schedule = {
+                                id: String(id),
+                                calendarId: String(id),
+                                title: i.name,
+                                body: 'Progress: ' + i.progress,
+                                isReadOnly: true,
+                                dueDateClass: '',
+                                category: 'time',
+                                isAllday: true,
+                                start: moment(i.time.start.replace('/', '-').replace('/', '-    ')).toDate(),
+                                end: moment(i.time.end.replace('/', '-').replace('/', '-')).endOf('day')._d,
+                                color: '#ffffff',
+                                bgColor: projectsColors[p.color][eventnum],
+                                borderColor: projectsColors[p.color][eventnum]
+                            }
+                            ScheduleList.push(schedule);
                         }
-                        ScheduleList.push(schedule);
                         // let schedule = new ScheduleInfo();
                         // schedule.id = chance.guid();
                         // schedule.calendarId = String(id);
