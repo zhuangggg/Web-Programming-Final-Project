@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
 import './home.css'
-import {CREATE_PROJECT_MUTATION, ADD_PROJECT_ID_MUTATION, DELETE_PROJECT_MUTATION} from './graphql'
+import {CREATE_PROJECT_MUTATION, ADD_PROJECT_ID_MUTATION, DELETE_PROJECT_MUTATION, EDIT_PROJECT_MUTATION} from './graphql'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import {v4 as uuidv4} from 'uuid'
 import { BrowserRouter,NavLink, Switch, Route, Redirect, useLocation } from "react-router-dom";
@@ -9,6 +9,7 @@ import {DeleteOutlined} from '@ant-design/icons'
 import {Modal, Select} from 'antd'
 
 const colors = [
+    ["#1C78E6", "#00B4F0", "#0BD9CE", "#00D184","#6CE692"],
     ["#d7a05b", "#eabe7c", "#cdb590", "#aa916a", "#816f53"],
     ["#6c4760", "#617899", "#38acaf", "#6fda97", "#e6f972"],
 ]
@@ -23,6 +24,10 @@ function Home(props){
     const [count, setCount] = useState(0)
     const [clean, setClean] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [projectIndex,setProjectIndex] = useState(0)
+    const [colorIndex,setColorIndex] = useState(0)
+
+    const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
 
     const name = props.data.userinfo.name
     const id = props.data.userinfo.id
@@ -57,32 +62,34 @@ function Home(props){
       }
 
     
-  const showModal = () => {
+  const showModal = (index) => {
+    setProjectIndex(index)
+    console.log(index);
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
-    setIsModalVisible(false);
-    const newEvent = {
-      name: inputvalue.name,
-      progress: inputvalue.progress,
-      time: {
-        start: inputvalue.time.start,
-        end: inputvalue.time.end
-      },
-      items: props.event.items
-    }
-    props.getEditEvent({
-      variables: {
-        event_name: props.event.name,
-        newEvent: newEvent
-      }
-    })
-
+    let temp = projects[projectIndex];
+    temp.color = colorIndex;
+    console.log(temp);
+    editProject({variables:temp})
+    let newProjects = projects;
+    newProjects[projectIndex] = temp;
+    setProjects(newProjects)
+    setIsModalVisible(false)
   };
+  
+  const editProject = ({variables})=>{
+    const payload = {
+      name: variables.name,
+      recentContent: JSON.stringify(variables)
+    }
+    editProject_db({variables: payload})
+  }
 
   function handleChange(value) {
     console.log(`selected ${value}`);
+    setColorIndex(value)
   }
 
   const handleCancel = () => {
@@ -103,7 +110,7 @@ function Home(props){
             <div className="left">
                 <img className="userimg" src={userimg}/>
                 <div className="title">Hello, {name}</div>
-                <div class="button_cont" align="center">
+                <div className="button_cont" align="center">
                     <NavLink to={{
                         pathname:`/calendar/`,
                         state: {
@@ -120,7 +127,7 @@ function Home(props){
                     <div className="project">
                         {clean?
                             <div className="project">
-                                <button className="project_btn_edit" onClick={showModal}><span>{project.name}</span></button>
+                                <button className="project_btn_edit" onClick={()=>showModal(index)}><span>{project.name}</span></button>
                                 <div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>
                             </div>:
                             <NavLink to={{
@@ -149,10 +156,10 @@ function Home(props){
                 onCancel={handleCancel}
                 >
                 <p>Style</p>
-                <Select defaultValue="lucy" style={{ width: 200 }} onChange={handleChange}>
-                    <Option>{colors[0].map(((color)=>
-                    <div className="option"><div style={getStyle(color)}/></div>))}</Option>
-                    <Option value="lucy">Lucy</Option>
+                <Select defaultValue={projects[projectIndex].color} style={{ width: 200 }} onChange={handleChange}>
+                    {colors.map((color_set,i)=><Option value={i}>
+                    <div className="option">{color_set.map(((color)=>
+                    <div style={getStyle(color)}/>))}</div></Option>)}
                 </Select>
             </Modal>
         </div>

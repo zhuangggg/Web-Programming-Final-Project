@@ -153,14 +153,6 @@ ul.project_content {
     font-size: medium;
 }
 
-.eventBar .bar-progress {
-    fill: #7CB5F7 !important;
-}
-
-.itemBar .bar-progress {
-    fill: #92D9F0 !important;
-}
-
 .details-container input{
     margin: 0;
     font-size: 14px;

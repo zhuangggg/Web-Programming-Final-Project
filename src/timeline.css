@@ -1,0 +1,43 @@
+.event_0 .bar-progress {
+    fill: var(--first) !important;
+}
+
+.event_1 .bar-progress {
+    fill: var(--second) !important;
+}
+
+.event_2 .bar-progress {
+    fill: var(--third) !important;
+}
+
+.event_3 .bar-progress {
+    fill: var(--fourth) !important;
+}
+
+.event_4 .bar-progress {
+    fill: var(--fifth) !important;
+}
+
+.color_0{
+    --first: #1C78E6;
+    --second: #00B4F0;
+    --third: #0BD9CE;
+    --fourth: #00D184;
+    --fifth: #6CE692;
+}
+
+.color_1{
+    --first: #d7a05b;
+    --second: #eabe7c;
+    --third: #cdb590;
+    --fourth :#aa916a;
+    --fifth: #816f53;
+}
+
+.color_2{
+    --first: #6c4760;
+    --second: #617899;
+    --third: #38acaf;
+    --fourth :#6fda97;
+    --fifth: #e6f972;
+}
