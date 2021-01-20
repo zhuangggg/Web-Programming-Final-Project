@@ -28,6 +28,7 @@ function GetInfo(props) {
       refetch();
     });
 
+
     return (<>
     {loading?<div className="loadingimg" ><img src={loadingimg}/></div>:
     <Home data={data.user}/>}

@@ -17,7 +17,7 @@ function Event (props) {
     },
   })
 
-
+  console.log(props.id);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -52,7 +52,7 @@ function Event (props) {
             {props.edit? <button className="x" onClick={()=>{
               props.deleteEvent({
                 variables:{
-                  project_name: props.project_name,
+                  id: props.id,
                   event_name: props.event.name
                 }
               })
@@ -64,7 +64,7 @@ function Event (props) {
             {props.event.items.map((item,itemIndex)=>
               <Item
                 deleteItem={props.deleteItem}
-                project_name={props.project_name}
+                id={props.id}
                 event_name={props.event.name}
                 item={item}
                 itemIndex={itemIndex}
@@ -81,7 +81,7 @@ function Event (props) {
             if(input.value!="" && key==13) {
               props.addItem({
                 variables:{
-                  project_name: props.project_name,
+                  id: props.id,
                   event_name: props.event.name,
                   item_name: input.value
                 }

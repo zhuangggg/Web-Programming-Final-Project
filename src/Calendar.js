@@ -700,48 +700,57 @@ function GanttCalendar(props) {
                 </div>
                 <div id="lnb">
                     <div id="lnb-calendars" className="lnb-calendars">
+                        <div>
+                            <div class="lnb-calendars-item">
+                                <label>
+                                    <input class="tui-full-calendar-checkbox-square" type="checkbox" value="all" checked/>
+                                    <span></span>
+                                    <strong>View all</strong>
+                                </label>
+                            </div>
+                        </div>
                         <div id="calendarList" className="lnb-calendars-d1">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="right">
-                <div id="menu">
-                    <Dropdown>
-                        <Dropdown.Toggle id="dropdownMenu-calendarType" className="btn btn-default btn-sm dropdown-toggle">
-                            <i id="calendarTypeIcon" className="calendar-icon ic_view_month" style={{marginRight: "4px"}}></i>
-                            <span id="calendarTypeName">Dropdown</span>&nbsp;
-                            <i className="calendar-icon tui-full-calendar-dropdown-arrow"></i>
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu className="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-calendarType">
-                            <Dropdown.Item role="presentation">
-                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-daily">
-                            <i className="calendar-icon ic_view_day"></i>Daily
-                            </a>
-                            </Dropdown.Item>
-                            <Dropdown.Item role="presentation">
-                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-weekly">
-                            <i className="calendar-icon ic_view_week"></i>Weekly
-                            </a>
-                            </Dropdown.Item>
-                            <Dropdown.Item role="presentation">
-                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-monthly">
-                            <i className="calendar-icon ic_view_month"></i>Month
-                            </a>
-                            </Dropdown.Item>
+                <div id="right">
+                    <div id="menu">
+                        <Dropdown style={{display: 'none'}}>
+                            <Dropdown.Toggle id="dropdownMenu-calendarType" className="btn btn-default btn-sm dropdown-toggle">
+                                <i id="calendarTypeIcon" className="calendar-icon ic_view_month" style={{marginRight: "4px"}}></i>
+                                <span id="calendarTypeName">Dropdown</span>&nbsp;
+                                <i className="calendar-icon tui-full-calendar-dropdown-arrow"></i>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu className="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-calendarType">
+                                <Dropdown.Item role="presentation">
+                                <a className="dropdown-menu-title" role="menuitem" data-action="toggle-daily">
+                                <i className="calendar-icon ic_view_day"></i>Daily
+                                </a>
+                                </Dropdown.Item>
+                                <Dropdown.Item role="presentation">
+                                <a className="dropdown-menu-title" role="menuitem" data-action="toggle-weekly">
+                                <i className="calendar-icon ic_view_week"></i>Weekly
+                                </a>
+                                </Dropdown.Item>
+                                <Dropdown.Item role="presentation">
+                                <a className="dropdown-menu-title" role="menuitem" data-action="toggle-monthly">
+                                <i className="calendar-icon ic_view_month"></i>Month
+                                </a>
+                                </Dropdown.Item>
 
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <span id="menu-navi">
-                        <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
-                        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
-                            <i className="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
-                        </button>
-                        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
-                            <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
-                        </button>
-                    </span>
-                    <span id="renderRange" className="render-range"></span>
-                </div>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <span id="menu-navi">
+                            <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+                            <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
+                                <i className="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
+                            </button>
+                            <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
+                                <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
+                            </button>
+                        </span>
+                        <span id="renderRange" className="render-range"></span>
+                    </div>
                     <div>
                         <div id="calendar" ref={calendarRef}> </div>
                     </div>

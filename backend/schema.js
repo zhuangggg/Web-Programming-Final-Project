@@ -1,6 +1,6 @@
 const typeDefs = `
 type Query {
-    project(name: String!): Project!
+    project(id: String!): Project!
     user(data: userInput!): UserPayload!
 }
 
@@ -16,7 +16,7 @@ type Mutation {
 }
 
 type Subscription {
-    update_project(project_name: String!): projectSubscriptionPayload
+    update_project(id: String!): projectSubscriptionPayload
 }
 
 type Project {
@@ -95,24 +95,24 @@ input Item_ {
 }
 
 input projectEditInput {
-    name: String!
+    id: String!
     recentContent: String!
 }
 
 input eventInput {
-    project_name: String!
+    id: String!
     event_name: String!
     progress: String!
     time: timeInput!
 }
 
 input _eventInput {
-    project_name: String!
+    id: String!
     event_name: String!
 }
 
 input itemInput {
-    project_name: String!
+    id: String!
     event_name: String!
     item_name: String!
     progress: String!
@@ -121,13 +121,13 @@ input itemInput {
 }
 
 input _itemInput {
-    project_name: String!
+    id: String!
     event_name: String!
     item_name: String!
 }
 
 input addUserInput {
-    project_name: String!
+    id: String!
     event_name: String!
     item_name: String!
     username: String!

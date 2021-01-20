@@ -29,9 +29,10 @@ var c = 0;
 function Gantt(props) {
   const location = useLocation()
   const projectName = props.location.state.projectname
+  const projectId = props.location.state.projectid
   const name = props.location.state.username
   const password = props.location.state.password
-  const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {name: projectName}})
+  const { subscribeToMore, loading, data, refetch } = useQuery(PROJECT_QUERY, {variables: {id: projectId}})
   const [subscribe, setSubscribe] = useState(false)
   const [project, setProject] = useState("")
   const [count, setCount] = useState(0)
@@ -54,7 +55,7 @@ function Gantt(props) {
   const addEvent = ({variables})=>{
     const gqlbody = {
       event_name: variables.event_name,
-      project_name: variables.project_name,
+      id: variables.id,
       progress: "0%",
       start: defaultStart,
       end: defaultEnd
@@ -77,7 +78,7 @@ function Gantt(props) {
   const deleteEvent = ({variables})=>{
     const gqlbody = {
       event_name: variables.event_name,
-      project_name: variables.project_name,
+      id: variables.id,
     }
     let temp = project
     const index = temp.events.findIndex(event=>event.name===variables.event_name)
@@ -91,7 +92,7 @@ function Gantt(props) {
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,
-      project_name: variables.project_name,
+      id: variables.id,
       progress: defaultProgress,
       start: defaultStart,
       end: defaultEnd,
@@ -121,7 +122,7 @@ function Gantt(props) {
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,
-      project_name: variables.project_name,
+      id: variables.id,
     }
     let temp = project
     const event_index = temp.events.findIndex(event=>event.name===variables.event_name)
@@ -138,7 +139,7 @@ function Gantt(props) {
   const editProject = ({variables},render=true)=>{
     console.log(variables);
     const payload = {
-      name: variables.name,
+      id: variables.id,
       recentContent: JSON.stringify(variables)
     }
     setProject(variables)
