@@ -176,11 +176,20 @@ function Home(props){
                 <div>
                     {projects.length!==0? projects.map(((project, index)=> 
                             <div style={{display: (visible[index]?"flex":"none"),  flexDirection: "column" }}>
-                                <Analysis project={props.data.projects[index]} count={props.count} color={colors[projects[index].color]}/>
+                                <Analysis project={project} color={colors[projects[index].color]}/>
+
+                                {project.lastupdated? (
+                                <div>
+                                <p>Last update: </p>
+                                <p className="updateText">{project.lastupdated.message}</p>
+                                <p className="updateText">{' user: ' + project.lastupdated.username}</p>
+                                <p className="updateText">{' time: ' + project.lastupdated.updatetime.slice(0,10)}</p>
+                                </div>
+                                ):(<div></div>)}
                                 <NavLink to={{
                                         pathname:`/gantt/${project.id}`,
                                         state: {projectname: project.name, projectid:project.id, username: name, password: password}
-                                    }}><button className="project_btn" style={{background:colors[projects[index].color][2], width: "700px"}}><span>Gantt Chart</span></button></NavLink>
+                                    }}><button className="project_btn" style={{background:colors[projects[index].color][2], width: "400px"}}><span>Gantt Chart</span></button></NavLink>
                             </div>)):<div></div>}
                 </div>
                 
