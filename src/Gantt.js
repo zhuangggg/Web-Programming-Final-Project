@@ -120,11 +120,15 @@ function Gantt(props) {
     })
     let sum = 0;
     temp.events[index].items.map(item=>sum+=parseInt(item.progress.split('%')[0]))
-    temp.events[index].progress = `${Math.round(sum/temp.events[index].items.length)}%`
+    temp.events[index].progress = `${temp.events[index].items.length!==0?Math.round(sum/temp.events[index].items.length):0}%`
     setProject(temp)
     c+=1;
-    console.log(gqlbody)
+    console.log(`addItem ${temp}`)
     addItem_db({variables: gqlbody})
+    editProject({variables:{
+      project: temp,
+      message: `Add Item: ${temp.events[index].name}`
+    }})
   }
 
   const deleteItem = ({variables})=>{
