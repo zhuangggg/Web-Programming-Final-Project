@@ -266,7 +266,7 @@ p {
 }
 
 .back_btn {
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
     background: rgb(85, 85, 85);
@@ -274,6 +274,8 @@ p {
     color: #ffffff;
     transition: all 0.4s;
     cursor: pointer;
+    height: 50px;
+    width: 100px;
 }
 
   .back_btn span {
@@ -281,6 +283,7 @@ p {
     display: inline-block;
     position: relative;
     transition: 0.4s;
+    font-size: 30px;
   }
   .back_btn span:after {
     content: '\00bb';

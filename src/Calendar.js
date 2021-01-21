@@ -676,14 +676,29 @@ function GanttCalendar(props) {
             setEventListener();
             var calendarList = document.getElementById('calendarList');
             var html = [];
-            CalendarList.forEach(function(calendar) {
-                html.push('<div class="lnb-calendars-item"><label>' +
-                    '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
-                    '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
-                    '<span>' + calendar.name + '</span>' +
-                    '</label></div>'
-                );
-            });
+            var id = 0;
+            projects.forEach(p => {
+                if(p.events){
+                    html.push('<div style="font-weight: bold; font-size: 20px; margin-top: 10px;">' + p.name + '</div>')
+                    p.events.forEach(e => {
+                        html.push('<div class="lnb-calendars-item"><label>' +
+                            '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + CalendarList[id].id + '" checked>' +
+                            '<span style="border-color: ' + CalendarList[id].borderColor + '; background-color: ' + CalendarList[id].borderColor + ';"></span>' +
+                            '<span>' + CalendarList[id].name + '</span>' +
+                            '</label></div>'
+                        );
+                        id++;
+                    })
+                }
+            })
+            //CalendarList.forEach(function(calendar) {
+                // html.push('<div class="lnb-calendars-item"><label>' +
+                //     '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
+                //     '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
+                //     '<span>' + calendar.name + '</span>' +
+                //     '</label></div>'
+                // );
+            //});
             calendarList.innerHTML = html.join('\n');
         }
 
