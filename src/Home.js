@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState,useEffect } from 'react'
 import './home.css'
 import {CREATE_PROJECT_MUTATION, DELETE_PROJECT_MUTATION, EDIT_PROJECT_MUTATION} from './graphql'
 import { useQuery, useMutation } from '@apollo/react-hooks'
@@ -39,10 +39,22 @@ function Home(props){
     const [colorIndex,setColorIndex] = useState(0)
 
     const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
-
-    const name = props.data.userinfo.name
-    const password = props.data.userinfo.password
-    const id = props.data.userinfo.password
+    const [name,setName] = useState('');
+    const [password,setPassword] = useState("");
+    const [id,setId] = useState("");
+    // let name;
+    // let password;
+    // let id;
+    useEffect(() => {
+        console.log("hhhhhhhhhhh");
+        setName(props.data.userinfo.name)
+        setPassword(props.data.userinfo.password)
+        setId(props.data.userinfo.password)
+        //console.log(props.data.events);
+      },[props.data.userinfo])
+    // const name = props.data.userinfo.name
+    // const password = props.data.userinfo.password
+    // const id = props.data.userinfo.password
     const deleteProject = (project_id)=>{
         let temp = projects
         const index = temp.findIndex(project=>project.id===project_id)
@@ -132,13 +144,15 @@ function Home(props){
 
   const getDeadlineItem = (projects)=>{
       let deadline = []
-      projects.map((project,i)=>{
-          let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
-          console.log(deadline_items);
-          deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
-          console.log(deadline_items);
-            deadline[i] = deadline_items
-      })
+      if (projects.length!==0){
+        projects.map((project,i)=>{
+            if (project.events!==undefined){
+            let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
+            console.log(deadline_items);
+            deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
+            console.log(deadline_items);
+                deadline[i] = deadline_items
+        }})}
       console.log("deadlinnnnnnn");
     //   deadline.map(project=>project.map(event=>{
     //     event.map(item=>console.log(item))}));
