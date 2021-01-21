@@ -125,6 +125,7 @@ export const EDIT_PROJECT_MUTATION = gql`
             recentContent: $recentContent
             username: $username
             updatetime: $updatetime
+            message: $message
         })
     }
 `

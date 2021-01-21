@@ -21,7 +21,7 @@ type Subscription {
 type Project {
     id: String!
     name: String!
-    lastupdated: Lastupdated!
+    lastupdated: Lastupdated
     color: Int!
     usernames: [String]
     events: [Event]
@@ -82,6 +82,7 @@ input projectInput {
     username: String!
     updatetime: String!
     id: String!
+    name: String!
     color: Int!
     events: [Event_]
 }

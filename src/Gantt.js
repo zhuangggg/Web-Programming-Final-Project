@@ -53,13 +53,17 @@ function Gantt(props) {
   const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
 
   const addEvent = ({variables})=>{
+    const current_time = new Date()
     const gqlbody = {
       event_name: variables.event_name,
       id: variables.id,
       progress: "0%",
       start: defaultStart,
-      end: defaultEnd
+      end: defaultEnd,
+      username: name,
+      updatetime: current_time
     }
+
     let temp = project
     temp.events.push({
       name: variables.event_name,
@@ -76,9 +80,12 @@ function Gantt(props) {
   }  
   
   const deleteEvent = ({variables})=>{
+    const current_time = new Date()
     const gqlbody = {
       event_name: variables.event_name,
       id: variables.id,
+      username: name,
+      updatetime: current_time
     }
     let temp = project
     const index = temp.events.findIndex(event=>event.name===variables.event_name)
@@ -89,6 +96,7 @@ function Gantt(props) {
   }
 
   const addItem = ({variables})=>{
+    const current_time = new Date()
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,
@@ -96,7 +104,8 @@ function Gantt(props) {
       progress: defaultProgress,
       start: defaultStart,
       end: defaultEnd,
-      username: name
+      username: name,
+      updatetime: current_time
     }
     let temp = project
     const index = temp.events.findIndex(event=>event.name===variables.event_name)
@@ -119,10 +128,14 @@ function Gantt(props) {
   }
 
   const deleteItem = ({variables})=>{
+    const current_time = new Date()
+
     const gqlbody = {
       item_name: variables.item_name,
       event_name: variables.event_name,
       id: variables.id,
+      username: name,
+      updatetime: current_time
     }
     let temp = project
     const event_index = temp.events.findIndex(event=>event.name===variables.event_name)
@@ -138,11 +151,16 @@ function Gantt(props) {
 
   const editProject = ({variables},render=true)=>{
     console.log(variables);
+    const current_time = new Date()
+
     const payload = {
-      id: variables.id,
-      recentContent: JSON.stringify(variables)
+      id: variables.project.id,
+      recentContent: JSON.stringify(variables.project),
+      username: name,
+      updatetime: current_time,
+      message: variables.message
     }
-    setProject(variables)
+    setProject(variables.project)
     if (render === true) c+=1
     editProject_db({variables: payload})
   }
@@ -151,7 +169,10 @@ function Gantt(props) {
     const index = project.events.findIndex((event)=>event.name===variables.event_name)
     const temp = project
     temp.events[index] = variables.newEvent
-    editProject({variables: temp})
+    editProject({variables: {
+      project: temp,
+      message: `Edit event: ${variables.newEvent.name}`
+    }})
     setProject(temp)
   }
 
@@ -167,7 +188,10 @@ function Gantt(props) {
     const newUserNames = [...new Set([...temp.usernames, ...temp.events[event_index].items[item_index].usernames])]
     temp.usernames = newUserNames
     console.log(temp);
-    editProject({variables: temp})
+    editProject({variables: {
+      project: temp,
+      message: `Edit item: ${variables.newItem.name}`
+    }})
     setProject(temp)
   }
   

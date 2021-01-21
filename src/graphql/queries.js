@@ -6,6 +6,11 @@ export const PROJECT_QUERY = gql`
     ){
         project(id: $id){
             name
+            lastupdated{
+                username
+                updatetime
+                message
+            }
             id
             color
             usernames
@@ -48,6 +53,11 @@ export const USER_QUERY = gql`
             }
             check
             projects{
+                lastupdated{
+                    username
+                    updatetime
+                    message
+                }
                 name
                 color
                 id

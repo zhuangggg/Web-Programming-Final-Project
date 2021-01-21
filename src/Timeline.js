@@ -35,7 +35,7 @@ function Timeline(props) {
               end: end,
               name: event.name,
               id: "Event " + i,
-              progress: Math.round(sum/event.items.length),
+              progress: event.items.length !==0?Math.round(sum/event.items.length):0,
               custom_class: `event_${i%5}`
             }
         items.unshift(task);
@@ -88,37 +88,54 @@ function Timeline(props) {
   };
 
   const handleDateChange = (task,start,end)=>{
-    var payload = props.data;
+    var project = props.data;
     var taskId = task.id.split(" ");
     switch (taskId[0]){
       case 'Event':
-        payload.events[taskId[1]].time.start = `${start.getFullYear()}/${start.getMonth()+1}/${start.getDate()}`;
-        payload.events[taskId[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
+        project.events[taskId[1]].time.start = `${start.getFullYear()}/${start.getMonth()+1}/${start.getDate()}`;
+        project.events[taskId[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
+        props.editProject({variables:{
+          project: project,
+          message: `Edit event: ${project.events[taskId[1]].name}`
+        }},false)
         break;
       case 'Item':
-        payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.start = `${start.getFullYear()}/${start.getMonth()+1}/${start.getDate()}`;
-        payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
+        project.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.start = `${start.getFullYear()}/${start.getMonth()+1}/${start.getDate()}`;
+        project.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].time.end = `${end.getFullYear()}/${end.getMonth()+1}/${end.getDate()}`;
+        props.editProject({variables:{
+          project: project,
+          message: `Edit item: ${project.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].name}`
+        }},false)
         break;
     }
-    props.editProject({variables:payload},false)
+
   }
 
   const handleProgressChange = (task,progress)=>{
-    var payload = props.data;
+    var project = props.data;
     var taskId = task.id.split(" ");
     let sum = 0;
     switch (taskId[0]){
       case 'Event':
-        payload.events[taskId[1]].progress = `${progress}%`;
+        project.events[taskId[1]].progress = `${progress}%`;
+        props.editProject({variables:{
+          project: project,
+          message: `Edit event: ${project.events[taskId[1]].name}`
+        }})
         break;
       case 'Item':
-        payload.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].progress = `${progress}%`;
-        payload.events[taskId[1].split('-')[0]].items.map(item=>{
+        project.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].progress = `${progress}%`;
+        project.events[taskId[1].split('-')[0]].items.map(item=>{
         sum+=parseInt(item.progress.split('%')[0])
       })
-        payload.events[taskId[1].split('-')[0]].progress = `${Math.round(sum/payload.events[taskId[1].split('-')[0]].items.length)}%`
-    }
-    props.editProject({variables:payload})
+        project.events[taskId[1].split('-')[0]].progress = `${Math.round(sum/project.events[taskId[1].split('-')[0]].items.length)}%`
+        props.editProject({variables:{
+          project: project,
+          message: `Edit item: ${project.events[taskId[1].split('-')[0]].items[taskId[1].split('-')[1]].name}`
+        }})
+        break;
+      }
+    
   }
 
     return (
