@@ -7,6 +7,7 @@ import { BrowserRouter,NavLink, Switch, Route, Redirect, useLocation } from "rea
 import userimg from './images/user.png'
 import {DeleteOutlined} from '@ant-design/icons'
 import {Modal, Select} from 'antd'
+import {EditOutlined} from '@ant-design/icons'
 import Analysis from './Analysis'
 
 const colors = [
@@ -159,7 +160,7 @@ function Home(props){
                     if(input.value!="" && key==13) {
                         addProject(input.value)
                         input.value = ""}}}/>
-                    <button onClick={cleanMode} className="clearproject">Edit Projects</button>
+                        <div className="edit" onClick={cleanMode}><EditOutlined/></div>
                 </div>  
                 <div>
                     {projects.length!==0? projects.map(((project, index)=> 

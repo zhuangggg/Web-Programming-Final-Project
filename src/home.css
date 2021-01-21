@@ -92,7 +92,13 @@
     margin-bottom: 10px;
     color: black;
     margin-left: 15px;
+    margin-top: 13px;
     outline: none;
+    line-height: 20px;
+    font-size: 20px;
+}
+.add_project::placeholder {
+    font-size: 20px;
 }
 
 .add_project:focus::placeholder {
