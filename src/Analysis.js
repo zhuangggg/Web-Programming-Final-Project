@@ -1,27 +1,33 @@
 import React, { Component, useState, useEffect } from 'react'
 import { Progress } from 'antd';
 import { Pie } from '@ant-design/charts' ;     
-
+import Piechart from './Piechart'
+import './analysis.css'
 
 function Analysis(props) {
     const [ave, setAve] = useState(0)
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState(0)
+    const [value, setValue] = useState([])
     let add = 0
     let temp = []
     let data = []
     let userNames = props.project.usernames
     const events = props.project.events
     console.log(events);
-    for(let i=0;i<events.length;i++){
-        add += parseInt(events[i].progress)
-        for(let j=0;j<events[i].items.length;j++){
-            temp = [...temp, events[i].items[j]]
+    
+    if(events){
+        for(let i=0;i<events.length;i++){
+            add += parseInt(events[i].progress)
+            for(let j=0;j<events[i].items.length;j++){
+                temp = [...temp, events[i].items[j]]
+            }
         }
     }
+    
 
     console.log(userNames)
 
-    if(!count){
+    if(!count && events){
         for(let i=0;i<userNames.length;i++){
             for(let j=0;j<temp.length;j++){
                 temp[j].progress = parseInt(temp[j].progress)
@@ -36,55 +42,20 @@ function Analysis(props) {
                 }
             }
         }
+        setValue(data)
         setCount(1)
     }
-
-    let config = { 
-        data ,
-        meta : { 
-          x : { 
-            alias : '國家' , 
-            range : [ 0 , 1 ] ,  
-          } ,
-          y : { 
-            alias : '數量' , 
-            formatter : ( v ) => {   
-              return ` ${ v }個` ; 
-            } ,
-          } ,
-        } ,
-        angleField : 'x' , 
-        colorField : 'y' , 
-      } ;
-    
-    /*let config = { 
-        data ,
-        angleField : 'x', 
-        colorField : 'y', 
-      }*/
     console.log(data);
 
-    const pie_style = {
-    }
-      const pie_color = {
-        color: props.color
-      }
-
-    useEffect(() => {
-        setAve(add/events.length)
-    }, [add]);
-
-    console.log(temp);
-
     return (
-        <>
+        <div className="content">
             <Progress
-                type="circle"
-                strokeColor={props.color}
-                percent={ave}
+                width={150}
+                strokeColor={props.color[2]}
+                percent={events? add/events.length:0}
             />
-            {count?< Pie {...config} />:<div></div>}
-        </>
+            {count?  < Piechart data={value} color={props.color}/>:<div></div>}
+        </div>
     )
 } 
 

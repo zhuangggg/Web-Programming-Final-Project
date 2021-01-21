@@ -6,6 +6,7 @@ export const CREATE_PROJECT_MUTATION = gql`
         $id: String!
         $username: String!
         $color: Int!
+        $updatetime: String!
     ){
         createProject(
             data: {
@@ -13,6 +14,7 @@ export const CREATE_PROJECT_MUTATION = gql`
                 id: $id
                 username: $username
                 color: $color
+                updatetime: $updatetime
             }
         )
     }
@@ -25,11 +27,16 @@ export const CREATE_EVENT_MUTATION = gql`
         $progress: String!
         $start: String!
         $end: String!
+        $username: String!
+        $updatetime: String!
+
     ){
         createEvent(data: {
             id: $id
             event_name: $event_name
             progress: $progress
+            updatetime: $updatetime
+            username: $username
             time:{
                 start: $start
                 end: $end
@@ -47,6 +54,7 @@ export const CREATE_ITEM_MUTATION = gql`
         $start: String!
         $end: String!
         $username: String!
+        $updatetime: String!
     ){
         createItem(data: {
             id: $id
@@ -54,6 +62,8 @@ export const CREATE_ITEM_MUTATION = gql`
             item_name: $item_name
             progress: $progress
             username: $username
+            updatetime: $updatetime
+
             time:{
                 start: $start
                 end: $end
@@ -66,17 +76,23 @@ export const DELETE_PROJECT_MUTATION = gql`
     mutation deleteProject(
         $name: String!
     ){
-        deleteProject(name: $name)
+        deleteProject(data:{
+            name: $name
+        })
     }
 `
 export const DELETE_EVENT_MUTATION = gql`
     mutation deleteEvent(
         $id: String!
         $event_name: String!
+        $username: String!
+        $updatetime: String!
     ){
         deleteEvent(data: {
             id: $id
             event_name: $event_name
+            username: $username
+            updatetime: $updatetime
         })
     }
 `
@@ -85,11 +101,15 @@ export const DELETE_ITEM_MUTATION = gql`
         $id: String!
         $event_name: String!
         $item_name: String!
+        $username: String!
+        $updatetime: String!
     ){
         deleteItem(data: {
             id: $id
             event_name: $event_name
             item_name: $item_name
+            username: $username
+            updatetime: $updatetime
         })
     }
 `
@@ -98,10 +118,15 @@ export const EDIT_PROJECT_MUTATION = gql`
     mutation editProject(
         $id: String!
         $recentContent: String!
+        $username: String!
+        $updatetime: String!
+        $message: String!
     ){
         editProject(data: {
             id: $id
             recentContent: $recentContent
+            username: $username
+            updatetime: $updatetime
         })
     }
 `

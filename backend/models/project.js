@@ -6,6 +6,11 @@ const ProjectSchema = new Schema({
     color: Number,
     id: String,
     usernames: [String],
+    lastupdated: {
+        username: String,
+        updatetime: String,
+        message: String,
+    },
     events: [{
         name: String,
         progress: String,

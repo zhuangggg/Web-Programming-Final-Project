@@ -13,7 +13,12 @@ const Mutation = {
         name: args.data.name,
         color: args.data.color,
         events: [],
-        usernames: [args.data.username]
+        usernames: [args.data.username],
+        lastupdated: {
+          username: args.data.username,
+          updatetime: arg.data.updatetime,
+          message: `created the project`
+        }
     }
     console.log('createProject');
 
@@ -34,7 +39,12 @@ const Mutation = {
         name: args.data.event_name,
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
-        items: []
+        items: [],
+        lastupdated: {
+          username: args.data.username,
+          updatetime: args.data.updatetime,
+          message: `create event: ${args.data.event_name}`
+        }
     }
     // pubsub.publish(`update_project ${args.data.event_name}`, {
     //   update_project: {
@@ -55,7 +65,12 @@ const Mutation = {
         name: args.data.item_name,
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
-        usernames: [args.data.username]
+        usernames: [args.data.username],
+        lastupdated: {
+          username: args.data.username,
+          updatetime: args.data.updatetime,
+          message: `create item: ${args.data.item_name}`
+        }
       }
     // pubsub.publish(`update_project ${args.data.item_name}`, {
     //   update_project: {
@@ -90,6 +105,11 @@ const Mutation = {
     await Project.findOne({id: args.data.id}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events.splice(index,1)
+        doc.lastupdated = {
+          username: args.data.username,
+          updatetime: args.data.updatetime,
+          message: `delete event: ${args.data.event_name}`
+        }
         doc.save()
     })
     return `delete event ${args.data.event_name} successfully!`
@@ -105,6 +125,11 @@ const Mutation = {
     await Project.findOne({id: args.data.id}, function(err, doc){
         const eventIndex = doc.events.findIndex((event)=>event.name===args.data.event_name)
         const itemIndex = doc.events[eventIndex].items.findIndex((item)=>item.name===args.data.item_name)
+        doc.lastupdated = {
+          username: args.data.username,
+          updatetime: args.data.updatetime,
+          message: `delete item: ${args.data.item_name}`
+        }
         doc.events[eventIndex].items.splice(itemIndex,1)
         doc.save()
     })
@@ -130,21 +155,14 @@ const Mutation = {
       doc.events = data.events
       doc.color = data.color
       doc.usernames = data.usernames
+      doc.lastupdated = {
+        username: args.data.username,
+        updatetime: args.data.updatetime,
+        message: args.data.message
+      }
       doc.save()
   })
     return `edit project ${args.data.name} successfully!`
-
-  },
-
-  async addUserNameForItem(parent, args, { pubsub }, info) {
-    const event_index = project.events.findIndex((event)=>event.name===args.data.event_name)
-    const item_index = project.events[event_index].items.findIndex((item)=>item.name===args.data.item_name)
-    await Project.findOne({id: args.data.id}, function(err,doc){
-      const temp = doc.events[event_index].items[item_index].usernames
-      temp.push(args.data.username)
-      doc.events[event_index].items[item_index].usernames = temp
-      doc.save()
-    })
 
   }
 }

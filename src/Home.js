@@ -20,7 +20,7 @@ const colors = [
 function Home(props){
     console.log(props)
     const [projects, setProjects] = useState(props.data.projects)
-
+    const [visible, setVisible] = useState([false])
     const [addProject_db] = useMutation(CREATE_PROJECT_MUTATION)
     const [deleteProject_db] = useMutation(DELETE_PROJECT_MUTATION)
     const [count, setCount] = useState(0)
@@ -81,7 +81,7 @@ function Home(props){
   
   const editProject = ({variables})=>{
     const payload = {
-      name: variables.name,
+      id: variables.id,
       recentContent: JSON.stringify(variables)
     }
     editProject_db({variables: payload})
@@ -105,6 +105,14 @@ function Home(props){
       }
   }
 
+  const handleVisible = (index) => {
+      let temp = visible
+      temp = [false]
+      temp[index] = true
+      setVisible(temp)
+      setCount(count+1)
+  }
+
     return (
         <div className="home">
             <div className="left">
@@ -125,32 +133,44 @@ function Home(props){
                 </div>
             </div>
             <div className="right">
-                {projects.length!==0? projects.map(((project, index)=>
-                <div style={{flexDirection: "column"}}>
-                    <div className="project">
-                        {clean?
-                            <div className="project">
-                                <button className="project_btn_edit" onClick={()=>showModal(index)} style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>
-                                <div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>
-                            </div>:
-                            <NavLink to={{
-                                pathname:`/gantt/${project.id}`,
-                                state: {projectname: project.name, projectid:project.id, username: name, password: password}
-                            }}><button className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button></NavLink>}
+                <div className="projects">
+                    {projects.length!==0? projects.map(((project, index)=>
+                    <div style={{flexDirection: "column"}}>
+                        <div className="project">
+                            {clean?
+                                <div className="project">
+                                    <div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>
+                                    <button className="project_btn_edit" onClick={()=>showModal(index)} style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>
+                                </div>:
+                                <button onClick={()=>handleVisible(index)}className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>}
+                        </div>
                     </div>
-                </div>
-                )):<p>no projects</p>
+                    )):<p>No projects</p>
                 }
-                <input  className="add_project"
-                id={props.eventIndex} 
-                placeholder="+ Add Project ..." 
-                onKeyUp={(e)=>{  
-                let key = window.event ? e.keyCode : e.which
-                let input = document.getElementsByClassName("add_project")[0]
-                if(input.value!="" && key==13) {
-                    addProject(input.value)
-                    input.value = ""}}}/>
-                <button onClick={cleanMode} className="clearproject">Edit Projects</button>
+                </div>
+                <div style={{display: "flex", flexDirection: "row"}}>
+                    <input  className="add_project"
+                    id={props.eventIndex} 
+                    placeholder="+ Add Project ..." 
+                    onKeyUp={(e)=>{  
+                    let key = window.event ? e.keyCode : e.which
+                    let input = document.getElementsByClassName("add_project")[0]
+                    if(input.value!="" && key==13) {
+                        addProject(input.value)
+                        input.value = ""}}}/>
+                    <button onClick={cleanMode} className="clearproject">Edit Projects</button>
+                </div>  
+                <div>
+                    {projects.length!==0? projects.map(((project, index)=> 
+                            <div style={{display: (visible[index]?"flex":"none"),  flexDirection: "column" }}>
+                                <Analysis project={project} color={colors[projects[index].color]}/>
+                                <NavLink to={{
+                                        pathname:`/gantt/${project.id}`,
+                                        state: {projectname: project.name, projectid:project.id, username: name, password: password}
+                                    }}><button className="project_btn" style={{background:colors[projects[index].color][2], width: "700px"}}><span>Gantt Chart</span></button></NavLink>
+                            </div>)):<div></div>}
+                </div>
+                
             </div>
             {projects.length?<Modal
                 title="Edit Project"
@@ -172,3 +192,7 @@ function Home(props){
 export default Home
 
 // <Analysis project={project} color={colors[projects[index].color][2]}/>
+//<NavLink to={{
+//    pathname:`/gantt/${project.id}`,
+//    state: {projectname: project.name, projectid:project.id, username: name, password: password}
+//}}>
