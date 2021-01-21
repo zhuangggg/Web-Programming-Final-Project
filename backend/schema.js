@@ -21,7 +21,7 @@ type Subscription {
 type Project {
     id: String!
     name: String!
-    lastupdated: Lastupdated!
+    lastupdated: Lastupdated
     color: Int!
     usernames: [String]
     events: [Event]
