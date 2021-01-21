@@ -9,6 +9,7 @@ import {DeleteOutlined} from '@ant-design/icons'
 import {Modal, Select} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
 import Analysis from './Analysis'
+import logoutbtn from './images/logout.png'
 
 const colors = [
     ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"],
@@ -131,7 +132,10 @@ function Home(props){
                         }
                     }}>
                     <div className="example_f"><span>Calendar</span></div></NavLink>
-                    <NavLink to={{pathname: `/`}}>log out</NavLink>
+                    <NavLink to={{pathname: `/`}} style={{color: "gray", display:'flex', flexDirection:'row', width:'120px', paddingTop: '20px'}}>
+                        <img src={logoutbtn} style={{width:'30px', height: '30px', opacity: '0.5'}}/>
+                        <p style={{paddingLeft:'10px'}}>log out</p>
+                    </NavLink>
                 </div>
             </div>
             <div className="right">
