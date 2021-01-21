@@ -53,7 +53,7 @@ function Home(props){
             id: newid,
             color: 0,
             username: name,
-            updatetime: current_time
+            updatetime: current_time,
         }
         const temp = projects
         temp.push(newProject)
@@ -85,9 +85,14 @@ function Home(props){
   };
   
   const editProject = ({variables})=>{
+    const current_time = new Date()
     const payload = {
       id: variables.id,
-      recentContent: JSON.stringify(variables)
+      recentContent: JSON.stringify(variables),
+      message: `Edit the Project`,
+      username: name,
+      updatetime: current_time
+
     }
     editProject_db({variables: payload})
   }
@@ -147,7 +152,7 @@ function Home(props){
                         <div className="project">
                             {clean?
                                 <div className="project">
-                                    <div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>
+                                    <div className="x" onClick={()=>deleteProject(project.id)}><DeleteOutlined/></div>
                                     <button className="project_btn_edit" onClick={()=>showModal(index)} style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>
                                 </div>:
                                 <button onClick={()=>handleVisible(index)}className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>}
