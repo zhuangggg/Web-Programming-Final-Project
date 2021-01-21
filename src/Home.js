@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState,useEffect } from 'react'
 import './home.css'
 import {CREATE_PROJECT_MUTATION, DELETE_PROJECT_MUTATION, EDIT_PROJECT_MUTATION} from './graphql'
 import { useQuery, useMutation } from '@apollo/react-hooks'
@@ -11,7 +11,8 @@ import {EditOutlined} from '@ant-design/icons'
 import Analysis from './Analysis'
 import logoutbtn from './images/logout.png'
 import {UserOutlined} from '@ant-design/icons'
-import {ClockCircleOutlined} from '@ant-design/icons'
+import {ClockCircleOutlined,CalendarOutlined} from '@ant-design/icons'
+import calendarImg from './images/calendar.jpg'
 
 const colors = [
     ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"],
@@ -38,10 +39,22 @@ function Home(props){
     const [colorIndex,setColorIndex] = useState(0)
 
     const [editProject_db] = useMutation(EDIT_PROJECT_MUTATION)
-
-    const name = props.data.userinfo.name
-    const password = props.data.userinfo.password
-    const id = props.data.userinfo.password
+    const [name,setName] = useState('');
+    const [password,setPassword] = useState("");
+    const [id,setId] = useState("");
+    // let name;
+    // let password;
+    // let id;
+    useEffect(() => {
+        console.log("hhhhhhhhhhh");
+        setName(props.data.userinfo.name)
+        setPassword(props.data.userinfo.password)
+        setId(props.data.userinfo.password)
+        //console.log(props.data.events);
+      },[props.data.userinfo])
+    // const name = props.data.userinfo.name
+    // const password = props.data.userinfo.password
+    // const id = props.data.userinfo.password
     const deleteProject = (project_id)=>{
         let temp = projects
         const index = temp.findIndex(project=>project.id===project_id)
@@ -131,13 +144,15 @@ function Home(props){
 
   const getDeadlineItem = (projects)=>{
       let deadline = []
-      projects.map((project,i)=>{
-          let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
-          console.log(deadline_items);
-          deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
-          console.log(deadline_items);
-            deadline[i] = deadline_items
-      })
+      if (projects.length!==0){
+        projects.map((project,i)=>{
+            if (project.events!==undefined){
+            let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
+            console.log(deadline_items);
+            deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
+            console.log(deadline_items);
+                deadline[i] = deadline_items
+        }})}
       console.log("deadlinnnnnnn");
     //   deadline.map(project=>project.map(event=>{
     //     event.map(item=>console.log(item))}));
@@ -162,8 +177,8 @@ function Home(props){
                             projects: props.data.projects,
                             projectsColors: colors
                         }
-                    }}>
-                    <div className="example_f"><span>Calendar</span></div></NavLink>
+                    }} style={{color: "black", "text-decoration": "none"}}>
+                    <div className="calendar_btn"><img src={calendarImg} style={{width: "150px"}}/><span style={{color: "black !important"}}>{"Calendar >>"}</span></div></NavLink>
                     <div className="deadline" style={{margin:"20px"}}>
                         <h5>Deadline: </h5>
                         {getDeadlineItem(props.data.projects).map((events,i)=>events.map(event=><div>{projects[i].name}-{event.name}-{event.time.end}</div>))}
