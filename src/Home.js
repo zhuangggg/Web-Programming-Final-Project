@@ -11,7 +11,8 @@ import {EditOutlined} from '@ant-design/icons'
 import Analysis from './Analysis'
 import logoutbtn from './images/logout.png'
 import {UserOutlined} from '@ant-design/icons'
-import {ClockCircleOutlined} from '@ant-design/icons'
+import {ClockCircleOutlined,CalendarOutlined} from '@ant-design/icons'
+import calendarImg from './images/calendar.jpg'
 
 const colors = [
     ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"],
@@ -162,8 +163,8 @@ function Home(props){
                             projects: props.data.projects,
                             projectsColors: colors
                         }
-                    }}>
-                    <div className="example_f"><span>Calendar</span></div></NavLink>
+                    }} style={{color: "black", "text-decoration": "none"}}>
+                    <div className="calendar_btn"><img src={calendarImg} style={{width: "150px"}}/><span style={{color: "black !important"}}>Calendar >></span></div></NavLink>
                     <div className="deadline" style={{margin:"20px"}}>
                         <h5>Deadline: </h5>
                         {getDeadlineItem(props.data.projects).map((events,i)=>events.map(event=><div>{projects[i].name}-{event.name}-{event.time.end}</div>))}

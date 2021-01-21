@@ -180,3 +180,20 @@
   .updateText {
     font-size: 20px;
   }
+
+  .calendar_btn {
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    opacity: 0.5;
+    color: black !important;
+
+  }
+
+  .calendar_btn:hover {
+    opacity: 1;
+    transform: 0.4s;
+
+  }
+
