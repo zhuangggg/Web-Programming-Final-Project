@@ -147,15 +147,16 @@ function Home(props){
 
   const getDeadlineItem = (projects)=>{
       let deadline = []
-      if (projects.length!==0){
-        projects.map((project,i)=>{
-            if (project.events!==undefined){
-            let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
-            // console.log(deadline_items);
-            deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
-            // console.log(deadline_items);
-                deadline[i] = deadline_items
-        }})}
+      if (projects !== null){
+        if (projects.length!==0){
+            projects.map((project,i)=>{
+                if (project.events!==undefined){
+                let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
+                // console.log(deadline_items);
+                deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
+                // console.log(deadline_items);
+                    deadline[i] = deadline_items
+            }})}
     //   console.log("deadlinnnnnnn");
     //   deadline.map(project=>project.map(event=>{
     //     event.map(item=>console.log(item))}));
@@ -164,7 +165,7 @@ function Home(props){
     // console.log("deadlinnnnnnn");
     // console.log(deadline);
       return deadline
-  }
+  }}
 
     return (
         <div className="home">
