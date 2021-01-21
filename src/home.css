@@ -4,27 +4,28 @@
 .home { 
     display: flex;
     flex-direction: row;
-
+    align-items: center;
     background: #fff;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     font-size: 20px;
+    width: 80%;
 }
 
 .left {
     text-align: center;
-    width: 350px;   
-    top: 50%;
-    left: 50%;
+    width: 35%;
+    margin-left: 10%;
 }
 
 .right {
     display: flex;
     flex-direction: column;
     font-size: 30px;
-    width: 800px;
+    width: 65%;
+    margin: 5% 0;
 }
 
 .title{

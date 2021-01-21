@@ -164,7 +164,7 @@ function Home(props){
                         }
                     }}>
                     <div className="example_f"><span>Calendar</span></div></NavLink>
-                    <div className="deadline">
+                    <div className="deadline" style={{margin:"20px"}}>
                         <h5>Deadline: </h5>
                         {getDeadlineItem(props.data.projects).map((events,i)=>events.map(event=><div>{projects[i].name}-{event.name}-{event.time.end}</div>))}
                     {/* <p>{getDeadlineItem(props.data.projects)[0][0]}</p> */}
@@ -206,7 +206,7 @@ function Home(props){
                 </div>  
                 <div>
                     {projects.length!==0? projects.map(((project, index)=> 
-                            <div style={{visibility: (visible[index]?"visible":"hidden"),  flexDirection: "column" }}>
+                            <div style={{display: (visible[index]?"flex":"none"),  flexDirection: "column" }}>
                                 <Analysis project={project} color={colors[projects[index].color]}/>
 
                                 {project.lastupdated? (
