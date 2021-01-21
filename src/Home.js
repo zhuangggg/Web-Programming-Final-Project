@@ -178,7 +178,7 @@ function Home(props){
                             projectsColors: colors
                         }
                     }} style={{color: "black", "text-decoration": "none"}}>
-                    <div className="calendar_btn"><img src={calendarImg} style={{width: "150px"}}/><span style={{color: "black !important"}}>Calendar >></span></div></NavLink>
+                    <div className="calendar_btn"><img src={calendarImg} style={{width: "150px"}}/><span style={{color: "black !important"}}>{"Calendar >>"}</span></div></NavLink>
                     <div className="deadline" style={{margin:"20px"}}>
                         <h5>Deadline: </h5>
                         {getDeadlineItem(props.data.projects).map((events,i)=>events.map(event=><div>{projects[i].name}-{event.name}-{event.time.end}</div>))}
