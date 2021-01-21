@@ -22,6 +22,7 @@ import "./css/icons.css"
 import "tui-calendar/dist/tui-calendar.js"
 //import {CalendarList, findCalendar, ScheduleList, generateSchedule} from './js/data/event.js'
 import imgbi from './images/img-bi.png'
+import userimg from './images/user.png'
 import Chance from 'chance'
 //import { useQuery, useMutation } from '@apollo/react-hooks'
 //import {USER_QUERY, PROJECT_QUERY} from './graphql'
@@ -702,6 +703,10 @@ function GanttCalendar(props) {
                 </div>
                 <div id="lnb">
                     <div id="lnb-calendars" className="lnb-calendars">
+                        <div style={{display: "flex", flexDirection: "row", padding: '5px'}}>
+                            <img className="userimg" src={userimg} style={{height: '50px', width: '50px'}}/>
+                            <div className="usernametitle" style={{fontSize: '25px', margin: 'auto'}}>{name}</div>
+                        </div>
                         <div>
                             <div class="lnb-calendars-item">
                                 <label>
