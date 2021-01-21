@@ -15,14 +15,16 @@ function Piechart(props) {
             type: 'inner',
             offset: '-30%',
             content: function content(_ref) {
+                var name = _ref.x
               var percent = _ref.percent;
-              return ''.concat(Math.round(percent * 100), '%');
+              return `${name} ${''.concat(Math.round(percent * 100), '%')}`;
             },
             style: {
               fontSize: 14,
               textAlign: 'center',
             },
           },
+        legend: false,
       } ;
 
     const pie_style = {
@@ -31,7 +33,7 @@ function Piechart(props) {
         height: 250,
     }
     return(
-        < Pie { ... config } style={pie_style} colors={['#003322', '#004422', '#005522', '#006622', '#007722', '#008822' ]} />
+        < Pie { ... config } style={pie_style} />
     )
 }
 

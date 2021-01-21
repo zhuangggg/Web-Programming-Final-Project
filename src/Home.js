@@ -176,7 +176,7 @@ function Home(props){
                 <div>
                     {projects.length!==0? projects.map(((project, index)=> 
                             <div style={{display: (visible[index]?"flex":"none"),  flexDirection: "column" }}>
-                                <Analysis project={project} color={colors[projects[index].color]}/>
+                                <Analysis project={props.data.projects[index]} count={props.count} color={colors[projects[index].color]}/>
                                 <NavLink to={{
                                         pathname:`/gantt/${project.id}`,
                                         state: {projectname: project.name, projectid:project.id, username: name, password: password}
