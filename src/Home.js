@@ -134,7 +134,6 @@ function Home(props){
                 </div>
             </div>
             <div className="right">
-<<<<<<< HEAD
                 <div className="projects">
                     {projects.length!==0? projects.map(((project, index)=>
                     <div style={{flexDirection: "column"}}>
@@ -146,20 +145,6 @@ function Home(props){
                                 </div>:
                                 <button onClick={()=>handleVisible(index)}className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>}
                         </div>
-=======
-                {projects.length!==0? projects.map(((project, index)=>
-                <div style={{flexDirection: "column"}}>
-                    <div className="project">
-                        {clean?
-                            <div className="project">
-                                <button className="project_btn_edit" onClick={()=>showModal(index)} style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>
-                                <div className="x" onClick={()=>deleteProject(project.id)}><DeleteOutlined/></div>
-                            </div>:
-                            <NavLink to={{
-                                pathname:`/gantt/${project.id}`,
-                                state: {projectname: project.name, projectid:project.id, username: name, password: password}
-                            }}><button className="project_btn" style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button></NavLink>}
->>>>>>> db4c44e22fcfc38defbf951a6daf347fee3700b4
                     </div>
                     )):<p>No projects</p>
                 }
