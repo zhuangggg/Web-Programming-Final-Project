@@ -16,7 +16,7 @@ const Mutation = {
         usernames: [args.data.username],
         lastupdated: {
           username: args.data.username,
-          updatetime: arg.data.updatetime,
+          updatetime: args.data.updatetime,
           message: `created the project`
         }
     }
@@ -40,11 +40,13 @@ const Mutation = {
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
         items: [],
-        lastupdated: {
-          username: args.data.username,
-          updatetime: args.data.updatetime,
-          message: `create event: ${args.data.event_name}`
-        }
+        
+    }
+
+    const last = {
+      username: args.data.username,
+      updatetime: args.data.updatetime,
+      message: `create event: ${args.data.event_name}`
     }
     // pubsub.publish(`update_project ${args.data.event_name}`, {
     //   update_project: {
@@ -53,6 +55,7 @@ const Mutation = {
     // })
     await Project.findOne({id: args.data.id}, function(err, doc){
         doc.events = [...doc.events, newEvent]
+        doc.lastupdated = last
         doc.save()
     })
     return `add event ${args.data.event_name} successfully!`
@@ -66,12 +69,12 @@ const Mutation = {
         progress: args.data.progress,
         time: {start: args.data.time.start, end: args.data.time.end},
         usernames: [args.data.username],
-        lastupdated: {
-          username: args.data.username,
-          updatetime: args.data.updatetime,
-          message: `create item: ${args.data.item_name}`
-        }
       }
+    const last = {
+      username: args.data.username,
+      updatetime: args.data.updatetime,
+      message: `create item: ${args.data.item_name}`
+    }
     // pubsub.publish(`update_project ${args.data.item_name}`, {
     //   update_project: {
     //       mutation: 'CREATED'
@@ -80,6 +83,7 @@ const Mutation = {
     await Project.findOne({id: args.data.id}, function(err, doc){
         const index = doc.events.findIndex((event)=>event.name===args.data.event_name)
         doc.events[index].items = [...doc.events[index].items, newItem]
+        doc.lastupdated = last
         doc.save()
     })
     return `add item ${args.data.item_name} successfully!`

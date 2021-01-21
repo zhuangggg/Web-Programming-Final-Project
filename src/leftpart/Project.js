@@ -6,7 +6,7 @@ import {EditOutlined} from '@ant-design/icons'
 
 function Project (props) {
   const [edit, setEdit] = useState(false)
-  console.log(props.project);
+  console.log(props.project.lastupdated);
   const editMode = ()=>{
     setEdit(!edit)
   }

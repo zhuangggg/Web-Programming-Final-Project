@@ -82,6 +82,7 @@ input projectInput {
     username: String!
     updatetime: String!
     id: String!
+    name: String!
     color: Int!
     events: [Event_]
 }

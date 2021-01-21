@@ -45,11 +45,13 @@ function Home(props){
     }
     const addProject = (project_name)=>{
         const newid = uuidv4()
+        const current_time = new Date()
         const newProject = {
             name: project_name,
             id: newid,
             color: 0,
-            username: name
+            username: name,
+            updatetime: current_time
         }
         const temp = projects
         temp.push(newProject)
