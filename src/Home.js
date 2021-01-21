@@ -34,13 +34,14 @@ function Home(props){
     const name = props.data.userinfo.name
     const password = props.data.userinfo.password
     const id = props.data.userinfo.password
-    const deleteProject = (project_name)=>{
+    const deleteProject = (project_id)=>{
         let temp = projects
-        const index = temp.findIndex(project=>project.name===project_name)
+        const index = temp.findIndex(project=>project.id===project_id)
+        console.log(index);
         temp.splice(index, 1)
         setProjects(temp)
         setCount(count+1)
-        deleteProject_db({variables: {name: project_name}})
+        deleteProject_db({variables: {id: project_id}})
     }
     const addProject = (project_name)=>{
         const newid = uuidv4()
@@ -81,7 +82,7 @@ function Home(props){
   
   const editProject = ({variables})=>{
     const payload = {
-      name: variables.name,
+      id: variables.id,
       recentContent: JSON.stringify(variables)
     }
     editProject_db({variables: payload})
@@ -131,7 +132,7 @@ function Home(props){
                         {clean?
                             <div className="project">
                                 <button className="project_btn_edit" onClick={()=>showModal(index)} style={{background:colors[projects[index].color][2]}}><span>{project.name}</span></button>
-                                <div className="x" onClick={()=>deleteProject(project.name)}><DeleteOutlined/></div>
+                                <div className="x" onClick={()=>deleteProject(project.id)}><DeleteOutlined/></div>
                             </div>:
                             <NavLink to={{
                                 pathname:`/gantt/${project.id}`,
