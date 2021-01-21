@@ -49,6 +49,7 @@
     transition: all 0.4s;
     cursor: pointer;
     margin: 5px;
+    transition: 0.4s;
   }
   .project_btn span {
     cursor: pointer;
@@ -70,6 +71,9 @@
   .project_btn:hover span:after {
     opacity: 1;
     right: 0;
+  }
+  .project_btn:active {
+    transition: 0.4s;
   }
 
   .project_btn_edit {
