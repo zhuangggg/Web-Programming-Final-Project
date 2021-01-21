@@ -50,8 +50,9 @@ function Home(props){
         setName(props.data.userinfo.name)
         setPassword(props.data.userinfo.password)
         setId(props.data.userinfo.password)
+        setProjects(props.data.projects)
         //console.log(props.data.events);
-      },[props.data.userinfo])
+      },[props.count])
     // const name = props.data.userinfo.name
     // const password = props.data.userinfo.password
     // const id = props.data.userinfo.password
@@ -75,7 +76,7 @@ function Home(props){
             updatetime: current_time,
         }
         const temp = projects
-        temp.push(newProject)
+        temp.push({...newProject, usernames: [name]})
         setProjects(temp)
         setCount(count+1)
         addProject_db({variables: newProject})
@@ -93,11 +94,11 @@ function Home(props){
   };
 
   const handleOk = () => {
-    let temp = projects[projectIndex];
+    let temp = props.data.projects[projectIndex];
     temp.color = colorIndex;
     console.log(temp);
     editProject({variables:temp})
-    let newProjects = projects;
+    let newProjects = props.data.projects;
     newProjects[projectIndex] = temp;
     setProjects(newProjects)
     setIsModalVisible(false)
@@ -113,6 +114,8 @@ function Home(props){
       updatetime: current_time
 
     }
+    console.log("editedit");
+    console.log(payload);
     editProject_db({variables: payload})
   }
 
@@ -148,12 +151,12 @@ function Home(props){
         projects.map((project,i)=>{
             if (project.events!==undefined){
             let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
-            console.log(deadline_items);
+            // console.log(deadline_items);
             deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
-            console.log(deadline_items);
+            // console.log(deadline_items);
                 deadline[i] = deadline_items
         }})}
-      console.log("deadlinnnnnnn");
+    //   console.log("deadlinnnnnnn");
     //   deadline.map(project=>project.map(event=>{
     //     event.map(item=>console.log(item))}));
     //     console.log(deadline);

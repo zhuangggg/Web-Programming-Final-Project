@@ -225,9 +225,9 @@ function Gantt(props) {
   }, [data]);
   return(
         <>
-          {!project? <div className="loadingimg" ><img src={loadingimg}/></div>:
+          {data===undefined? <div className="loadingimg" ><img src={loadingimg}/></div>:
           <div className="gantt">
-              <Leftpart data={project} 
+              <Leftpart data={data.project} 
                         addEvent={addEvent}
                         deleteEvent={deleteEvent}
                         addItem={addItem}
@@ -236,7 +236,7 @@ function Gantt(props) {
                         getEditEvent={getEditEvent}
                         getEditItem={getEditItem}
                         />
-              <Timeline data={project}
+              <Timeline data={data.project}
                         count={c}
                         editProject={editProject}/>
               <NavLink to={{pathname: `/home`, 

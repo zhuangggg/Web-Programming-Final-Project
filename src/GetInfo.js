@@ -10,6 +10,7 @@ import loadingimg from './images/loading.gif'
 
 
 function GetInfo(props) {
+  var count_info = 0;
     const location = useLocation();
     console.log(location.state);
     const name = location.state.username
@@ -21,6 +22,7 @@ function GetInfo(props) {
         password: password,
         type: "login" }}) 
     refetch()
+    count_info+=1
     console.log(data);
     console.log("rrrrrrrrrr");
 
@@ -31,7 +33,7 @@ function GetInfo(props) {
 
     return (<>
     {loading?<div className="loadingimg" ><img src={loadingimg}/></div>:
-    <Home data={data.user}/>}
+    <Home data={data.user} count={count_info}/>}
     </>)
   }
   

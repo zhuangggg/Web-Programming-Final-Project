@@ -4,7 +4,7 @@ import { Pie } from '@ant-design/charts' ;
 
 
 function Piechart(props) {
-    console.log(props.color);
+    // console.log(props.color);
     const data = props.data
     const config = { 
         data ,

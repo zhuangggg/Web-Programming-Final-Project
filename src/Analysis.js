@@ -13,7 +13,7 @@ function Analysis(props) {
     let data = []
     let userNames = props.project.usernames
     const events = props.project.events
-    console.log(events);
+    // console.log(events);
 
         if(events){
             for(let i=0;i<events.length;i++){
@@ -25,7 +25,7 @@ function Analysis(props) {
         }
         
 
-        console.log(userNames)
+        // console.log(userNames)
     
         if(!count && events){
             for(let i=0;i<userNames.length;i++){
@@ -45,8 +45,8 @@ function Analysis(props) {
             setValue(data)
             setCount(1)
         }
-        console.log("aaaaa");
-        console.log(value);
+        // console.log("aaaaa");
+        // console.log(value);
 
     function pieStyle(_ref) {
         var user = _ref.x;

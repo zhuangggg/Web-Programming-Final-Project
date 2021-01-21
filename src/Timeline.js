@@ -66,7 +66,7 @@ function Timeline(props) {
   useEffect(() => {
     console.log("bbbbbbbbbbbbb")
     getTasks(props.data)
-    //console.log(props.data.events);
+    console.log(props.data);
   },[props.count])
   // const tasks = getTasks();
 
