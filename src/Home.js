@@ -10,6 +10,8 @@ import {Modal, Select} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
 import Analysis from './Analysis'
 import logoutbtn from './images/logout.png'
+import {UserOutlined} from '@ant-design/icons'
+import {ClockCircleOutlined} from '@ant-design/icons'
 
 const colors = [
     ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"],
@@ -209,10 +211,16 @@ function Home(props){
 
                                 {project.lastupdated? (
                                 <div>
-                                <p>Last update: </p>
-                                <p className="updateText">{project.lastupdated.message}</p>
-                                <p className="updateText">{' user: ' + project.lastupdated.username}</p>
-                                <p className="updateText">{' time: ' + project.lastupdated.updatetime.slice(0,10)}</p>
+                                  <p>Last update: </p>
+                                    <div style={{display:"flex", flexDirection:"row", height:'25px', marginBottom:'20px', marginLeft:'20px'}}>
+                                    <p style={{paddingRight:'15px', fontSize:'20px'}}>{project.lastupdated.message}</p>
+                                    <div style={{display:"flex", flexDirection:"row", marginTop:'6px'}}>
+                                    <UserOutlined style={{fontSize: "15px"}}/>
+                                    <p style={{paddingRight:'15px',fontSize:'15px'}}>{project.lastupdated.username}</p>
+                                    <ClockCircleOutlined style={{fontSize: "15px"}}/>
+                                    <p style={{fontSize:'15px'}}>{project.lastupdated.updatetime.slice(0,10)}</p>
+                                    </div>
+                                  </div>
                                 </div>
                                 ):(<div></div>)}
                                 <NavLink to={{
