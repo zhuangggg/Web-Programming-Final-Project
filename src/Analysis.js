@@ -45,16 +45,32 @@ function Analysis(props) {
         setValue(data)
         setCount(1)
     }
-    console.log(data);
+    console.log("aaaaa");
+    console.log(value);
+
+    function pieStyle(_ref) {
+        var user = _ref.x;
+        console.log("vfvevfs");
+        console.log(props.project.usernames);
+        const index = props.project.usernames.findIndex(name=>name===user)%5
+        let color = {fill:props.color[index]}
+            console.log(color);
+            return color
+        }
+        // if ( users[0]) {
+        //   return { fill: 'p(a)https://gw.alipayobjects.com/zos/rmsportal/nASTPWDPJDMgkDRlAUmw.jpeg' };
+        // }
+        // return { fill: 'p(a)https://gw.alipayobjects.com/zos/rmsportal/ziMWHpHSTlTzURSzCarw.jpeg' };
+    //   }
 
     return (
         <div className="content">
             <Progress
                 width={150}
                 strokeColor={props.color[2]}
-                percent={events? add/events.length:0}
+                percent={events? Math.round(add/events.length):0}
             />
-            {count?  < Piechart data={value} color={props.color}/>:<div></div>}
+            {count?  <Piechart data={value} color={props.color} pieStyle={(_ref)=>pieStyle(_ref)} usernames={userNames}/>:<div></div>}
         </div>
     )
 } 
