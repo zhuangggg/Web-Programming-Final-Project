@@ -8,7 +8,7 @@ type Mutation {
     createProject(data: projectInput): String
     createEvent(data: eventInput!): String
     createItem(data: itemInput!): String
-    deleteProject(name: String!): String
+    deleteProject(id: String!): String
     deleteEvent(data: _eventInput!): String
     deleteItem(data: _itemInput!): String
     editProject(data: projectEditInput!): String

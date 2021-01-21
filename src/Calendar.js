@@ -22,6 +22,7 @@ import "./css/icons.css"
 import "tui-calendar/dist/tui-calendar.js"
 //import {CalendarList, findCalendar, ScheduleList, generateSchedule} from './js/data/event.js'
 import imgbi from './images/img-bi.png'
+import userimg from './images/user.png'
 import Chance from 'chance'
 //import { useQuery, useMutation } from '@apollo/react-hooks'
 //import {USER_QUERY, PROJECT_QUERY} from './graphql'
@@ -31,7 +32,7 @@ const chance = new Chance()
 function GanttCalendar(props) {
     console.log(props.location.state);
     const name = props.location.state.username
-    const id = props.location.state.userid
+    const password = props.location.state.userid
     const projects = props.location.state.projects
     const projectsColors = props.location.state.projectsColors
     const calendarRef = useRef(null)
@@ -377,22 +378,24 @@ function GanttCalendar(props) {
                 p.events.forEach(e => {
                     id++;
                     e.items.forEach(i => {
-                        let schedule = {
-                            id: String(id),
-                            calendarId: String(id),
-                            title: i.name,
-                            body: 'Progress: ' + i.progress,
-                            isReadOnly: true,
-                            dueDateClass: '',
-                            category: 'time',
-                            isAllday: true,
-                            start: moment(i.time.start.replace('/', '-').replace('/', '-    ')).toDate(),
-                            end: moment(i.time.end.replace('/', '-').replace('/', '-')).endOf('day')._d,
-                            color: '#ffffff',
-                            bgColor: projectsColors[p.color][eventnum],
-                            borderColor: projectsColors[p.color][eventnum]
+                        if(i.usernames.includes(name)) {
+                            let schedule = {
+                                id: String(id),
+                                calendarId: String(id),
+                                title: i.name,
+                                body: 'Progress: ' + i.progress,
+                                isReadOnly: true,
+                                dueDateClass: '',
+                                category: 'time',
+                                isAllday: true,
+                                start: moment(i.time.start.replace('/', '-').replace('/', '-    ')).toDate(),
+                                end: moment(i.time.end.replace('/', '-').replace('/', '-')).endOf('day')._d,
+                                color: '#ffffff',
+                                bgColor: projectsColors[p.color][eventnum],
+                                borderColor: projectsColors[p.color][eventnum]
+                            }
+                            ScheduleList.push(schedule);
                         }
-                        ScheduleList.push(schedule);
                         // let schedule = new ScheduleInfo();
                         // schedule.id = chance.guid();
                         // schedule.calendarId = String(id);
@@ -693,55 +696,66 @@ function GanttCalendar(props) {
                 <title>TOAST UI Calendar App DEMO</title>
             </div>
             <div>
-                <div id="top">
-                    <a href="https://github.com/nhn/tui.calendar">
-                        <img src={imgbi}/>
-                    </a>
+                 <div id="top">
+                    <img src={imgbi}/>
                 </div>
                 <div id="lnb">
                     <div id="lnb-calendars" className="lnb-calendars">
+                        <div style={{display: "flex", flexDirection: "row", padding: '5px'}}>
+                            <img className="userimg" src={userimg} style={{height: '50px', width: '50px'}}/>
+                            <div className="usernametitle" style={{fontSize: '25px', margin: 'auto'}}>{name}</div>
+                        </div>
+                        <div>
+                            <div class="lnb-calendars-item">
+                                <label>
+                                    <input class="tui-full-calendar-checkbox-square" type="checkbox" value="all" checked/>
+                                    <span></span>
+                                    <strong>View all</strong>
+                                </label>
+                            </div>
+                        </div>
                         <div id="calendarList" className="lnb-calendars-d1">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="right">
-                <div id="menu">
-                    <Dropdown>
-                        <Dropdown.Toggle id="dropdownMenu-calendarType" className="btn btn-default btn-sm dropdown-toggle">
-                            <i id="calendarTypeIcon" className="calendar-icon ic_view_month" style={{marginRight: "4px"}}></i>
-                            <span id="calendarTypeName">Dropdown</span>&nbsp;
-                            <i className="calendar-icon tui-full-calendar-dropdown-arrow"></i>
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu className="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-calendarType">
-                            <Dropdown.Item role="presentation">
-                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-daily">
-                            <i className="calendar-icon ic_view_day"></i>Daily
-                            </a>
-                            </Dropdown.Item>
-                            <Dropdown.Item role="presentation">
-                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-weekly">
-                            <i className="calendar-icon ic_view_week"></i>Weekly
-                            </a>
-                            </Dropdown.Item>
-                            <Dropdown.Item role="presentation">
-                            <a className="dropdown-menu-title" role="menuitem" data-action="toggle-monthly">
-                            <i className="calendar-icon ic_view_month"></i>Month
-                            </a>
-                            </Dropdown.Item>
+                <div id="right">
+                    <div id="menu">
+                        <Dropdown style={{display: 'none'}}>
+                            <Dropdown.Toggle id="dropdownMenu-calendarType" className="btn btn-default btn-sm dropdown-toggle">
+                                <i id="calendarTypeIcon" className="calendar-icon ic_view_month" style={{marginRight: "4px"}}></i>
+                                <span id="calendarTypeName">Dropdown</span>&nbsp;
+                                <i className="calendar-icon tui-full-calendar-dropdown-arrow"></i>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu className="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-calendarType">
+                                <Dropdown.Item role="presentation">
+                                <a className="dropdown-menu-title" role="menuitem" data-action="toggle-daily">
+                                <i className="calendar-icon ic_view_day"></i>Daily
+                                </a>
+                                </Dropdown.Item>
+                                <Dropdown.Item role="presentation">
+                                <a className="dropdown-menu-title" role="menuitem" data-action="toggle-weekly">
+                                <i className="calendar-icon ic_view_week"></i>Weekly
+                                </a>
+                                </Dropdown.Item>
+                                <Dropdown.Item role="presentation">
+                                <a className="dropdown-menu-title" role="menuitem" data-action="toggle-monthly">
+                                <i className="calendar-icon ic_view_month"></i>Month
+                                </a>
+                                </Dropdown.Item>
 
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <span id="menu-navi">
-                        <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
-                        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
-                            <i className="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
-                        </button>
-                        <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
-                            <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
-                        </button>
-                    </span>
-                    <span id="renderRange" className="render-range"></span>
-                </div>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <span id="menu-navi">
+                            <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+                            <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
+                                <i className="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
+                            </button>
+                            <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
+                                <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
+                            </button>
+                        </span>
+                        <span id="renderRange" className="render-range"></span>
+                    </div>
                     <div>
                         <div id="calendar" ref={calendarRef}> </div>
                     </div>
@@ -754,7 +768,7 @@ crossOrigin="anonymous"></script>
             <NavLink to={{pathname: `/home`,
             state:
             {
-                password: id,
+                password: password,
                 username: name
             }}} ><button className="back_btn"><span>Back</span></button></NavLink>
 

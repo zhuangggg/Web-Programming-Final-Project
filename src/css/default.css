@@ -85,16 +85,16 @@ body {
 }
 
 #top {
-  height: 49px;
+  height: 65px;
   border-bottom: 1px solid #bbb;
-  padding: 16px;
+  padding-left: 20px;
   font-size: 10px;
 }
 
 #lnb {
   position: absolute;
   width: 200px;
-  top: 49px;
+  top: 65px;
   bottom: 0;
   border-right: 1px solid #d5d5d5;
   padding: 12px 10px;
@@ -104,7 +104,7 @@ body {
 #right {
   position: absolute;
   left: 200px;
-  top: 49px;
+  top: 65px;
   right: 0;
   bottom: 0;
 }

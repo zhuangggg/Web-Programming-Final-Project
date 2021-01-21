@@ -74,11 +74,15 @@ export const CREATE_ITEM_MUTATION = gql`
 
 export const DELETE_PROJECT_MUTATION = gql`
     mutation deleteProject(
-        $name: String!
+        $id: String!
     ){
+<<<<<<< HEAD
         deleteProject(data:{
             name: $name
         })
+=======
+        deleteProject(id: $id)
+>>>>>>> db4c44e22fcfc38defbf951a6daf347fee3700b4
     }
 `
 export const DELETE_EVENT_MUTATION = gql`
