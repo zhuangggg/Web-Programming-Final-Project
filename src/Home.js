@@ -20,7 +20,11 @@ const colors = [
 ]
 
 function Home(props){
-    console.log(props)
+    const next = new Date()
+    next.setDate(new Date().getDate()+1)
+    const today = new Date()
+    today.setDate(new Date().getDate()-1)
+    // console.log(props)
     const [projects, setProjects] = useState(props.data.projects)
     const [visible, setVisible] = useState([false])
     const [addProject_db] = useMutation(CREATE_PROJECT_MUTATION)
@@ -123,6 +127,25 @@ function Home(props){
       setCount(count+1)
   }
 
+  const getDeadlineItem = (projects)=>{
+      let deadline = []
+      projects.map((project,i)=>{
+          let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
+          console.log(deadline_items);
+          deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
+          console.log(deadline_items);
+            deadline[i] = deadline_items
+      })
+      console.log("deadlinnnnnnn");
+    //   deadline.map(project=>project.map(event=>{
+    //     event.map(item=>console.log(item))}));
+    //     console.log(deadline);
+    // const deadline = projects.filter(project=>project.events.filter(event=>event.items.filter(item=>new Date(item.time.end)<=next&&new Date(item.time.end)>=new Date())))
+    // console.log("deadlinnnnnnn");
+    // console.log(deadline);
+      return deadline
+  }
+
     return (
         <div className="home">
             <div className="left">
@@ -139,6 +162,12 @@ function Home(props){
                         }
                     }}>
                     <div className="example_f"><span>Calendar</span></div></NavLink>
+                    <div className="deadline">
+                        <h5>Deadline: </h5>
+                        {getDeadlineItem(props.data.projects).map((events,i)=>events.map(event=><div>{projects[i].name}-{event.name}-{event.time.end}</div>))}
+                    {/* <p>{getDeadlineItem(props.data.projects)[0][0]}</p> */}
+                    {/* {getDeadlineItem(props.data.projects).map(items=><p>{items[0]}</p>)} */}
+                </div>
                     <NavLink to={{pathname: `/`}} style={{color: "gray", display:'flex', flexDirection:'row', width:'120px', paddingTop: '20px'}}>
                         <img src={logoutbtn} style={{width:'30px', height: '30px', opacity: '0.5'}}/>
                         <p style={{paddingLeft:'10px'}}>log out</p>
@@ -175,7 +204,7 @@ function Home(props){
                 </div>  
                 <div>
                     {projects.length!==0? projects.map(((project, index)=> 
-                            <div style={{display: (visible[index]?"flex":"none"),  flexDirection: "column" }}>
+                            <div style={{visibility: (visible[index]?"visible":"hidden"),  flexDirection: "column" }}>
                                 <Analysis project={project} color={colors[projects[index].color]}/>
 
                                 {project.lastupdated? (

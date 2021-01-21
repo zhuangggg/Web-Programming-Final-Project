@@ -10,7 +10,8 @@ function Piechart(props) {
         data ,
         angleField : 'y' , 
         colorField : 'x' , 
-        pieStyle : props.pieStyle,
+        color: props.color,
+        // pieStyle : props.pieStyle,
         label: {
             type: 'inner',
             offset: '-30%',
