@@ -695,11 +695,11 @@ function GanttCalendar(props) {
                 <title>TOAST UI Calendar App DEMO</title>
             </div>
             <div>
-                <div id="top">
+                {/* <div id="top">
                     <a href="https://github.com/nhn/tui.calendar">
                         <img src={imgbi}/>
                     </a>
-                </div>
+                </div> */}
                 <div id="lnb">
                     <div id="lnb-calendars" className="lnb-calendars">
                         <div>
