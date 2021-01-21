@@ -131,13 +131,14 @@ function Home(props){
 
   const getDeadlineItem = (projects)=>{
       let deadline = []
-      projects.map((project,i)=>{
-          let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
-          console.log(deadline_items);
-          deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
-          console.log(deadline_items);
-            deadline[i] = deadline_items
-      })
+        projects.map((project,i)=>{
+            if (project.events!==undefined){
+            let deadline_items = project.events.filter(event=>new Date(event.time.end)<=next)
+            console.log(deadline_items);
+            deadline_items = deadline_items.filter(event=>new Date(event.time.end)>=today)
+            console.log(deadline_items);
+                deadline[i] = deadline_items
+        }})
       console.log("deadlinnnnnnn");
     //   deadline.map(project=>project.map(event=>{
     //     event.map(item=>console.log(item))}));

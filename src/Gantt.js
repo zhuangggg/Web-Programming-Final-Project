@@ -147,10 +147,14 @@ function Gantt(props) {
     temp.events[event_index].items.splice(item_index, 1)
     let sum = 0;
     temp.events[event_index].items.map(item=>sum+=parseInt(item.progress.split('%')[0]))
-    temp.events[event_index].progress = `${Math.round(sum/temp.events[event_index].items.length)}%`
+    temp.events[event_index].progress = `${temp.events[event_index].items.length!==0?Math.round(sum/temp.events[event_index].items.length):0}%`
     setProject(temp)
     c+=1;
     deleteItem_db({variables: gqlbody})
+    editProject({variables:{
+      project: temp,
+      message: `Delete Item: ${temp.events[event_index].name}`
+    }})
   }
 
   const editProject = ({variables},render=true)=>{
